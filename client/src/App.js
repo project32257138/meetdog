@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Main from "./pages/Main/Main";
 import logo from "./logo.svg";
 import "./App.css";
 
@@ -12,9 +13,9 @@ function App() {
       <p className="App-intro">
         To get started, edit <code>src/App.js</code> and save to reload.
       </p>
+      <Main />
     </div>
   );
 }
-
 
 export default App;
