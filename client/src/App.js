@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Splash from "./pages/Splash";
 import Main from "./pages/Main/Main";
-import SignUp from "./pages/SignUp";
+import Signup from "./pages/SignUp/SignUp"
 import "./App.css";
 import "materialize-css/dist/css/materialize.min.css";
 
