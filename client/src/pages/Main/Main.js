@@ -1,8 +1,11 @@
 import React from "react";
 import Notification from "../../components/Notification/Notification";
+import Header from "../../components/Header"
 
 function Main() {
   return (
+      <>
+      <Header />
     <div className="container">
       <div className="row">
         <div className="section">
@@ -13,6 +16,7 @@ function Main() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
