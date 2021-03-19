@@ -1,12 +1,8 @@
 import axios from "axios"
 
-let dogList = [] 
-let dogIndex = 0
-
 const API = {
     
     getNextDog: function(cb) {
-        console.log("here2")
         axios.get("https://dog.ceo/api/breeds/image/random/")
         .then(data => {
             console.log(data)

@@ -8,25 +8,32 @@ class Swipe extends Component {
         currentDog: {
             image: process.env.PUBLIC_URL + "/img/dog-05.jpeg",
             name: "Doge",
-            id: 0
+            id: 0,
         },
-        dogList: [] ,
+        dogList: [],
         dogIndex: -1,
+        lastRatedIndex: -1,
+        liked: {
+            // object storing id and if that dog was liked by the user
+            0: true
+            // {id: true}  for liked --or--
+            // {id: false} for no disliked
+        }
     }
 
     componentDidMount() {
         API.getNextDogsNoCheck(10,(dogs) => {
             this.setState({dogList : dogs})
-            debugger;       
         })
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
+    componentDidUpdate(prevProps, prevState) {
         if (this.state.dogIndex !== prevState.dogIndex) {
             this.setState({
                 currentDog: {
                     image: this.state.dogList[this.state.dogIndex],
                     name: "Lucky"+this.state.dogIndex,
+                    id: this.state.dogList[this.state.dogIndex]
                 }
             })
         }
@@ -63,10 +70,6 @@ class Swipe extends Component {
             })
         } 
         this.setState({ 
-            // currentDog: {
-            //     image: this.state.dogList[this.state.dogIndex],
-            //     name: "Lucky"+this.state.dogIndex,
-            //     },
             dogIndex: this.state.dogIndex + 1
         })
         console.log(this.state)
@@ -79,8 +82,26 @@ class Swipe extends Component {
         })
     }
 
+    likeDog = () => {
+        // obviously thi would later store the dogs if not their image
+        // this.setState({likedDogs: [this.state.currentDog.image,...this.state.likedDogs]})
+        this.setState({liked: {[this.state.currentDog.id]: true}})
+        if (!this.state.liked.hasOwnProperty(this.state.currentDog.id)) this.setState({lastRatedIndex: this.state.lastRatedIndex + 1})
+        this.getNextDog()
+    }
+
+    dislikeDog = () => {
+        // obviously thi would later store the dogs if not their image
+        // this.setState({dislikedDogs: [this.state.currentDog.image,...this.state.dislikedDogs]})
+        if (!this.state.liked.hasOwnProperty(this.state.currentDog.id)) this.setState({lastRatedIndex: this.state.lastRatedIndex + 1})
+        this.setState({liked: {[this.state.currentDog.id]: false}})
+        this.getNextDog()
+    }
+
+
     showNextBtn = () => {
-        if (this.state.dogIndex < this.state.dogList.length) return (
+        console.log(this.state, this.state.liked.hasOwnProperty(this.state.currentDog.id),this.state.currentDog.id)
+        if (this.state.dogIndex <= this.state.lastRatedIndex) return (
             <i class="material-icons forward" onClick={this.getNextDog}>arrow_forward_ios</i>
         )
     }
@@ -104,8 +125,8 @@ class Swipe extends Component {
                     <span className="card-title dog-name">{this.state.currentDog.name}</span>
                 </div>
                 <div className="card-action bark-back">
-                <a href="#"><span className="material-icons like">thumb_up</span></a>
-                <a href="#"><span className="material-icons dislike">thumb_down</span></a>
+                <a href="#"><span className="material-icons like" onClick={this.likeDog}>thumb_up</span></a>
+                <a href="#"><span className="material-icons dislike" onClick={this.dislikeDog}>thumb_down</span></a>
                 </div>
             </div>
             </div>
