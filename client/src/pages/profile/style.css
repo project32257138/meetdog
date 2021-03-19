@@ -1,0 +1,31 @@
+@font-face{
+    font-family: moreSugarThin;
+    src: local('MoreSugar-Thin'), url(../font/MoreSugar-Thin.ttf) format('truetype');
+}
+
+img{
+    padding-top: 10px;
+}
+
+h4,h5 {
+    font-family: moreSugarThin;;
+}
+
+h4, h5, p{
+    color: white;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-panel{
+    padding-left: 10px;
+    background-color: #426d49;
+}
+
+.leftCol{
+    padding-left: 0;
+}
