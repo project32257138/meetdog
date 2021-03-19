@@ -15,25 +15,6 @@ class Swipe extends Component {
         })
     }
 
-    
-// function getDog() {
-
-//     const [thisDog, setNextDog] = useState("null"
-//     )
-//     const [loading, setLoading] = useState("false");
-
-//     useEffect(()=> {
-
-//        
-
-//     },[])
-
-//     return [thisDog, loading]
-// }
-
-
-// import React, { useState, useEffect } from "react";
-// import { getResource } from "./api";
     render() {
         return (
             <div class="row">
