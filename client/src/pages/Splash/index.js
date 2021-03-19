@@ -3,10 +3,10 @@ import "./style.css";
 
 const Splash = () => {
 
-    const he = window.innerHeight;
+    // const he = window.innerHeight;
 
     return (
-        <main id="main-splash" style={{ height: `${he}px` }}>
+        <main id="main-splash">
             <section id="close-button">
                 <a href="/home">
                     <i class="medium material-icons" style={{ color: "white" }} >close</i>
