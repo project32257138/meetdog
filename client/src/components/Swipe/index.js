@@ -7,10 +7,11 @@ class Swipe extends Component {
     state = {
         currentDog: {
             image: process.env.PUBLIC_URL + "/img/dog-05.jpeg",
-            name: "Doge"
+            name: "Doge",
+            id: 0
         },
         dogList: [] ,
-        dogIndex: 0,
+        dogIndex: -1,
     }
 
     componentDidMount() {
@@ -18,6 +19,17 @@ class Swipe extends Component {
             this.setState({dogList : dogs})
             debugger;       
         })
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.state.dogIndex !== prevState.dogIndex) {
+            this.setState({
+                currentDog: {
+                    image: this.state.dogList[this.state.dogIndex],
+                    name: "Lucky"+this.state.dogIndex,
+                }
+            })
+        }
     }
 
     getNextDogs(n,cb,list=[]) {
@@ -51,13 +63,32 @@ class Swipe extends Component {
             })
         } 
         this.setState({ 
-            currentDog: {
-                image: this.state.dogList[this.state.dogIndex],
-                name: "Lucky"+this.state.dogIndex,
-                },
+            // currentDog: {
+            //     image: this.state.dogList[this.state.dogIndex],
+            //     name: "Lucky"+this.state.dogIndex,
+            //     },
             dogIndex: this.state.dogIndex + 1
         })
         console.log(this.state)
+    }
+
+    getPreviousDog = () => {
+        console.log(this.state.dogIndex, this.state.currentDog)
+        this.setState({
+            dogIndex: this.state.dogIndex - 1,
+        })
+    }
+
+    showNextBtn = () => {
+        if (this.state.dogIndex < this.state.dogList.length) return (
+            <i class="material-icons forward" onClick={this.getNextDog}>arrow_forward_ios</i>
+        )
+    }
+
+    showPrevBtn = () => {
+        if (this.state.dogIndex > 0) return (
+            <i class="material-icons back" onClick={this.getPreviousDog}>arrow_back_ios</i>
+        )
     }
  
     render() {
@@ -66,8 +97,8 @@ class Swipe extends Component {
             <div class="col s12 m12">
             <div class="card">
                 <div class="card-image dog-image">
-                    <i class="material-icons back">arrow_back_ios</i>
-                    <i class="material-icons forward" onClick={this.getNextDog}>arrow_forward_ios</i>
+                    {this.showPrevBtn()}
+                    {this.showNextBtn()}
                     <img src={this.state.currentDog.image}>
                     </img>
                     <span className="card-title dog-name">{this.state.currentDog.name}</span>
