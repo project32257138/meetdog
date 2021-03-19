@@ -5,15 +5,14 @@ let dogIndex = 0
 
 const API = {
     
-    getNextDogNoCheck: async function() {
+    getNextDogNoCheck: function(cb) {
         axios.get("https://dog.ceo/api/breeds/image/random/")
         .then(data => {
             console.log(data)
             return data.data.message
         })
         .then(nextDog => {
-            console.log(nextDog)
-            return nextDog
+            return cb(nextDog)
         })
     },
 

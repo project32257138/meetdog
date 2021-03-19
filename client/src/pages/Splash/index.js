@@ -3,8 +3,6 @@ import "./style.css";
 
 const Splash = () => {
 
-    // const he = window.innerHeight;
-
     return (
         <main id="main-splash">
             <section id="close-button">

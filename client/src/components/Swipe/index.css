@@ -32,9 +32,15 @@ a {
 
 }
 
-.dog-image {
-    height: 100%;
-    width: 100%;
+.dog-image img{
+    height: 425.5px;
+    width: 425.5px;
+}
+
+.dog-image img{
+    height: 425.5px;
+    width: 425.5px;
+    object-fit: cover;
 }
 
 .back, .forward {

@@ -6,11 +6,14 @@ import API from "../../utils/api"
 
 class Swipe extends Component {
 
-    state = {image: process.env.PUBLIC_URL + "/img/dog-05.jpeg"}
+    state = {
+        image: process.env.PUBLIC_URL + "/img/dog-05.jpeg",
+        dogList: [] ,
+        dogIndex: 0,
+    }
 
     getNextDog = () => {
-        return API.getNextDogNoCheck()
-        .then(dog => {
+        return API.getNextDogNoCheck((dog) => {
             this.setState({image: dog})
         })
     }
