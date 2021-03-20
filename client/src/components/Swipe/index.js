@@ -61,7 +61,7 @@ class Swipe extends Component {
     getNextDog = () => {
         console.log(this.state.dogIndex, this.state.dogList.length)
         if (this.state.dogIndex + 3 === this.state.dogList.length) {
-            this.getNextDogs(5,(dogs) => {
+            this.getNextDogs(10,(dogs) => {
                 console.log(this.state.dogList,dogs)
                 this.setState({
                     dogList: [...this.state.dogList,...dogs]
@@ -118,13 +118,13 @@ class Swipe extends Component {
             <div class="col s12 m12">
             <div class="card">
                 <div class="card-image dog-image">
-                    {this.showPrevBtn()}
-                    {this.showNextBtn()}
                     <img src={this.state.currentDog.image}>
                     </img>
                     <span className="card-title dog-name">{this.state.currentDog.name}</span>
                 </div>
                 <div className="card-action bark-back">
+                {this.showPrevBtn()}
+                {this.showNextBtn()}
                 <a href="#"><span className="material-icons like" onClick={this.likeDog}>thumb_up</span></a>
                 <a href="#"><span className="material-icons dislike" onClick={this.dislikeDog}>thumb_down</span></a>
                 </div>

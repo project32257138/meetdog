@@ -44,17 +44,19 @@ a {
 }
 
 .back, .forward {
-    padding: 0.25em;
-    background-color: white;
+    /* padding: 0.25em; */
+    /* background-color: white; */
+    /* display: none; */
     border-radius: 50%;
     position: absolute;
-    top: 50%;
+    /* top: 50%; */
     z-index: 5;
 }
 
-.back:hover, .forward:hover {
-    color: white;
-    background-color: #26a69a;
+.back:hover, .forward:hover{
+    display: block;
+    color:  #26a69a;
+    /* background-color: #26a69a; */
 }
 
 .back {
