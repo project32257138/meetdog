@@ -17,7 +17,7 @@ class Swipe extends Component {
             // object storing id and if that dog was liked by the user
             0: true
             // {id: true}  for liked --or--
-            // {id: false} for no disliked
+            // {id: false} for disliked
         }
     }
 
@@ -50,7 +50,7 @@ class Swipe extends Component {
                     list.push(nextDog)
                     console.log(list)
                     console.log(n)
-                    // only decreases n if there is no match
+                    // only decreases n if array does not include nextDog
                     n--
                 }
                 return this.getNextDogs(n,cb,list)
@@ -83,7 +83,7 @@ class Swipe extends Component {
     }
 
     likeDog = () => {
-        // obviously thi would later store the dogs if not their image
+        // obviously this would later store the dogs id not their image
         // this.setState({likedDogs: [this.state.currentDog.image,...this.state.likedDogs]})
         this.setState({liked: {[this.state.currentDog.id]: true}})
         if (!this.state.liked.hasOwnProperty(this.state.currentDog.id)) this.setState({lastRatedIndex: this.state.lastRatedIndex + 1})
@@ -91,7 +91,7 @@ class Swipe extends Component {
     }
 
     dislikeDog = () => {
-        // obviously thi would later store the dogs if not their image
+        // obviously this would later store the dogs id not their image
         // this.setState({dislikedDogs: [this.state.currentDog.image,...this.state.dislikedDogs]})
         if (!this.state.liked.hasOwnProperty(this.state.currentDog.id)) this.setState({lastRatedIndex: this.state.lastRatedIndex + 1})
         this.setState({liked: {[this.state.currentDog.id]: false}})
@@ -100,24 +100,24 @@ class Swipe extends Component {
 
 
     showNextBtn = () => {
-        console.log(this.state, this.state.liked.hasOwnProperty(this.state.currentDog.id),this.state.currentDog.id)
+        // console.log(this.state, this.state.liked.hasOwnProperty(this.state.currentDog.id),this.state.currentDog.id)
         if (this.state.dogIndex <= this.state.lastRatedIndex) return (
-            <i class="material-icons forward" onClick={this.getNextDog}>arrow_forward_ios</i>
+            <i className="material-icons forward" onClick={this.getNextDog}>arrow_forward_ios</i>
         )
     }
 
     showPrevBtn = () => {
         if (this.state.dogIndex > 0) return (
-            <i class="material-icons back" onClick={this.getPreviousDog}>arrow_back_ios</i>
+            <i className="material-icons back" onClick={this.getPreviousDog}>arrow_back_ios</i>
         )
     }
  
     render() {
         return (
-            <div class="row">
-            <div class="col s12 m12">
-            <div class="card">
-                <div class="card-image dog-image">
+            <div className="row">
+            <div className="col s12 m12">
+            <div className="card">
+                <div className="card-image dog-image">
                     <img src={this.state.currentDog.image}>
                     </img>
                     <span className="card-title dog-name">{this.state.currentDog.name}</span>

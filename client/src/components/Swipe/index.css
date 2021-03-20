@@ -14,7 +14,7 @@ a {
 
 .dislike {
     margin: 0;
-    color: rgb(153, 31, 31);
+    color: hsl(0, 66%, 36%);
 }
 
 .like:hover {
@@ -23,6 +23,16 @@ a {
 
 .dislike:hover {
     color: rgb(192, 13, 13);
+}
+
+.like.disabled{
+    color: hsl(120, 41%, 79%);
+    cursor: default
+}
+
+.dislike.disabled {
+    color: hsl(0, 63%, 79%);
+    cursor: default
 }
 
 .dog-name {

@@ -24,22 +24,7 @@ const API = {
         .then(nextDogs => {
             return cb(nextDogs)
         })
-    },
-
-
-
-
-    // getNextDog: function() {
-
-    //     if (dogIndex === 0) return API.getNextDogsNoCheck(10)
-    //     else if (dogIndex > dogList.length) {
-    //         API.getNextDogs(5)
-    //     console.log(dogList,dogIndex)
-    //     let dog = dogList[dogIndex]
-    //     dogIndex++
-    //     return dog
-    //     }
-    // }
+    }
 
 }
 
