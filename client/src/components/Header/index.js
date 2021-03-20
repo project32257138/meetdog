@@ -12,7 +12,7 @@ const Header = () => {
                         <a href="/home" className="brand-logo" id="nav-logo"><img src="../../../img/puppy-love-small.png"></img></a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><a href="/home">Home</a></li>
-                            <li><a href="/matches">Macthes</a></li>
+                            <li><a href="/matches">Matches</a></li>
                             <li><a href="/">Settings</a></li>
                             <li><a href="/">Logout</a></li>
                         </ul>

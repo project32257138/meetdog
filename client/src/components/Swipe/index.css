@@ -14,7 +14,7 @@ a {
 
 .dislike {
     margin: 0;
-    color: rgb(153, 31, 31);
+    color: hsl(0, 66%, 36%);
 }
 
 .like:hover {
@@ -25,6 +25,16 @@ a {
     color: rgb(192, 13, 13);
 }
 
+.like.disabled{
+    color: hsl(120, 41%, 79%);
+    cursor: default
+}
+
+.dislike.disabled {
+    color: hsl(0, 63%, 79%);
+    cursor: default
+}
+
 .dog-name {
     font-weight: 500 !important;
     color: white;
@@ -32,23 +42,31 @@ a {
 
 }
 
-.dog-image {
-    height: 100%;
-    width: 100%;
+.dog-image img{
+    height: 425.5px;
+    width: 425.5px;
+}
+
+.dog-image img{
+    height: 425.5px;
+    width: 425.5px;
+    object-fit: cover;
 }
 
 .back, .forward {
-    padding: 0.25em;
-    background-color: white;
+    /* padding: 0.25em; */
+    /* background-color: white; */
+    /* display: none; */
     border-radius: 50%;
     position: absolute;
-    top: 50%;
+    /* top: 50%; */
     z-index: 5;
 }
 
-.back:hover, .forward:hover {
-    color: white;
-    background-color: #26a69a;
+.back:hover, .forward:hover{
+    display: block;
+    color:  #26a69a;
+    /* background-color: #26a69a; */
 }
 
 .back {
