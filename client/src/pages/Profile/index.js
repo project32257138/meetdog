@@ -7,19 +7,18 @@ import "./style.css";
 function Profile() {
     const [dog, savedDog] = useState({});
 
-
     return(
         <Container >
             <Row>
                 {/* Picture Column */}
                 <Col size="6">
-                    {dog.length ? (
-                        <img src={`${dog.image}`} alt="Dog profile picture" />
+                    {savedDog.length ? (
+                        <img src={`${savedDog.image}`} alt="Dog profile picture" />                 
                     ) : (
-                        <h3>Please add your profile picture!</h3>
+                        // random avatar 
+                        <h3>Please add your profile picture!</h3> 
                     )}
                 </Col>
-                
                 {/* Profile Detail Column */}
                 <Col size="6">
                 {savedDog.length ? (

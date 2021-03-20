@@ -4,10 +4,10 @@ import "./style.css";
 function ProfileListDefault() {
     return(
         <div>
-            <div class="card-panel">
+            <div className="card-panel">
                 <h4>My Profile</h4>
                 
-                <div class="divider"></div>
+                <div className="divider"></div>
                 
                 <h5>Name:</h5> 
                 <p> Tucker Budzyn</p>
@@ -16,12 +16,12 @@ function ProfileListDefault() {
                 <p>Golden Retriever</p>
                     
                 {/* <!-- Change padding-left to "0" --> */}
-                <div class="col s6 leftCol">
+                <div className="col s6 leftCol">
                     <h5>Age:</h5>
                     <p>2 years old</p>
                 </div>
 
-                <div class="col s6">
+                <div className="col s6">
                     <h5>Gender:</h5>
                     <p>Male</p>
                 </div>
@@ -36,6 +36,7 @@ function ProfileListDefault() {
                 <p>tucker123@gmail.com</p>
             </div>
             <a class="waves-effect waves-light btn">Edit Profile</a>
+            <button type="button" onClick={this.showModal}>Open</button>
         </div>
     )
 }
