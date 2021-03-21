@@ -1,45 +1,37 @@
 import axios from "axios"
 
-let dogList = [] 
-let dogIndex = 0
-
 const API = {
     
-    getNextDogNoCheck: async function() {
+    getNextDog: function(cb) {
         axios.get("https://dog.ceo/api/breeds/image/random/")
         .then(data => {
             console.log(data)
+            // this would need to be changed to a call to out db
             return data.data.message
         })
         .then(nextDog => {
-            console.log(nextDog)
-            return nextDog
+            return cb(nextDog)
         })
     },
 
-    // getNextDogs(n) {
-    //     while (dogList.length < n + dogIndex) {
-    //         axios.get("https://dog.ceo/api/breeds/image/random/")
-    //         .then(data => data.data.message)
-    //         .then(nextDog => {
-    //             if (!dogList.includes(nextDog)) dogList.push(nextDog)
-    //             return dogList
-    //         })
-    //     } return dogList
-    // },
+    getNextDogsNoCheck: function(n,cb) {
+        axios.get("https://dog.ceo/api/breeds/image/random/" + n)
+        .then(data => {
+            console.log(data)
+            // this would need to be changed to a call to out db
+            return data.data.message
+        })
+        .then(nextDogs => {
+            return cb(nextDogs)
+        })
+    },
 
-    // async getNextDog() {
-
-    //     if (dogIndex === 0) return API.getNextDogsNoCheck(10)
-    //     else if (dogIndex > dogList.length) {
-    //         API.getNextDogs(5)
-    //     console.log(dogList,dogIndex)
-    //     let dog = dogList[dogIndex]
-    //     dogIndex++
-    //     return dog
-    //     }
-    // }
-
+    getDogDetail: function(query) {
+        axios.get("/api/dog", { params: { q: query } })
+        .then(data => {
+            console.log(data);
+        })
+    }
 }
 
-export default API
+export default API;
