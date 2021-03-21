@@ -6,7 +6,7 @@ const Splash = () => {
     return (
         <main id="main-splash">
             <section id="close-button">
-                <a href="/home">
+                <a href="/welcome">
                     <i class="medium material-icons" style={{ color: "white" }} >close</i>
                 </a>
             </section>
