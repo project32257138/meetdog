@@ -12,6 +12,7 @@ const Header = () => {
                         <a href="/home" className="brand-logo" id="nav-logo"><img src="../../../img/puppy-love-small.png"></img></a>
                         <ul id="nav-mobile" className="right hide-on-med-and-down">
                             <li><a href="/home">Home</a></li>
+                            <li><a href="/profile">Profile</a></li>
                             <li><a href="/matches">Matches</a></li>
                             <li><a href="/">Settings</a></li>
                             <li><a href="/">Logout</a></li>
@@ -24,8 +25,8 @@ const Header = () => {
                     <div className="nav-wrapper">
                         <ul>
                             <li><a href="/home"><i class="material-icons">home</i></a></li>
+                            <li><a href="/profile"><i class="material-icons">person</i></a></li>
                             <li><a href="/matches"><i class="material-icons">pets</i></a></li>
-                            <li><a href="/"><i class="material-icons">person</i></a></li>
                             <li><a href="/">Logout</a></li>
                         </ul>
                     </div>
@@ -37,4 +38,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default Header;
