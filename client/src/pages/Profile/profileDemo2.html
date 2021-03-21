@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- Profile Pic -->
+            <div class="col s6">
+                <img src="https://picsum.photos/500/700" alt="Dog profile picture">
+            </div>
+            <!-- Profile Details -->
+            <div class="col s6">
+                <div class="card-panel">
+                    <h4>My Profile</h4>
+                    <div class="divider"></div>
+                    <h5>Name:</h5> 
+                    <div class="input-field">
+                        <input placeholder="Tucker Budzyn" type="text" class="validate">
+                    </div>
+                    <h5>Breed:</h5> 
+                    <div class="input-field">
+                        <input placeholder="Golden Retriever" type="text" class="validate">
+                    </div>
+                    
+                    <!-- Change padding-left to "0" -->
+                    <div class="col s6 leftCol">
+                        <h5>Age:</h5>
+                        <div class="input-field">
+                            <input placeholder="2 years old" type="text" class="validate">
+                        </div>
+                    </div>
+                    <div class="col s6">
+                        <h5>Gender:</h5>
+
+                        <div class="input-field">
+                            <input placeholder="Male" type="text" class="validate">
+                        </div>
+                    </div>
+                    
+                    <h5>About Me:</h5> 
+                    <div class="input-field">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">Tell us something about your pawesome friend!</label>
+                    </div>
+                    
+                    <h5>Parks I Enjoy:</h5> 
+                    <div class="input-field">
+                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                        <label for="textarea1">What parks do you guys like to go to?</label>
+                    </div>
+
+                    <h5>Email Me:</h5>
+                    <div class="input-field">
+                        <input placeholder="123tucker@gmail.com" type="text" class="validate">
+                    </div>
+                </div>
+                <a class="waves-effect waves-light btn">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

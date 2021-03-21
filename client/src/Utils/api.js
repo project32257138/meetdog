@@ -24,8 +24,14 @@ const API = {
         .then(nextDogs => {
             return cb(nextDogs)
         })
-    }
+    },
 
+    getDogDetail: function(query) {
+        axios.get("/api/dog", { params: { q: query } })
+        .then(data => {
+            console.log(data);
+        })
+    }
 }
 
-export default API
+export default API;
