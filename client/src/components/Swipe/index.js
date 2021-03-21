@@ -1,6 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 import "./index.css"
-import API from "../../utils/api"
+import API from "../../utils/api.js"
 
 class Swipe extends Component {
 
