@@ -12,9 +12,9 @@ function App() {
     <Router>
       <Auth0ProviderWithHistory>
         <Switch>
-          <Route exact path="/" component={Splash} />
-          <Route exact path="/home" component={Main} />
-          <Route exact path="/welcome" component={Welcome} />
+          {/* <Route exact path="/" component={Splash} /> */}
+          <Route exact path="/" component={Main} />
+          {/* <Route exact path="/welcome" component={Welcome} /> */}
           {/* <Route exact path="/signup" component={Signup} /> */}
           {/* <Route exact path="/login" component={Login} /> */}
         </Switch>
