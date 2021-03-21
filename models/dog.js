@@ -1,47 +1,53 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// Set `trim: true` on every string path by default
+mongoose.Schema.Types.String.set('trim', true);
+
 const dogSchema = new Schema({
     // Store the name of the dog's owner
-    owner: { type: String, trim: true, default: ""},
+    owner: { type: String, default: '' },
 
     // Store the owner's email address
-    email: { type: String, trim: true, required: true },
+    email: { type: String, unique: true, match: [/.+@.+\..+/, "Please enter a valid e-mail address"] },
 
     // Store the owner's password
-    password: { type: String, trim: true, required: true },
+    password: { type: String, required: true },
 
     // Store the dog's name
-    name: { type: String, trim: true, required: true, default: "" },
+    name: { type: String, default: "" },
 
     // Store the dog's age
-    age: { type: Number, required: true, default: 1 },
+    age: { type: Number, default: 1 },
 
     // Store the dog's breed
-    breed: { type: String, trim: true, required: true, default: "" },
+    breed: { type: String, default: "" },
 
     // Store the dog's size
-    size: Number,
+    size: { type: String, enum: ['small', 'medium', 'large'] },
 
     // Store the dog's gender
-    gender: { type: String, trim: true, default: ""},
+    gender: { type: String, enum: ['male', 'female'] },
 
     // Store the dog's description
-    description: { type: String, trim: true, default: "" },
+    description: { type: String, default: "" },
 
     // Store the dog's picture
-    image: { type: String, trim: true, default: "" },
+    image: { type: String, default: "" },
 
-    // Store the dog's matches
+    // Store the id of dogs that were disliked
+    dislikes: { type: Array, default: [] },
+
+    // Store the id of dogs that were liked
+    likes: { type: Array, default: [] },
+
+    // Store id of dogs that were matched
     matches: { type: Array, default: [] },
 
     // Store the dog's location
-    location: { type: Object, required: true, default: {}},
-
-    // Store the profile is created
-     date: { type: Date, default: Date.now }
-
+    location: { type: String, default: "" },
 });
+
 
 const Dog = mongoose.model("Dog", dogSchema);
 
