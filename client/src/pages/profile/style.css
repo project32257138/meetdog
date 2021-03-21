@@ -24,9 +24,5 @@ h4, h5, p{
 .card-panel{
     padding-left: 30px;
     padding-right: 30px;
-    background-color: #426d49;
-}
-
-.leftCol{
-    padding-left: 0;
+    /* background-color: #426d49;  Not working, needed to inline style  */
 }

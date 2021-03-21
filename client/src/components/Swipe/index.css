@@ -1,0 +1,80 @@
+a {
+    margin: 0 !important;
+}
+
+.bark-back {
+    display: flex;
+    justify-content: space-around;
+}
+
+.like {
+    margin: 0;
+    color: hsl(120, 71%, 25%)
+}
+
+.dislike {
+    margin: 0;
+    color: hsl(0, 66%, 36%);
+}
+
+.like:hover {
+    color: hsl(120, 63%, 38%)
+}
+
+.dislike:hover {
+    color: rgb(192, 13, 13);
+}
+
+.like.disabled{
+    color: hsl(120, 41%, 79%);
+    cursor: default
+}
+
+.dislike.disabled {
+    color: hsl(0, 63%, 79%);
+    cursor: default
+}
+
+.dog-name {
+    font-weight: 500 !important;
+    color: white;
+    text-shadow: black 0 0 2px;
+
+}
+
+.dog-image img{
+    height: 425.5px;
+    width: 425.5px;
+}
+
+.dog-image img{
+    height: 425.5px;
+    width: 425.5px;
+    object-fit: cover;
+}
+
+.back, .forward {
+    /* padding: 0.25em; */
+    /* background-color: white; */
+    /* display: none; */
+    border-radius: 50%;
+    position: absolute;
+    /* top: 50%; */
+    z-index: 5;
+}
+
+.back:hover, .forward:hover{
+    display: block;
+    color:  #26a69a;
+    /* background-color: #26a69a; */
+}
+
+.back {
+    text-align: right;
+    left: 1em;
+}
+
+.forward {
+    /* margin-right: 0.75em !important; */
+    right: 1em;
+}
