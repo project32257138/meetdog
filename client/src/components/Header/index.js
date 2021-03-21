@@ -1,10 +1,8 @@
 import React from "react";
-// import {useAuth0} from "@auth0/auth0-react"
 import AuthBtn from "../AuthBtn/AuthBtn"
 import "./style.css";
 
 const Header = () => {
-    
   return (
     <>
       <header>
@@ -16,6 +14,9 @@ const Header = () => {
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
                 <a href="/home">Home</a>
+              </li>
+              <li>
+                <a href="/profile">Profile</a>
               </li>
               <li>
                 <a href="/matches">Matches</a>
@@ -58,5 +59,6 @@ const Header = () => {
     </>
   );
 };
+
 
 export default Header;
