@@ -5,7 +5,7 @@ const LoginButton = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <button
-      className="waves-effect waves-light btn"
+      className="btn-flat white-text"
       onClick={() => loginWithRedirect()}
     >
       Log In
