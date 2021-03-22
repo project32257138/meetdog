@@ -23,6 +23,7 @@ function Profile() {
     //     .then(res => savedDog(res.data))
     //     .catch(err => console.log(err));
     // }
+
     const handleProfileChange = (e) => {
         // savedDog({
         //     name: e.target.value,
@@ -32,13 +33,24 @@ function Profile() {
         //     description: e.target.value,
         //     email: e.target.value
         // })
+        e.preventDefault();
         const { value } = e.target;
+        
+        console.log({
+            value,
+            // check value before we change the state
+            currentState: dog
+        });
+    
         savedDog(value);
+    
+        // check value after we change the state
+        console.log("stateAfterInput", dog)
     };
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(`${savedDog.name}`);
+        console.log([dog]);
     };
 
     return(
@@ -86,31 +98,31 @@ function Profile() {
                     <div className="card-panel" style={{backgroundColor: "#426d49"}}>
                         <h4>My Profile</h4>
                         <div className="divider"></div>
-                        <h5>Name:</h5> <p>{dog.name}</p>
+                        <h5>Name:</h5> <p>{dog.profile.name}</p>
                     
-                        <h5>Breed:</h5> <p>{dog.breed}</p>
+                        <h5>Breed:</h5> <p>{dog.profile.breed}</p>
                         
                         
                         <div className="col s6" style={{paddingLeft: "0px"}}>
                             <h5>Age:</h5>
 
-                            <p>{dog.age}</p>
+                            <p>{dog.profile.age}</p>
                         </div>
                         <div className="col s6">
                             <h5>Gender:</h5>
 
-                            <p>{dog.gender}</p>
+                            <p>{dog.profile.gender}</p>
                         </div>
                         
                         <h5>About Me:</h5> 
 
-                        <p>{dog.description}</p>
+                        <p>{dog.profile.description}</p>
                         
                         <h5>Parks I Enjoy:</h5> 
                         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
                         <h5>Email Me:</h5>
-                        <p>{dog.email}</p>
+                        <p>{dog.profile.email}</p>
                     </div>
                     {/* <!-- Edit Profile Modal Trigger --> */}
                     <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Edit Profile</a>
