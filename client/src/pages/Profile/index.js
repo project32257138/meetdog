@@ -7,14 +7,40 @@ import API from "../../Utils/api";
 import "./style.css";
 
 function Profile() {
-    const [dog, savedDog] = useState({});
+   
+
+    const [dog, savedDog] = useState({
+        name: "Tucker Budzyn",
+        breed: "Golden Retriever",
+        age: "2 years old",
+        gender: "Male",
+        description: "I enjoy long run at the doggy park and chasing squirrels!",
+        email: "tucker123@gmail.com"
+    });
 
     // const addDefaultProfile = () => {
     //     API.getDogDetail()
     //     .then(res => savedDog(res.data))
     //     .catch(err => console.log(err));
     // }
-    
+    const handleProfileChange = (e) => {
+        // savedDog({
+        //     name: e.target.value,
+        //     breed: e.target.value,
+        //     age: e.target.value,
+        //     gender: e.target.value,
+        //     description: e.target.value,
+        //     email: e.target.value
+        // })
+        const { value } = e.target;
+        savedDog(value);
+    };
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        console.log(`${savedDog.name}`);
+    };
+
     return(
         <>
         <Header />
@@ -78,7 +104,7 @@ function Profile() {
                         
                         <h5>About Me:</h5> 
 
-                        <p>{dog.bio}</p>
+                        <p>{dog.description}</p>
                         
                         <h5>Parks I Enjoy:</h5> 
                         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
@@ -90,57 +116,83 @@ function Profile() {
                     <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Edit Profile</a>
                     {/* <!-- Modal Structure --> */}
                     <div id="modal1" className="modal" style={{backgroundColor: "#426d49"}}>
-                        <div className="modal-content">
-                            <h4 className="modalTxt">Edit Profile</h4>
-                            <div className="divider"></div>
-                            <p className="modalTxt">A bunch of text</p>
+                        <form onSubmit={handleSubmit}>
+                            <div className="modal-content">
                             
-                            <h5 className="modalTxt">Name:</h5> 
-                            <div className="input-field">
-                                <input placeholder="Tucker Budzyn" type="text" className="validate" />
-                            </div>
-                            <h5 className="modalTxt">Breed:</h5> 
-                            <div className="input-field">
-                                <input placeholder="Golden Retriever" type="text" className="validate" />
-                            </div>
-                            
-                            <div className="col s6">
-                                <h5 className="modalTxt">Age:</h5>
+                                <h4 className="modalTxt">Edit Profile</h4>
+                                <div className="divider"></div>
+                                <p className="modalTxt">A bunch of text</p>
+                                
+                                <h5 className="modalTxt">Name:</h5> 
                                 <div className="input-field">
-                                    <input placeholder="2 years old" type="text" className="validate" />
+                                    <input 
+                                    placeholder="Tucker Budzyn" 
+                                    type="text" 
+                                    className="validate" 
+                                    onChange={handleProfileChange}/>
+                                </div>
+                                <h5 className="modalTxt">Breed:</h5> 
+                                <div className="input-field">
+                                    <input 
+                                    placeholder="Golden Retriever" 
+                                    type="text" 
+                                    className="validate" 
+                                    onChange={handleProfileChange}/>
+                                </div>
+                                
+                                <div className="col s6">
+                                    <h5 className="modalTxt">Age:</h5>
+                                    <div className="input-field">
+                                        <input 
+                                        placeholder="2 years old" 
+                                        type="text" 
+                                        className="validate" 
+                                        onChange={handleProfileChange}/>
+                                    </div>
+                                </div>
+                                <div className="col s6">
+                                    <h5 className="modalTxt">Gender:</h5>
+
+                                    <div className="input-field">
+                                        <input 
+                                        placeholder="Male" 
+                                        type="text" 
+                                        className="validate" 
+                                        onChange={handleProfileChange}/>
+                                    </div>
+                                </div>
+                                
+                                <h5 className="modalTxt">About Me:</h5> 
+                                <div className="input-field">
+                                    <textarea 
+                                    id="textarea1" 
+                                    className="materialize-textarea"
+                                    onChange={handleProfileChange}></textarea>
+                                    <label for="textarea1">Tell us something about your pawesome friend!</label>
+                                </div>
+                                
+                                <h5 className="modalTxt">Parks I Enjoy:</h5> 
+                                <div className="input-field">
+                                    <textarea id="textarea1" className="materialize-textarea"></textarea>
+                                    <label for="textarea1">What parks do you guys like to go to?</label>
+                                </div>
+
+                                <h5 className="modalTxt">Email Me:</h5>
+                                <div class="input-field">
+                                    <input 
+                                    placeholder="123tucker@gmail.com" 
+                                    type="text" 
+                                    class="validate" 
+                                    onChange={handleProfileChange}/>
                                 </div>
                             </div>
-                            <div className="col s6">
-                                <h5 className="modalTxt">Gender:</h5>
-
-                                <div className="input-field">
-                                    <input placeholder="Male" type="text" className="validate" />
-                                </div>
+                            <div className="modal-footer">
+                                <a href="#!" className="modal-close btn-flat">Cancel</a>
+                                <button className="btn waves-effect waves-light modal-close" type="submit" name="action">Submit
+                                    <i className="material-icons right">send</i>
+                                </button>
                             </div>
-                            
-                            <h5 className="modalTxt">About Me:</h5> 
-                            <div className="input-field">
-                                <textarea id="textarea1" className="materialize-textarea"></textarea>
-                                <label for="textarea1">Tell us something about your pawesome friend!</label>
-                            </div>
-                            
-                            <h5 className="modalTxt">Parks I Enjoy:</h5> 
-                            <div className="input-field">
-                                <textarea id="textarea1" className="materialize-textarea"></textarea>
-                                <label for="textarea1">What parks do you guys like to go to?</label>
-                            </div>
-
-                            <h5 className="modalTxt">Email Me:</h5>
-                            <div class="input-field">
-                                <input placeholder="123tucker@gmail.com" type="text" class="validate" />
-                            </div>
-                        </div>
-                        <div className="modal-footer">
-                            <a href="#!" className="modal-close btn-flat">Cancel</a>
-                            <button className="btn waves-effect waves-light modal-close" type="submit" name="action">Submit
-                                <i className="material-icons right">send</i>
-                            </button>
-                        </div>
+                        </form>
                     </div>
                 </Col>
             </Row>
