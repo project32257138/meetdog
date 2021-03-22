@@ -74,6 +74,5 @@ import usePlacesAutocomplete, {
         {status === "OK" && <ul>{renderSuggestions()}</ul>}
       </div>
     );
-            //Need to create state and route
 
   };
