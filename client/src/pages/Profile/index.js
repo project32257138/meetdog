@@ -10,7 +10,7 @@ function Profile() {
     const [dog, savedDog] = useState({
         owner: "Puppy Lover",
         password: "!PuppyLove1",
-        size: "small",
+        // size: "small",
         image: "img.png"
     });
     // const [formObject, setFormObject] = useState([]);
@@ -60,7 +60,7 @@ function Profile() {
             dog.name && 
             dog.breed && 
             dog.age &&
-            dog.gender &&
+            // dog.gender &&
             dog.description &&
             dog.email) 
             {
@@ -68,7 +68,7 @@ function Profile() {
                     name: dog.name,
                     breed: dog.breed,
                     age: dog.age,
-                    gender: dog.gender,
+                    // gender: dog.gender,
                     description: dog.description,
                     email: dog.email
                 })

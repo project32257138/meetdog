@@ -26,7 +26,7 @@ app.get("*", (req, res) => {
 
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dogsDB",
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dogsDB2",
     {
         useNewUrlParser: true,
         useUnifiedTopology: true,

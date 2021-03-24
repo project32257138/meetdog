@@ -12,7 +12,7 @@ const dogSchema = new Schema({
     email: { type: String, unique: true, match: [/.+@.+\..+/, "Please enter a valid e-mail address"] },
 
     // Store the owner's password
-    password: { type: String, required: true },
+    // password: { type: String, required: true },
 
     // Store the dog's name
     name: { type: String, default: "" },
@@ -24,10 +24,10 @@ const dogSchema = new Schema({
     breed: { type: String, default: "" },
 
     // Store the dog's size
-    size: { type: String, enum: ['small', 'medium', 'large'] },
+    // size: { type: String, enum: ['small', 'medium', 'large'] },
 
     // Store the dog's gender
-    gender: { type: String, enum: ['male', 'female'] },
+    // gender: { type: String, enum: ['male', 'female'] },
 
     // Store the dog's description
     description: { type: String, default: "" },

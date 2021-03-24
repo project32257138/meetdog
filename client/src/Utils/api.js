@@ -28,7 +28,12 @@ const API = {
 
     // Saves a profile to the database
     saveDogProfile: function(data) {
-        return axios.post("/api/profile", data);
+        console.log(data);
+        return axios.post("/api/profile", data, {
+          headers: {
+            'content-type': 'application/json'
+          }
+        });
     },
 
     //get all profile
