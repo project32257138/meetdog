@@ -2,6 +2,8 @@ import React from "react";
 import Notification from "../Notification/Notification";
 import Swipe from "../Swipe/index";
 import Header from "../Header";
+import { withAuthenticationRequired } from "@auth0/auth0-react";
+import Loading from "../Loading/Loading";
 
 function UserMain() {
   return (
@@ -23,4 +25,6 @@ function UserMain() {
   );
 }
 
-export default UserMain;
+export default withAuthenticationRequired(UserMain, {
+  onredirecting: () => <Loading />,
+});
