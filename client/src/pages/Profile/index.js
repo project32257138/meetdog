@@ -7,16 +7,31 @@ import API from "../../Utils/api";
 import "./style.css";
 
 function Profile() {
-   
+    const [dog, savedDog] = useState(
+        {
+            name: "Tucker Budzyn",
+            breed: "Golden Retriever",
+            age: "2 years old",
+            gender: "Male",
+            description: "I enjoy long run at the doggy park and chasing squirrels!",
+            email: "tucker123@gmail.com"
+        }
+    );
+    // const [formObject, setFormObject] = useState([]);
 
-    const [dog, savedDog] = useState({
-        name: "Tucker Budzyn",
-        breed: "Golden Retriever",
-        age: "2 years old",
-        gender: "Male",
-        description: "I enjoy long run at the doggy park and chasing squirrels!",
-        email: "tucker123@gmail.com"
-    });
+    // Load all profile and store them with savedDog
+    // useEffect(() => {
+    //     loadProfile()
+    // }, [])
+
+    // Loads all Profile and set to savedDog
+    // function loadProfile() {
+    //     API.getDogProfile()
+    //     .then(res => 
+    //         savedDog(res.data)
+    //     )
+    //     .catch(err => console.log(err));
+    // };
 
     // const addDefaultProfile = () => {
     //     API.getDogDetail()
@@ -34,7 +49,7 @@ function Profile() {
         //     email: e.target.value
         // })
         e.preventDefault();
-        const { value } = e.target;
+        const { name, value } = e.target;
         
         console.log({
             value,
@@ -43,14 +58,33 @@ function Profile() {
         });
     
         savedDog(value);
+        // setFormObject({...formObject, [name]: value})
     
         // check value after we change the state
-        console.log("stateAfterInput", dog)
+        console.log("stateAfterInput", dog);
     };
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log([dog]);
+        // if (
+        //     formObject.name && 
+        //     formObject.breed && 
+        //     formObject.age &&
+        //     formObject.gender &&
+        //     formObject.description &&
+        //     formObject.email) {
+        //     API.saveBook({
+        //       name: formObject.name,
+        //       breed: formObject.breed,
+        //       age: formObject.age,
+        //       gender: formObject.gender,
+        //       description: formObject.description,
+        //       email: formObject.email
+        //     })
+        //     .then(res => loadProfile())
+        //     .catch(err => console.log(err));
+        // }
+        console.log(dog);
     };
 
     return(
@@ -98,31 +132,31 @@ function Profile() {
                     <div className="card-panel" style={{backgroundColor: "#426d49"}}>
                         <h4>My Profile</h4>
                         <div className="divider"></div>
-                        <h5>Name:</h5> <p>{dog.profile.name}</p>
+                        <h5>Name:</h5> <p>{dog.name}</p>
                     
-                        <h5>Breed:</h5> <p>{dog.profile.breed}</p>
+                        <h5>Breed:</h5> <p>{dog.breed}</p>
                         
                         
                         <div className="col s6" style={{paddingLeft: "0px"}}>
                             <h5>Age:</h5>
 
-                            <p>{dog.profile.age}</p>
+                            <p>{dog.age}</p>
                         </div>
                         <div className="col s6">
                             <h5>Gender:</h5>
 
-                            <p>{dog.profile.gender}</p>
+                            <p>{dog.gender}</p>
                         </div>
                         
                         <h5>About Me:</h5> 
 
-                        <p>{dog.profile.description}</p>
+                        <p>{dog.description}</p>
                         
                         <h5>Parks I Enjoy:</h5> 
                         <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 
                         <h5>Email Me:</h5>
-                        <p>{dog.profile.email}</p>
+                        <p>{dog.email}</p>
                     </div>
                     {/* <!-- Edit Profile Modal Trigger --> */}
                     <a className="waves-effect waves-light btn modal-trigger" href="#modal1">Edit Profile</a>
@@ -133,7 +167,6 @@ function Profile() {
                             
                                 <h4 className="modalTxt">Edit Profile</h4>
                                 <div className="divider"></div>
-                                <p className="modalTxt">A bunch of text</p>
                                 
                                 <h5 className="modalTxt">Name:</h5> 
                                 <div className="input-field">
@@ -141,7 +174,8 @@ function Profile() {
                                     placeholder="Tucker Budzyn" 
                                     type="text" 
                                     className="validate" 
-                                    onChange={handleProfileChange}/>
+                                    onChange={handleProfileChange}
+                                    name="name"/>
                                 </div>
                                 <h5 className="modalTxt">Breed:</h5> 
                                 <div className="input-field">
@@ -149,7 +183,8 @@ function Profile() {
                                     placeholder="Golden Retriever" 
                                     type="text" 
                                     className="validate" 
-                                    onChange={handleProfileChange}/>
+                                    onChange={handleProfileChange}
+                                    name="breed"/>
                                 </div>
                                 
                                 <div className="col s6">
@@ -159,7 +194,8 @@ function Profile() {
                                         placeholder="2 years old" 
                                         type="text" 
                                         className="validate" 
-                                        onChange={handleProfileChange}/>
+                                        onChange={handleProfileChange}
+                                        name="input"/>
                                     </div>
                                 </div>
                                 <div className="col s6">
@@ -170,7 +206,8 @@ function Profile() {
                                         placeholder="Male" 
                                         type="text" 
                                         className="validate" 
-                                        onChange={handleProfileChange}/>
+                                        onChange={handleProfileChange}
+                                        name="gender"/>
                                     </div>
                                 </div>
                                 
@@ -179,7 +216,8 @@ function Profile() {
                                     <textarea 
                                     id="textarea1" 
                                     className="materialize-textarea"
-                                    onChange={handleProfileChange}></textarea>
+                                    onChange={handleProfileChange}
+                                    name="description"></textarea>
                                     <label for="textarea1">Tell us something about your pawesome friend!</label>
                                 </div>
                                 
@@ -195,7 +233,8 @@ function Profile() {
                                     placeholder="123tucker@gmail.com" 
                                     type="text" 
                                     class="validate" 
-                                    onChange={handleProfileChange}/>
+                                    onChange={handleProfileChange}
+                                    name="email"/>
                                 </div>
                             </div>
                             <div className="modal-footer">

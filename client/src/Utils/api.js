@@ -26,12 +26,10 @@ const API = {
         })
     },
 
-    getDogDetail: function(query) {
-        axios.get("/api/dog", { params: { q: query } })
-        .then(data => {
-            console.log(data);
-        })
-    }
+    //get all profile
+    getDogProfile: function() {
+        return axios.get("/api/profile");
+    }    
 }
 
 export default API;
