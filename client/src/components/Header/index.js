@@ -25,7 +25,7 @@ const Header = () => {
                 <a href="/">Settings</a>
               </li>
               <li>
-                <AuthBtn />
+                <AuthBtn className="btn-flat white-text"/>
               </li>
             </ul>
           </div>
