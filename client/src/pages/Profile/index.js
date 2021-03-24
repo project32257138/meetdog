@@ -9,12 +9,7 @@ import "./style.css";
 function Profile() {
     const [dog, savedDog] = useState(
         {
-            name: "Tucker Budzyn",
-            breed: "Golden Retriever",
-            age: "2 years old",
-            gender: "Male",
-            description: "I enjoy long run at the doggy park and chasing squirrels!",
-            email: "tucker123@gmail.com"
+            password: "!PuppyLover1",
         }
     );
     // const [formObject, setFormObject] = useState([]);
@@ -33,11 +28,6 @@ function Profile() {
     //     .catch(err => console.log(err));
     // };
 
-    // const addDefaultProfile = () => {
-    //     API.getDogDetail()
-    //     .then(res => savedDog(res.data))
-    //     .catch(err => console.log(err));
-    // }
 
     const handleProfileChange = (e) => {
         // savedDog({
@@ -57,7 +47,7 @@ function Profile() {
             currentState: dog
         });
     
-        savedDog(value);
+        savedDog({...dog, [name]:value});
         // setFormObject({...formObject, [name]: value})
     
         // check value after we change the state
@@ -66,25 +56,30 @@ function Profile() {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        // if (
-        //     formObject.name && 
-        //     formObject.breed && 
-        //     formObject.age &&
-        //     formObject.gender &&
-        //     formObject.description &&
-        //     formObject.email) {
-        //     API.saveBook({
-        //       name: formObject.name,
-        //       breed: formObject.breed,
-        //       age: formObject.age,
-        //       gender: formObject.gender,
-        //       description: formObject.description,
-        //       email: formObject.email
-        //     })
-        //     .then(res => loadProfile())
-        //     .catch(err => console.log(err));
-        // }
-        console.log(dog);
+        if (
+            dog.name && 
+            dog.breed && 
+            dog.age &&
+            dog.gender &&
+            dog.size &&
+            dog.description &&
+            dog.location &&
+            dog.email) {
+            API.saveDogProfile({
+                name: dog.name,
+                breed: dog.breed,
+                age: dog.age,
+                gender: dog.gender,
+                size: dog.size,
+                description: dog.description,
+                location: dog.location,
+                email: dog.email
+            })
+            // .then(res => loadProfile())
+            .catch(err => console.log(err));
+        }
+        else {console.log("form isn't complete")}
+        console.log("afterSubmit",dog);
     };
 
     return(
@@ -136,24 +131,24 @@ function Profile() {
                     
                         <h5>Breed:</h5> <p>{dog.breed}</p>
                         
-                        
                         <div className="col s6" style={{paddingLeft: "0px"}}>
                             <h5>Age:</h5>
-
                             <p>{dog.age}</p>
                         </div>
+
                         <div className="col s6">
                             <h5>Gender:</h5>
-
                             <p>{dog.gender}</p>
                         </div>
-                        
-                        <h5>About Me:</h5> 
 
+                        <h5>Size:</h5>
+                        <p>{dog.size}</p>
+
+                        <h5>About Me:</h5> 
                         <p>{dog.description}</p>
                         
-                        <h5>Parks I Enjoy:</h5> 
-                        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <h5>Location:</h5> 
+                        <p>{dog.location}</p>
 
                         <h5>Email Me:</h5>
                         <p>{dog.email}</p>
@@ -195,36 +190,63 @@ function Profile() {
                                         type="text" 
                                         className="validate" 
                                         onChange={handleProfileChange}
-                                        name="input"/>
+                                        name="age"/>
                                     </div>
                                 </div>
                                 <div className="col s6">
                                     <h5 className="modalTxt">Gender:</h5>
 
+                                    <select 
+                                    class="browser-default"
+                                    onChange={handleProfileChange}
+                                    name="gender">
+                                        <option disabled selected>What's their gender?</option>
+                                        <option>male</option>
+                                        <option>female</option>
+                                    </select>
+                                    
+                                </div>
+                                <div className="col s12" style={{paddingBottom: "20px"}}>
+                                    <h5 className="modalTxt">Size:</h5>
+                                    <select 
+                                    class="browser-default"
+                                    onChange={handleProfileChange}
+                                    name="size">
+                                        <option disabled selected>What's their size?</option>
+                                        <option>small</option>
+                                        <option>medium</option>
+                                        <option>large</option>
+                                    </select>
+                                </div>
+                                <div className="wrapper" style={{paddingTop: "100px"}}>
+                                    <h5 className="modalTxt">About Me:</h5> 
                                     <div className="input-field">
-                                        <input 
-                                        placeholder="Male" 
-                                        type="text" 
-                                        className="validate" 
+                                        <textarea 
+                                        id="textarea1" 
+                                        className="materialize-textarea"
                                         onChange={handleProfileChange}
-                                        name="gender"/>
+                                        name="description"></textarea>
+                                        <label for="textarea1">Tell us something about your pawesome friend!</label>
                                     </div>
                                 </div>
                                 
-                                <h5 className="modalTxt">About Me:</h5> 
-                                <div className="input-field">
-                                    <textarea 
-                                    id="textarea1" 
-                                    className="materialize-textarea"
-                                    onChange={handleProfileChange}
-                                    name="description"></textarea>
-                                    <label for="textarea1">Tell us something about your pawesome friend!</label>
-                                </div>
-                                
-                                <h5 className="modalTxt">Parks I Enjoy:</h5> 
+                                {/* <h5 className="modalTxt">Parks I Enjoy:</h5> 
                                 <div className="input-field">
                                     <textarea id="textarea1" className="materialize-textarea"></textarea>
                                     <label for="textarea1">What parks do you guys like to go to?</label>
+                                </div> */}
+
+                                <div className="col s12" style={{paddingBottom: "20px"}}>       
+                                    <h5 className="modalTxt">Location:</h5>
+                                    <select 
+                                    class="browser-default"
+                                    onChange={handleProfileChange}
+                                    name="location">
+                                        <option disabled selected>Which city are you located in?</option>
+                                        <option>Toronto</option>
+                                        <option>Markham</option>
+                                        <option>Mississauga</option>
+                                    </select>
                                 </div>
 
                                 <h5 className="modalTxt">Email Me:</h5>

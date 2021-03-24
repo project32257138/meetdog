@@ -26,6 +26,15 @@ const API = {
         })
     },
 
+    saveDogProfile: function(data) {
+        console.log(data);
+        return axios.post("/api/profile", data, {
+          headers: {
+            'content-type': 'application/json'
+          }
+        });
+    },
+    
     //get all profile
     getDogProfile: function() {
         return axios.get("/api/profile");
