@@ -1,9 +1,8 @@
 import React from "react";
-import loading from "../../../public/img/loading.svg";
 
 const Loading = () => (
   <div className="spinner">
-    <img src={loading} alt="Loading" />
+    <img src="../../../public/img/loading.svg" alt="Loading" />
   </div>
 );
 
