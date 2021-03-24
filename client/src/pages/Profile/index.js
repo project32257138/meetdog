@@ -7,16 +7,12 @@ import API from "../../Utils/api";
 import "./style.css";
 
 function Profile() {
-    const [dog, savedDog] = useState(
-        {
-            name: "Tucker Budzyn",
-            breed: "Golden Retriever",
-            age: "2 years old",
-            gender: "Male",
-            description: "I enjoy long run at the doggy park and chasing squirrels!",
-            email: "tucker123@gmail.com"
-        }
-    );
+    const [dog, savedDog] = useState({
+        owner: "Puppy Lover",
+        password: "!PuppyLove1",
+        size: "small",
+        image: "img.png"
+    });
     // const [formObject, setFormObject] = useState([]);
 
     // Load all profile and store them with savedDog
@@ -33,12 +29,6 @@ function Profile() {
     //     .catch(err => console.log(err));
     // };
 
-    // const addDefaultProfile = () => {
-    //     API.getDogDetail()
-    //     .then(res => savedDog(res.data))
-    //     .catch(err => console.log(err));
-    // }
-
     const handleProfileChange = (e) => {
         // savedDog({
         //     name: e.target.value,
@@ -51,14 +41,14 @@ function Profile() {
         e.preventDefault();
         const { name, value } = e.target;
         
-        console.log({
-            value,
-            // check value before we change the state
-            currentState: dog
-        });
+        // console.log({
+        //     value,
+        //     // check value before we change the state
+        //     currentState: dog
+        // });
     
-        savedDog(value);
-        // setFormObject({...formObject, [name]: value})
+        
+        savedDog({...dog, [name]: value})
     
         // check value after we change the state
         console.log("stateAfterInput", dog);
@@ -66,25 +56,29 @@ function Profile() {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        // if (
-        //     formObject.name && 
-        //     formObject.breed && 
-        //     formObject.age &&
-        //     formObject.gender &&
-        //     formObject.description &&
-        //     formObject.email) {
-        //     API.saveBook({
-        //       name: formObject.name,
-        //       breed: formObject.breed,
-        //       age: formObject.age,
-        //       gender: formObject.gender,
-        //       description: formObject.description,
-        //       email: formObject.email
-        //     })
-        //     .then(res => loadProfile())
-        //     .catch(err => console.log(err));
-        // }
-        console.log(dog);
+        if (
+            dog.name && 
+            dog.breed && 
+            dog.age &&
+            dog.gender &&
+            dog.description &&
+            dog.email) 
+            {
+                API.saveDogProfile({
+                    name: dog.name,
+                    breed: dog.breed,
+                    age: dog.age,
+                    gender: dog.gender,
+                    description: dog.description,
+                    email: dog.email
+                })
+                // .then(res => loadProfile())
+                .catch(err => console.log(err));
+            }
+        else {
+            console.log("The form isn't complete!");
+            }
+        console.log("stateAfterInput",dog);
     };
 
     return(
@@ -195,7 +189,7 @@ function Profile() {
                                         type="text" 
                                         className="validate" 
                                         onChange={handleProfileChange}
-                                        name="input"/>
+                                        name="age"/>
                                     </div>
                                 </div>
                                 <div className="col s6">
