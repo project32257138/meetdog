@@ -1,6 +1,5 @@
 import React from "react";
-import loading from "../assets/loading.svg";
-import loading from "../../../public/img/loading.svg"
+import loading from "../../../public/img/loading.svg";
 
 const Loading = () => (
   <div className="spinner">
