@@ -4,7 +4,6 @@ import API from "../../Utils/api"
 import OneSignal, { useOneSignalSetup } from 'react-onesignal';
 import execute from "../../send-push"
 import { TrustProductsEntityAssignmentsContext } from 'twilio/lib/rest/trusthub/v1/trustProducts/trustProductsEntityAssignments';
-// import { addToMatches } from '../../../../controllers/dogsController';
 
 class Swipe extends Component {
 
@@ -12,7 +11,7 @@ class Swipe extends Component {
         id: 1,
         name: "Spot",
         email: "spotty@gmail.com",
-        currentMatch: false,
+        currentMatch: true,
         currentDog: {
             image: process.env.PUBLIC_URL + "/img/dog-05.jpeg",
             name: "Doge",
@@ -30,8 +29,8 @@ class Swipe extends Component {
         // lastRatedIndex: -1,
         liked: {
             // object storing id and if that dog was liked by the user
-            // {id: true}  for liked --or--
-            // {id: false} for disliked
+            // id: true,  for liked --or--
+            // id: false, for disliked
         }
     }
 
@@ -44,11 +43,8 @@ class Swipe extends Component {
     componentDidUpdate(prevProps, prevState) {
         if (this.state.dogIndex !== prevState.dogIndex) {
             this.setState({
-                currentDog:
-                    this.state.dogList[this.state.dogIndex]
-                    // name: "Lucky"+this.state.dogIndex,
-                    // id: this.state.dogList[this.state.dogIndex],
-                    // liked: this.state.dogList[this.state.dogIndex]
+                currentDog: this.state.dogList[this.state.dogIndex],
+                currentMatch: this.state.currentDog.liked[this.state.id],
             })
         }
     }
@@ -104,12 +100,12 @@ class Swipe extends Component {
         // this.setState({likedDogs: [this.state.currentDog.image,...this.state.likedDogs]})
         this.setState({liked: {[this.state.currentDog.id]: true, ...this.state.liked}})
         // if (!this.state.liked.hasOwnProperty(this.state.currentDog.id)) this.setState({lastRatedIndex: this.state.lastRatedIndex + 1})
-        if (this.state.currentDog.liked[this.state.id] === true) {
-            console.log("match!!!!!")
-            this.setState({currentMatch: true})
-        } else {
-            this.setState({currentMatch: false})
-        }
+        // if (this.state.currentDog.liked[this.state.id] === true) {
+        //     console.log("match!!!!!")
+        //     this.setState({currentMatch: true})
+        // } else {
+        //     this.setState({currentMatch: false})
+        // }
         this.getNextDog()
     }
 
@@ -136,7 +132,7 @@ class Swipe extends Component {
     // }
 
     showMatch = () => {
-        if (this.state.currentMatch > 0) {
+        if (this.state.currentMatch) {
             return (
             <div>Match!!!</div>
         )} else return ""
