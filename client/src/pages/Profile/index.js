@@ -3,6 +3,10 @@ import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileList from "../../components/ProfileList";
+
+//--------- LOCATION API:
+// import ProileLocationAPI from "../../components";
+
 import API from "../../Utils/api";
 import "./style.css";
 
@@ -248,6 +252,9 @@ function Profile() {
                                         <option>Mississauga</option>
                                     </select>
                                 </div>
+                                
+                                {/* ---------LOCATION API */}
+                                {/* <ProileLocationAPI onChange={handleProfileChange} /> */}
 
                                 <h5 className="modalTxt">Email Me:</h5>
                                 <div class="input-field">
