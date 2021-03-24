@@ -11,8 +11,7 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build",
-    "seed": "node scripts/seedDB.js"
+    "heroku-postbuild": "npm run build"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +24,7 @@
     "express": "^4.16.3",
     "if-env": "^1.0.4",
     "mongoose": "^5.12.1",
-    "react-materialize": "^3.9.7"
+    "react-materialize": "^3.9.7",
+    "use-places-autocomplete": "^1.9.1"
   }
 }

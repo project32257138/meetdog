@@ -5,7 +5,7 @@ import { Col, Row, Container } from "../../components/Grid";
 // import ProfileList from "../../components/ProfileList";
 
 //--------- LOCATION API:
-// import ProileLocationAPI from "../../components";
+// import ParkPreference from "../../components/ParkPreference";
 
 import API from "../../Utils/api";
 import "./style.css";
@@ -254,7 +254,7 @@ function Profile() {
                                 </div>
                                 
                                 {/* ---------LOCATION API */}
-                                {/* <ProileLocationAPI onChange={handleProfileChange} /> */}
+                                {/* <ParkPreference onChange={handleProfileChange} /> */}
 
                                 <h5 className="modalTxt">Email Me:</h5>
                                 <div class="input-field">
