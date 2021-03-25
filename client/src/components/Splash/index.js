@@ -6,7 +6,9 @@ const Splash = () => {
   return (
     <main id="main-splash">
       <section id="logo">
+
         <img src="../../../img/puppy-love.png" alt="Logo"/>
+
       </section>
 
       <section id="message">

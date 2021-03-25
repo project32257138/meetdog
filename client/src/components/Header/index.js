@@ -9,7 +9,7 @@ const Header = () => {
         <nav id="navbar">
           <div className="nav-wrapper">
             <a href="/" className="brand-logo" id="nav-logo">
-              <img src="../../../img/puppy-love-small.png"></img>
+              <img src="../../../img/puppy-love-small.png" alt=""></img>
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
@@ -25,7 +25,7 @@ const Header = () => {
                 <a href="/">Settings</a>
               </li>
               <li>
-                <AuthBtn />
+                <AuthBtn className="btn-flat white-text"/>
               </li>
             </ul>
           </div>
