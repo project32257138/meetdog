@@ -201,7 +201,7 @@ function Profile() {
                                     <h5 className="modalTxt">Gender:</h5>
 
                                     <select 
-                                    class="browser-default"
+                                    className="browser-default"
                                     onChange={handleProfileChange}
                                     name="gender">
                                         <option disabled selected>What's their gender?</option>
@@ -213,7 +213,7 @@ function Profile() {
                                 <div className="col s12" style={{paddingBottom: "20px"}}>
                                     <h5 className="modalTxt">Size:</h5>
                                     <select 
-                                    class="browser-default"
+                                    className="browser-default"
                                     onChange={handleProfileChange}
                                     name="size">
                                         <option disabled selected>What's their size?</option>
@@ -230,7 +230,7 @@ function Profile() {
                                         className="materialize-textarea"
                                         onChange={handleProfileChange}
                                         name="description"></textarea>
-                                        <label for="textarea1">Tell us something about your pawesome friend!</label>
+                                        <label htmlFor="textarea1">Tell us something about your pawesome friend!</label>
                                     </div>
                                 </div>
                                 
@@ -238,13 +238,13 @@ function Profile() {
                                 <div className="input-field">
                                     <textarea id="textarea1" className="materialize-textarea"></textarea>
                                     <label 
-                                    for="textarea1">What parks do you guys like to go to?</label>
+                                    htmlFor="textarea1">What parks do you guys like to go to?</label>
                                 </div> */}
 
                                 <div className="col s12" style={{paddingBottom: "20px"}}>       
                                     <h5 className="modalTxt">Location:</h5>
                                     <select 
-                                    class="browser-default"
+                                    className="browser-default"
                                     onChange={handleProfileChange}
                                     name="location">
                                         <option disabled selected>Which city are you located in?</option>
@@ -258,11 +258,11 @@ function Profile() {
                                 {/* <ParkPreference onChange={handleProfileChange} /> */}
 
                                 <h5 className="modalTxt">Email Me:</h5>
-                                <div class="input-field">
+                                <div className="input-field">
                                     <input 
                                     placeholder="123tucker@gmail.com" 
                                     type="text" 
-                                    class="validate" 
+                                    className="validate" 
                                     onChange={handleProfileChange}
                                     name="email"/>
                                 </div>
