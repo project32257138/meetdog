@@ -10,7 +10,7 @@ export function Input(props) {
 
     <div className="input-field">
       <input {...props} type="text" className="validate"/>
-      {/* <label for="first_name">First Name</label> */}
+      {/* <label htmlFor="first_name">First Name</label> */}
     </div>
   );
 }
@@ -22,7 +22,7 @@ export function TextArea(props) {
     // </div>
     <div class="input-field col s12">
       <textarea className="materialize-textarea" {...props} />
-      {/* <label for="textarea1">Textarea</label> */}
+      {/* <label htmlFor="textarea1">Textarea</label> */}
     </div>
   );
 }

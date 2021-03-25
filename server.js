@@ -1,20 +1,28 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+var sign_s3 = require('./controllers/sign_s3');
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
+const cors = require("cors");
+
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors());
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
     app.use(express.static("client/build"));
 }
 
 // Define API routes here
-app.use(routes);
+// app.use(routes);
+app.use('/sign_s3', sign_s3.sign_s3);
+
 
 // Send every other request to the React app
 // Define any API routes before this runs

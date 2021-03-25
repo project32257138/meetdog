@@ -3,8 +3,9 @@
     src: local('MoreSugar-Thin'), url(../../font/MoreSugar-Thin.ttf) format('truetype');
 }
 
-img{
-    padding-top: 10px;
+#profile-img{
+    width: 100%;
+    height: 100%;
 }
 
 h4,h5 {
@@ -25,4 +26,16 @@ h4, h5, p{
     padding-left: 30px;
     padding-right: 30px;
     /* background-color: #426d49;  Not working, needed to inline style  */
+}
+
+#profile-img-div {
+    padding-top: 20px;
+}
+
+.fieldLabelTxt {
+    color: cadetblue;
+}
+
+.btn {
+    margin: 20px;
 }

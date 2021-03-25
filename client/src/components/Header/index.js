@@ -36,17 +36,17 @@ const Header = () => {
             <ul>
               <li>
                 <a href="/">
-                  <i class="material-icons">home</i>
+                  <i className="material-icons">home</i>
                 </a>
               </li>
               <li>
                 <a href="/matches">
-                  <i class="material-icons">pets</i>
+                  <i className="material-icons">pets</i>
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <i class="material-icons">person</i>
+                  <i className="material-icons">person</i>
                 </a>
               </li>
               <li>
