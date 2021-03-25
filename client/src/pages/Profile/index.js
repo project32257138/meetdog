@@ -237,7 +237,8 @@ function Profile() {
                                 {/* <h5 className="modalTxt">Parks I Enjoy:</h5> 
                                 <div className="input-field">
                                     <textarea id="textarea1" className="materialize-textarea"></textarea>
-                                    <label for="textarea1">What parks do you guys like to go to?</label>
+                                    <label 
+                                    for="textarea1">What parks do you guys like to go to?</label>
                                 </div> */}
 
                                 <div className="col s12" style={{paddingBottom: "20px"}}>       

@@ -4,7 +4,9 @@ import usePlacesAutocomplete, {
 } from "use-places-autocomplete";
 import useOnclickOutside from "react-cool-onclickoutside";
   
-function PlacesAutocomplete(props) {
+function PlacesAutocomplete(
+  // prop
+) {
   // const {[onChange]:profileChange} = props; 
   const {
     ready,
