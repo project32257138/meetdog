@@ -8,7 +8,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileListDefault from "../../components/ProfileListDefault"
 
 //--------- LOCATION API:
-// import ParkPreference from "../../components/ParkPreference";
+import AutoComplete from "../../components/AutoComplete";
 
 import API from "../../Utils/api";
 import "./style.css";
@@ -271,11 +271,10 @@ function Profile() {
                                 </div>
                             </div>
 
-                            {/* <h5 className="fieldLabelTxt">Parks I Enjoy:</h5>
+                            <h5 className="fieldLabelTxt">Parks I Enjoy:</h5>
                             <div className="input-field">
-                                <textarea id="textarea1" className="materialize-textarea"></textarea>
-                                <label for="textarea1">What parks do you guys like to go to?</label>
-                            </div> */}
+                                <AutoComplete ></AutoComplete>
+                            </div>
 
                             <div className="col s12" style={{ paddingBottom: "20px" }}>
                                 <h5 className="fieldLabelTxt">Location:</h5>
