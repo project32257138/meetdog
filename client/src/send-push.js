@@ -4,7 +4,7 @@ require('dotenv').config({path:__dirname + "/../.env"})
 const OSID = process.env.REACT_APP_ONE_SIGNAL_ID;
 const OSKEY = "Basic " + process.env.REACT_APP_ONE_SIGNAL_KEY
 
-function Push() {
+function Push(props) {
 
   window.OneSignal = window.OneSignal || [];
   const OneSignal = window.OneSignal;
@@ -13,6 +13,8 @@ function Push() {
 
 
     OneSignal.push(()=> {
+      console.log(props)
+      if (props.match) {
       OneSignal.init(
         {
           appId: OSID,
@@ -30,10 +32,12 @@ function Push() {
           "message": "Thanks for subscribing!",
         } 
       },
-        OneSignal.sendSelfNotification( "Puppy Love","Welcome back!","http://localhost:3000"
+       OneSignal.sendSelfNotification( "Puppy Love","You matched with "+ props.dog,"http://localhost:3000"
         )
       );
+    }
     });
+    
   })
 
   return (

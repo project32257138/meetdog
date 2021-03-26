@@ -151,7 +151,10 @@ class Swipe extends Component {
     render() {
         return (
             <div className="row">
-            <Push/>
+            <Push
+                match={this.state.currentMatch}
+                dog={this.state.currentDog.name}
+            />
             <div className="col s12 m12">
             <div className="card">
                 <div className="card-image dog-image">
