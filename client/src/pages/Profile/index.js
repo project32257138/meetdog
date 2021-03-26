@@ -3,14 +3,9 @@ import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
 
-import { Input, TextArea, FormBtn } from "../../components/Form";
-// import ProfileList from "../../components/ProfileList";
-// import ProfileListDefault from "../../components/ProfileListDefault"
-
 //--------- LOCATION API:
 import AutoComplete from "../../components/AutoComplete";
 
-import API from "../../Utils/api";
 import "./style.css";
 
 function Profile() {
@@ -23,8 +18,8 @@ function Profile() {
     const [size, setSize] = useState("What's their size?");
     const [gender, setGender] = useState("What's their gender?");
     const [description, setDescription] = useState("Tell us something about your pawesome friend!");
-    const [image, setImage] = useState("");
-    const [likes, setLikes] = useState("");
+    // const [image, setImage] = useState("");
+    // const [likes, setLikes] = useState("");
     const [location, setLocation] = useState("Which city are you located in?");
 
     const [stateAWS, setStateAWS] = useState({
@@ -83,23 +78,6 @@ function Profile() {
             })
     }
 
-
-    // const [formObject, setFormObject] = useState([]);
-
-    // Load all profile and store them with savedDog
-    // useEffect(() => {
-    //     loadProfile()
-    // }, [])
-
-    // Loads all Profile and set to savedDog
-    // function loadProfile() {
-    //     API.getDogProfile()
-    //     .then(res => 
-    //         savedDog(res.data)
-    //     )
-    //     .catch(err => console.log(err));
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
@@ -112,19 +90,6 @@ function Profile() {
             location &&
             email
         ) {
-            // API.saveDogProfile({
-            //     name: dog.name,
-            //     breed: dog.breed,
-            //     age: dog.age,
-            //     gender: dog.gender,
-            //     size: dog.size,
-            //     description: dog.description,
-            //     location: dog.location,
-            //     email: dog.email
-            // }
-            // )
-            // .then(res => loadProfile())
-            // .catch(err => console.log(err));
             console.log({
                 name: name,
                 breed: breed,
@@ -147,7 +112,6 @@ function Profile() {
     }
 
     const SuccessMessage = () => (
-
         <div>
             <p style={{ color: 'green' }}>SUCCESSFUL UPLOAD</p>
         </div>
