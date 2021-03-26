@@ -29,5 +29,5 @@
     "mongoose": "^5.12.1",
     "react-materialize": "^3.9.7",
     "react-places-autocomplete": "^7.3.0"
-   }
+  }
 }
