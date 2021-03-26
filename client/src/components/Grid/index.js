@@ -1,10 +1,12 @@
 import React from "react";
+import "./style.css";
 
 // Exporting the Container, Row, and Col components from this file
 
 // This Container component allows us to use a materialize container without worrying about class names
+// This Container is specific to profile page
 export function Container({ children }) {
-  return <div className={`container`}>{children}</div>;
+  return <div className="container_profile">{children}</div>;
 }
 
 // This Row component lets us use a materialize row without having to think about class names
