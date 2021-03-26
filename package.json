@@ -27,6 +27,6 @@
     "mongoose": "^5.12.1",
     "onesignal-node": "^3.2.1",
     "react-materialize": "^3.9.7",
-    "twilio": "^3.58.0"
+    "use-places-autocomplete": "^1.9.1"
   }
 }
