@@ -9,7 +9,7 @@ const Header = () => {
         <nav id="navbar">
           <div className="nav-wrapper">
             <a href="/" className="brand-logo" id="nav-logo">
-              <img src="../../../img/puppy-love-small.png"></img>
+              <img src="../../../img/puppy-love-small.png" alt=""></img>
             </a>
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
@@ -25,7 +25,7 @@ const Header = () => {
                 <a href="/">Settings</a>
               </li>
               <li>
-                <AuthBtn />
+                <AuthBtn className="btn-flat white-text"/>
               </li>
             </ul>
           </div>
@@ -36,17 +36,17 @@ const Header = () => {
             <ul>
               <li>
                 <a href="/">
-                  <i class="material-icons">home</i>
+                  <i className="material-icons">home</i>
                 </a>
               </li>
               <li>
                 <a href="/matches">
-                  <i class="material-icons">pets</i>
+                  <i className="material-icons">pets</i>
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <i class="material-icons">person</i>
+                  <i className="material-icons">person</i>
                 </a>
               </li>
               <li>

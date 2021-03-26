@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 import "./index.css"
 import API from "../../Utils/api"
-import OneSignal, { useOneSignalSetup } from 'react-onesignal';
 import Push from "./../../send-push.js"
 import { useHistory } from 'react-router';
 // import { TrustProductsEntityAssignmentsContext } from 'twilio/lib/rest/trusthub/v1/trustProducts/trustProductsEntityAssignments';
@@ -152,7 +151,7 @@ class Swipe extends Component {
     render() {
         return (
             <div className="row">
-                <Push/>
+            <Push/>
             <div className="col s12 m12">
             <div className="card">
                 <div className="card-image dog-image">
