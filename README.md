@@ -25,7 +25,7 @@ npm start
 ```
 
 
-## Built wiht & Librares used
+## Built with & Librares used
 * React
 * Javascript
 * HTML/CSS
