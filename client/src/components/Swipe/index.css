@@ -45,7 +45,7 @@ a {
 
 .dog-image img{
     height: 425.5px;
-    width: 425.5px !important;
+    /* max-width: 425.5px !important; */
     object-fit: cover;
 }
 

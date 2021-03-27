@@ -2,7 +2,7 @@ import axios from "axios"
 
 let setId = 0;
 
-const swapIndexes = (arr,i,j) => {
+const swap = (arr,i,j) => {
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
@@ -11,13 +11,13 @@ const swapIndexes = (arr,i,j) => {
 
 const getRandomNonRepeating = (n) => {
     let arr = []
-    for (let i = 1; i <= n; i++) {
+    for (let i = 0; i < n; i++) {
         arr.push(i)
     }
     let rdm;
     for (let i = (n - 1); i >= 0; i--) {
         rdm = Math.floor(Math.random() * (i))
-        swapIndexes(arr,i,rdm)
+        swap(arr,i,rdm)
     }
     return arr
 }
@@ -63,11 +63,11 @@ const API = {
                     email: "lucky" + setId + "@doggymail.com",
                     name: "lucky" + setId,
                     liked: {
-                        [likeID[0]] : !!Math.floor(Math.random() * 4),
-                        [likeID[1]] : !!Math.floor(Math.random() * 4),
-                        [likeID[2]] : !!Math.floor(Math.random() * 4),
-                        [likeID[3]] : !!Math.floor(Math.random() * 4),
-                        [likeID[4]] : !!Math.floor(Math.random() * 4)
+                        [likeID[0]] : !!Math.floor(Math.random() * 10),
+                        [likeID[1]] : !!Math.floor(Math.random() * 10),
+                        [likeID[2]] : !!Math.floor(Math.random() * 10),
+                        [likeID[3]] : !!Math.floor(Math.random() * 10),
+                        [likeID[4]] : !!Math.floor(Math.random() * 10)
                     }
                 }
             })

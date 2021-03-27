@@ -14,7 +14,7 @@ class ShowMatch extends Component {
     // }
 
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         if (this.props.match) {
             return (
                 <div>You matched with {this.props.thisDog}</div>
@@ -32,21 +32,16 @@ class Swipe extends Component {
         name: "Spot",
         email: "spotty@gmail.com",
         currentMatch: false,
+        currentMatchName: "",
         currentDog: {
-            image: process.env.PUBLIC_URL + "/img/dog-05.jpeg",
-            name: "Doge",
+            image: "../../../img/loading.svg",
+            name: "Loading",
             id: 0,
-            email: "natasha.fray9@gmail.com",
             liked: {
-                1: false,
-                2: false,
-                3: false,
-                4: false
             }
         },
         dogList: [],
         dogIndex: 0,
-        // lastRatedIndex: -1,
         liked: {
             // object storing id and if that dog was liked by the user
             // id: true,  for liked --or--
@@ -55,34 +50,82 @@ class Swipe extends Component {
     }
 
     componentDidMount() {
-        console.log("component did mount")
-        API.getNextDogsNoCheck(10,(dogs) => {
+
+        const OSID = process.env.REACT_APP_ONE_SIGNAL_ID;
+        const OSKEY = "Basic " + process.env.REACT_APP_ONE_SIGNAL_KEY
+        
+        window.OneSignal = window.OneSignal || [];
+        const OneSignal = window.OneSignal;
+
+        OneSignal.init(
+            {
+              appId: OSID,
+              // requiresUserPrivacyConsent: true,
+              promptOptions: {
+                slidedown: {
+                  enabled: true,
+                  actionMessage: "We'd like to notify you of matches for new play dates for you.",
+                  acceptButtonText: "Yes!",
+                  cancelButtonText: "Maybe later.",
+              } 
+            },
+            welcomeNotification: {
+              "title": "Puppy Love | Creating New Play Dates",
+              "message": "Thanks for subscribing!",
+            } 
+          });
+
+        API.getNextDogsNoCheck(20,(dogs) => {
+            // console.log(dogs)
             this.setState({dogList : dogs})
+            this.setState({currentDog: dogs[this.state.dogIndex]})
+
         })
+        // console.log(this.state.dogList)
     }
+
+
+    // componentDidMount() {
+    //     console.log("component did mount")
+    //     API.getNextDogsNoCheck(10,(dogs) => {
+    //         this.setState({dogList : dogs})
+    //     })
+    // }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("component did update")
-        console.log(this.state)
-        if (this.state.dogIndex !== prevState.dogIndex) {
-            this.setState({
-                currentDog: this.state.dogList[this.state.dogIndex],
-                currentMatch: this.state.currentDog.liked[this.state.id] === this.state.liked[this.state.currentDog.id] &&
-                this.state.liked[this.state.currentDog.id] === true
-            })
-        }
+        // console.log(this.state)
+        console.log(prevState.currentDog.liked[this.state.id],this.state.liked[prevState.currentDog.id] )
+        // if (this.state.dogIndex !== prevState.dogIndex) {
+        this.setState({
+            // currentDog: this.state.dogList[this.state.dogIndex],
+            currentMatch: (prevState.currentDog.liked[this.state.id] && this.state.liked[prevState.currentDog.id]),
+            currentMatchName: (prevState.currentDog.name)
+            // && this.state.liked[prevState.currentDog.id]
+        })
+            // console.log(this.state.currentMatch, prevState.currentDog.name)
+
+        // }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state.currentDog !== nextState.currentDog
+    }
+
+
     getNextDog = () => {
-        console.log(this.state.dogIndex, this.state.dogList.length)
-        this.setState({ 
-            dogIndex: this.state.dogIndex + 1
+        // console.log(this.state.dogIndex, this.state.dogList.length)
+        // this.setState({ 
+        //     currentMatch: this.state.dogList[this.state.dogIndex]
+        // })
+        this.setState({
+            dogIndex: this.state.dogIndex + 1,
+            currentDog: this.state.dogList[this.state.dogIndex],
         })
-        console.log(this.state)
+        console.log(this.state.currentMatch, this.state.currentDog.name, this.state.currentDog.liked)
     }
 
     getPreviousDog = () => {
-        console.log(this.state.dogIndex, this.state.currentDog)
+        // console.log(this.state.dogIndex, this.state.currentDog)
         this.setState({
             dogIndex: this.state.dogIndex - 1,
         })
@@ -99,8 +142,13 @@ class Swipe extends Component {
         // } else {
         //     this.setState({currentMatch: false})
         // }
-        this.setState({liked: {[this.state.currentDog.id]: true, ...this.state.liked}})
-        console.log(this.state.currentDog.liked[this.state.id])
+        this.setState({
+            liked: {[this.state.currentDog.id]: true, ...this.state.liked},
+            // currentMatch: this.state.currentDog.liked[this.state.id] === this.state.liked[this.state.currentDog.id] 
+            // && this.state.currentDog.liked[this.state.id] === true
+        })
+        
+        // console.log(this.state.currentDog.liked[this.state.id])
         this.getNextDog()
         // return true
     }
@@ -127,33 +175,13 @@ class Swipe extends Component {
             <div>Match!!!</div>
         )
     }
-
-    // showPrevBtn = () => {
-    //     if (this.state.dogIndex > 0) return (
-    //         <i className="material-icons back" onClick={this.getPreviousDog}>arrow_back_ios</i>
-    //     )
-    // }
-
-    // showMatch = () => {
-    //     if (this.state.currentMatch) {
-    //         return (
-    //         <div>Match!!!</div>
-
-    //     )} else return ""
-    //     // )}
-    // }
-
-    // handleMatch = (match) => {
-    //     console.log(match)
-    //     this.setState({currentMatch: match})
-    // }
  
     render() {
         return (
             <div className="row">
             <Push
                 match={this.state.currentMatch}
-                dog={this.state.currentDog.name}
+                dog={this.state.currentMatchName}
             />
             <div className="col s12 m12">
             <div className="card">
@@ -169,7 +197,7 @@ class Swipe extends Component {
                 {/* {this.showNextBtn()} */}
                 <ShowMatch
                     match={this.state.currentMatch}
-                    thisDog={this.state.currentDog.name}
+                    thisDog={this.state.currentMatchName}
                     // matchChange={this.handleMatch}
                 />
                 <a href="#"><span className="material-icons like" onClick={this.likeDog}>thumb_up</span></a>

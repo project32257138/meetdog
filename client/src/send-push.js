@@ -14,28 +14,9 @@ function Push(props) {
 
     OneSignal.push(()=> {
       console.log(props)
-      if (props.match) {
-      OneSignal.init(
-        {
-          appId: OSID,
-          // requiresUserPrivacyConsent: true,
-          promptOptions: {
-            slidedown: {
-              enabled: true,
-              actionMessage: "We'd like to notify you of matches for new play dates for you.",
-              acceptButtonText: "Yes!",
-              cancelButtonText: "Maybe later.",
-          } 
-        },
-        welcomeNotification: {
-          "title": "Puppy Love | Creating New Play Dates",
-          "message": "Thanks for subscribing!",
-        } 
-      },
-       OneSignal.sendSelfNotification( "Puppy Love","You matched with "+ props.dog,"http://localhost:3000"
-        )
-      );
-    }
+    // }
+    if (props.match) OneSignal.sendSelfNotification( "Puppy Love","You matched with "+ props.dog,"http://localhost:3000")
+
     });
     
   })
