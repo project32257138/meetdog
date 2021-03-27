@@ -3,8 +3,6 @@ import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-
-
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileList from "../../components/ProfileList";
 // import ProfileListDefault from "../../components/ProfileListDefault"
@@ -13,7 +11,7 @@ import { useParams } from "react-router-dom";
 import AutoComplete from "../../components/AutoComplete";
 
 import API from "../../Utils/api";
-// import "./style.css";
+import "./style.css"
 
 function Profile() {
 
