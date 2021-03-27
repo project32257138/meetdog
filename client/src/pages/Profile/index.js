@@ -13,7 +13,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import AutoComplete from "../../components/AutoComplete";
 
 import API from "../../Utils/api";
-// import "./style.css";
+import "./style.css";
 
 function Profile() {
 
