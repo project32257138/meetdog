@@ -48,6 +48,10 @@ const API = {
     //     })
     // },
 
+    tryget: function() {
+        return axios.get("/api/profile").then(l => console.log(l))
+    },
+
     getNextDogsNoCheck: function(n,cb) {
         axios.get("https://dog.ceo/api/breeds/image/random/" + n)
         .then(data => {

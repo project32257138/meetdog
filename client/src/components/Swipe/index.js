@@ -81,6 +81,8 @@ class Swipe extends Component {
             this.setState({currentDog: dogs[0]})
 
         })
+
+        API.tryget()
         // console.log(this.state.dogList)
     }
 
