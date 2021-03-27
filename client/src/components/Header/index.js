@@ -19,12 +19,6 @@ const Header = () => {
                 <a href="/profile">Profile</a>
               </li>
               <li>
-                <a href="/matches">Matches</a>
-              </li>
-              <li>
-                <a href="/">Settings</a>
-              </li>
-              <li>
                 <AuthBtn className="btn-flat white-text"/>
               </li>
             </ul>
