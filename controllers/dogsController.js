@@ -69,10 +69,10 @@ module.exports = {
                 let filterArray = Object.getOwnPropertyNames(loggedDog.likes)
 
                 // Push user id into filterArray 
-                const filterArray = filterArray.push(req.params.id)
+                const filterList = filterArray.push(req.params.id)
 
                 // Get one new profile
-                db.Dog.find({ _id: { $nin: filterArray } }).limit(10)
+                db.Dog.find({ _id: { $nin: filterList } }).limit(10)
                 .then(dbModel => res.json(dbModel))
                 .catch(err => res.status(422).json(err))
             })
