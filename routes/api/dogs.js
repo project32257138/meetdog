@@ -13,4 +13,31 @@ router
 
 //   .delete(dogsController.remove);  // Missing
 
+// Matches with "/api/dogs/newdog/:id"
+router 
+  .route("/newdog/:id")
+  .get(dogsController.getOneNewDog)
+
+
+// Matches with "/api/dogs/newdogs/:id"
+router 
+  .route("/newdogs/:id")
+  .get(dogsController.getTenNewDog)
+
+// Matches with "/api/dogs/swipe/:id"
+router 
+  .route("/swipe/:id")
+  .put(dogsController.updateLikes)
+
+// Matches with "/api/dogs/check/:id"
+router 
+  .route("/check/:id")
+  .get(dogsController.checkMatch)
+
+// Matches with "/api/dogs/matches/:id"
+router 
+  .route("/matches/:id")
+  .get(dogsController.getMatches)
+
+
 module.exports = router;

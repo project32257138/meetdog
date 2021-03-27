@@ -87,9 +87,35 @@ const API = {
     },
 
      // Gets all new Dogs
-     getNewDogs: function () {
-         return axios.get("/api/dogs");
-     }
+    //  getNewDogs: function () {
+    //      return axios.get("/api/dogs");
+    //  },
+
+    // Get logged profile id and return a single 
+    getNewDog: function (id) {
+        return axios.get("/api/dogs/newdog/" + id);
+    },
+
+    // Get logged profile id and return 10 new profiles 
+    getNewDogs: function (id) {
+        return axios.get("/api/dogs/newdogs/" + id);
+    },
+
+    // Get logged profile id and and obj (for likes pass {id: "2323483", value: true} and for dislike pass {id: "2323483", value: false})
+    likeOrDislike: function (id, swipedProfile) {
+        return axios.get("/api/dogs/swipe/" + id, swipedProfile);
+    },
+
+    // Get logged profile id and and id of the swiped profile {id: "19289234"} and return true / false
+    checkIfMatch: function (id, swipedProfileId) {
+        return axios.get("/api/dogs/check/" + id, swipedProfileId);
+    },
+
+    // No Ready
+    // Get all the matches  
+    getAllMatches: function (id) {
+        return axios.get("/api/dogs/matches/" + id);
+    }
 
 }
 
