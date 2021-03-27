@@ -1,15 +1,20 @@
 const router = require("express").Router();
 const dogsController = require("../../controllers/dogsController");
 
-// Matches with "/api/profile"
+// Matches with "/api/dogs"
 router.route("/")
   .get(dogsController.findAllNew)
 
-// Matches with "/api/profile/:id"
+// Matches with "/api/dogs/:id"
 router
   .route("/:id")
   .get(dogsController.findById)
   .put(dogsController.update)
+
+// Get the current logged user id
+router
+    .route("/currentuser/:email")
+    .get(dogsController.findUserId)
 
 //   .delete(dogsController.remove);  // Missing
 

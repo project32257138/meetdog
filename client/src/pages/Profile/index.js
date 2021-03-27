@@ -3,6 +3,7 @@ import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileList from "../../components/ProfileList";
 // import ProfileListDefault from "../../components/ProfileListDefault"
@@ -11,7 +12,8 @@ import { useParams } from "react-router-dom";
 import AutoComplete from "../../components/AutoComplete";
 
 import API from "../../Utils/api";
-import "./style.css"
+import "./style.css";
+
 
 function Profile() {
 
@@ -43,24 +45,32 @@ function Profile() {
 
     // Load Profile and component render
     useEffect(() => {
-        API.getDog(id)
-            .then(res => {
-                setName(res.data.name);
-                setAge(res.data.age);
-                setBreed(res.data.breed);
-                setSize(res.data.size);
-                setGender(res.data.gender);
-                setDescription(res.data.description);
-                setImage(res.data.image);
-                setLikes(res.data.likes);
-                // setPark(res.data.park);
-                setLocation(res.data.location);
+
+
+        // API.getDog(id)
+        //     .then(res => {
+
+        //         let filterArray = Object.getOwnPropertyNames(res.data.likes)
+
+        //         console.log(filterArray)
+        //         setName(res.data.name);
+        //         setAge(res.data.age);
+        //         setBreed(res.data.breed);
+        //         setSize(res.data.size);
+        //         setGender(res.data.gender);
+        //         setDescription(res.data.description);
+        //         setImage(res.data.image);
+        //         setLikes(res.data.likes);
+        //         // setPark(res.data.park);
+        //         setLocation(res.data.location);
+        //     })
+        //     .catch(err => console.log(err));
+
+            API.getAllDogs().then(res => {
+                console.log(res)
             })
             .catch(err => console.log(err));
 
-            API.getNewDogs().then(res => {
-                console.log(res)
-            })
     }, [])
 
 
@@ -289,7 +299,7 @@ function Profile() {
                                 </select>
                             </div>
                             {/* <button className="btn" onClick={toggleEditMode}>Edit</button> */}
-                            <button className="btn submit" onClick={handleSubmit} >Save</button>)
+                            <button className="btn submit" onClick={handleSubmit} >Save</button>
 
                         </form>
                     </Col>
