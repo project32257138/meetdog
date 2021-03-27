@@ -4,7 +4,8 @@ a {
 
 .bark-back {
     display: flex;
-    justify-content: space-around;
+    padding: 16px 64px !important;
+    justify-content: space-between;
 }
 
 .like {
@@ -44,12 +45,7 @@ a {
 
 .dog-image img{
     height: 425.5px;
-    width: 425.5px;
-}
-
-.dog-image img{
-    height: 425.5px;
-    width: 425.5px;
+    width: 425.5px !important;
     object-fit: cover;
 }
 
@@ -77,4 +73,9 @@ a {
 .forward {
     /* margin-right: 0.75em !important; */
     right: 1em;
+}
+
+/* sets img tag back to normal */
+.avatar img, .dog-image img {
+    padding-top: 0;
 }
