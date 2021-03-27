@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useParams } from "react-router-dom";
 
 
-import { Input, TextArea, FormBtn } from "../../components/Form";
+// import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileList from "../../components/ProfileList";
 // import ProfileListDefault from "../../components/ProfileListDefault"
 
@@ -13,7 +13,7 @@ import { Input, TextArea, FormBtn } from "../../components/Form";
 import AutoComplete from "../../components/AutoComplete";
 
 import API from "../../Utils/api";
-import "./style.css";
+// import "./style.css";
 
 function Profile() {
 
