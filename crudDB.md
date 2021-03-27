@@ -11,6 +11,30 @@ db.dogs.findOne({_id: userID})
 db.dogs.find({location: {city: "Toronto"}, _id: {$nin: [likes, dislike, userID]}})
 
 
+<!-- Create Empty Profile  -->
+db.dogs.insert({
+    email: "test10@gmail.com",
+        password: "123456789",
+        email_verified: true
+})
+
+
+<!-- Update User Profile by email -->
+db.dogs.update({"email": "test10@gmail.com"}, {$set: {
+      name: "Fluffy",
+        age: 3,
+        breed: "Golden Retriever",
+        size: "Medium",
+        gender: "Male",
+        description: "Friendly",
+        image: "../../../img/dog-05.jpeg",
+        likes: {},
+        location: "Toronto"
+    }})
+
+
+
+
 <!-- Like another Profile -->
 
 // Push liked user id to the likes field

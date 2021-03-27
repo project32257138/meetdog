@@ -21,6 +21,7 @@ const getRandomNonRepeating = (n) => {
     }
     return arr
 }
+
 const API = {
     
     getNextDog: function(cb) {
@@ -75,19 +76,21 @@ const API = {
         })
     },
 
-    saveDogProfile: function(data) {
-        console.log(data);
-        return axios.post("/api/profile", data, {
-          headers: {
-            'content-type': 'application/json'
-          }
-        });
+    // Get a dog profile
+    getDog: function (id) {
+        return axios.get("/api/dogs/" + id);
     },
-    
-    //get all profile
-    getDogProfile: function() {
-        return axios.get("/api/profile");
-    }    
+
+    // Update dog profile
+    saveDogProfile: function (id, data) {
+        return axios.put("/api/dogs/" + id,  data);
+    },
+
+     // Gets all new Dogs
+     getNewDogs: function () {
+        return axios.get("/api/dogs");
+     }
+
 }
 
 export default API;
