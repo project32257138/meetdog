@@ -3,13 +3,9 @@ import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
-<<<<<<< HEAD
-
-=======
 // import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileList from "../../components/ProfileList";
 // import ProfileListDefault from "../../components/ProfileListDefault"
->>>>>>> main
 
 //--------- LOCATION API:
 import AutoComplete from "../../components/AutoComplete";
