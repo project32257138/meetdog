@@ -1,16 +1,16 @@
-@font-face{
+/* @font-face{
     font-family: moreSugarThin;
     src: local('MoreSugar-Thin'), url(../../font/MoreSugar-Thin.ttf) format('truetype');
-}
+} */
 
 #profile-img{
     width: 100%;
     height: 100%;
 }
 
-h4,h5 {
+/* h4,h5 {
     font-family: moreSugarThin;
-}
+} */
 
 h4, h5, p{
     color: white;
