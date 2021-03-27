@@ -68,15 +68,20 @@ const API = {
         return axios.get("/api/dogs/" + id);
     },
 
+    // Get logged user ID by email  
+    getLoggedUserByEmail: function (email) {
+        return axios.get("/api/dogs/currentuser/" + email);
+    },
+
     // Update dog profile
     saveDogProfile: function (id, data) {
         return axios.put("/api/dogs/" + id,  data);
     },
 
-     // Gets all new Dogs
-    //  getNewDogs: function () {
-    //      return axios.get("/api/dogs");
-    //  },
+     // Gets all  Dogs
+     getAllDogs: function () {
+         return axios.get("/api/dogs/");
+     },
 
     // Get logged profile id and return a single 
     getNewDog: function (id) {
@@ -85,7 +90,7 @@ const API = {
 
     // Get logged profile id and return 10 new profiles 
     getNewDogs: function (id) {
-        return axios.get("/api/dogs/newdogs/" + id);
+        return axios.get("/api/dogs/newdog" + id);
     },
 
     // Get logged profile id and and obj (for likes pass {id: "2323483", value: true} and for dislike pass {id: "2323483", value: false})
