@@ -10,12 +10,11 @@
  * and re-run your build process.
  * See https://goo.gl/2aRDsh
  */
-// importScripts('https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js');
 
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.3808dd9fe69c1fd8d3fdfa1e3948b009.js"
+  "/precache-manifest.1f83407530c57503f47c9a423e019337.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -36,5 +35,5 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
 workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("/index.html"), {
   
-  blacklist: [/^\/_/,/\/[^/?]+\.[^/]+$/],
+  blacklist: [/^\/_/,/\/[^\/?]+\.[^\/]+$/],
 });
