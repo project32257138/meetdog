@@ -3,13 +3,19 @@ import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
 import { useParams } from "react-router-dom";
+<<<<<<< HEAD
 
+=======
+// import { Input, TextArea, FormBtn } from "../../components/Form";
+// import ProfileList from "../../components/ProfileList";
+// import ProfileListDefault from "../../components/ProfileListDefault"
+>>>>>>> main
 
 //--------- LOCATION API:
 import AutoComplete from "../../components/AutoComplete";
 
 import API from "../../Utils/api";
-import "./style.css";
+import "./style.css"
 
 
 function Profile() {
@@ -24,6 +30,7 @@ function Profile() {
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [likes, setLikes] = useState("");
+    // const [park, setPark] = useState("");
     const [location, setLocation] = useState("Which city are you located in?");
 
     const [stateAWS, setStateAWS] = useState({
@@ -51,6 +58,7 @@ function Profile() {
                 setDescription(res.data.description);
                 setImage(res.data.image);
                 setLikes(res.data.likes);
+                // setPark(res.data.park);
                 setLocation(res.data.location);
             })
             .catch(err => console.log(err));
@@ -124,6 +132,7 @@ function Profile() {
                 size: size,
                 description: description,
                 image: image,
+                // park: park,
                 location: location,
             })
                 .then(res => {console.log(res);             
