@@ -1,10 +1,21 @@
 import React from "react";
 
-function Notification() {
+function Notification(props) {
   return (
     <div>
       <ul className="collection">
-        <li className="collection-item avatar">
+        {props.matches.map(match => (
+          <li className="collection-item avatar">
+            <img src="../../../img/dog-01.jpg" alt="" className="circle" />
+            <p>{match.date}</p>
+            <span className="title">{match.name}</span> sent you a bark!
+            <p>Respond with a bark if you are interested in meeting up</p>
+            <a href="#!" className="secondary-content">
+              <i className="material-icons">send</i>
+            </a>
+          </li>
+        ))}
+        {/* <li className="collection-item avatar">
           <img src="../../../img/dog-01.jpg" alt="" className="circle" />
           <p>2021-03-17</p>
           <span className="title">Cutedog123</span> sent you a bark!
@@ -39,7 +50,7 @@ function Notification() {
           <a href="#!" className="secondary-content">
             <i className="material-icons">send</i>
           </a>
-        </li>
+        </li> */}
       </ul>
     </div>
   );

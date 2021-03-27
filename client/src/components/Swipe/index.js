@@ -41,7 +41,7 @@ class Swipe extends Component {
             }
         },
         dogList: [],
-        dogIndex: 0,
+        dogIndex: 1,
         liked: {
             // object storing id and if that dog was liked by the user
             // id: true,  for liked --or--
@@ -78,7 +78,7 @@ class Swipe extends Component {
         API.getNextDogsNoCheck(20,(dogs) => {
             // console.log(dogs)
             this.setState({dogList : dogs})
-            this.setState({currentDog: dogs[this.state.dogIndex]})
+            this.setState({currentDog: dogs[0]})
 
         })
         // console.log(this.state.dogList)
@@ -124,12 +124,12 @@ class Swipe extends Component {
         console.log(this.state.currentMatch, this.state.currentDog.name, this.state.currentDog.liked)
     }
 
-    getPreviousDog = () => {
-        // console.log(this.state.dogIndex, this.state.currentDog)
-        this.setState({
-            dogIndex: this.state.dogIndex - 1,
-        })
-    }
+    // getPreviousDog = () => {
+    //     // console.log(this.state.dogIndex, this.state.currentDog)
+    //     this.setState({
+    //         dogIndex: this.state.dogIndex - 1,
+    //     })
+    // }
 
     likeDog = () => {
         // obviously this would later store the dogs id not their image

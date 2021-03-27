@@ -16,7 +16,9 @@ function UserMain() {
               <Swipe />
             </div>
             <div className="col s12 m6">
-              <Notification />
+              <Notification 
+                matches={[]}              
+              />
             </div>
           </div>
         </div>
