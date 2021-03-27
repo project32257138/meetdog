@@ -22,51 +22,34 @@ const getRandomNonRepeating = (n) => {
     return arr
 }
 
+const randomizeArray = (arr) => {
+    let rdm
+    for (let i = (arr.length - 1); i >= 0; i--) {
+        rdm = Math.floor(Math.random() * (i))
+        swap(arr,i,rdm)
+    }
+    return arr
+}
+
 const API = {
-    
-    getNextDog: function(cb) {
-        axios.get("https://dog.ceo/api/breeds/image/random/")
+
+    // gets dogs that haven't been checked for...
+    // if they are the current dog,
+    // if they have already been liked/disliked
+    getNextDogsNoCheck: function(id,cb) {
+        this.getNewDogs(id)
         .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
+            console.log(data.data)
+            return data.data
         })
-        .then(nextDog => cb(nextDog)
-        )
-    },
-
-    // got rid of this because the API call doesn't really work and its just for testing
-    // getNextDogsNoCheck: function(n,cb) {
-    //     axios.get("https://dog.ceo/api/breeds/image/random/" + n)
-    //     .then(data => {
-    //         console.log(data)
-    //         // this would need to be changed to a call to out db
-    //         return data.data.message
-    //     })
-    //     .then(nextDogs => {
-    //         return cb(nextDogs)
-    //     })
-    // },
-
-    tryget: function() {
-        return axios.get("/api/profile").then(l => console.log(l))
-    },
-
-    getNextDogsNoCheck: function(n,cb) {
-        axios.get("https://dog.ceo/api/breeds/image/random/" + n)
-        .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
-        })
-        .then(nextDogImgs => {
-            let nextDogs = nextDogImgs.map((nextDogImg,i) => {
+        .then(nextDogs => {
+            let nextDogsList = nextDogs.map((nextDog,i) => {
                 let likeID = getRandomNonRepeating(10)
                 return {
                     id: ++setId,
-                    image: nextDogImg,
-                    email: "lucky" + setId + "@doggymail.com",
-                    name: "lucky" + setId,
+                    image: nextDog.image,
+                    email: nextDog.email,
+                    name: nextDog.name,
                     liked: {
                         [likeID[0]] : !!Math.floor(Math.random() * 10),
                         [likeID[1]] : !!Math.floor(Math.random() * 10),
@@ -76,7 +59,7 @@ const API = {
                     }
                 }
             })
-            return cb(nextDogs)
+            return cb(randomizeArray(nextDogsList))
         })
     },
 

@@ -4,6 +4,7 @@ function Notification(props) {
   return (
     <div>
       <ul className="collection">
+        {console.log(props.matches)}
         {props.matches.map(match => (
           <li className="collection-item avatar">
             <img src="../../../img/dog-01.jpg" alt="" className="circle" />

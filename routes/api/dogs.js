@@ -22,7 +22,7 @@ router
 // Matches with "/api/dogs/newdogs/:id"
 router 
   .route("/newdogs/:id")
-  .get(dogsController.getTenNewDog)
+  .get(dogsController.findAllNew)
 
 // Matches with "/api/dogs/swipe/:id"
 router 
