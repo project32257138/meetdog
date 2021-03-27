@@ -88,7 +88,7 @@ const API = {
 
      // Gets all new Dogs
      getNewDogs: function () {
-        return axios.get("/api/dogs");
+         return axios.get("/api/dogs");
      }
 
 }
