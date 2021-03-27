@@ -19,12 +19,6 @@ const Header = () => {
                 <a href={"/dogs/" + "605e58f29f0ef52213ba4747"}>Profile</a>
               </li>
               <li>
-                <a href="/matches">Matches</a>
-              </li>
-              <li>
-                <a href="/">Settings</a>
-              </li>
-              <li>
                 <AuthBtn className="btn-flat white-text"/>
               </li>
             </ul>
