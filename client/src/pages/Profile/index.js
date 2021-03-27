@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
+import { useParams } from "react-router-dom";
+
 
 import { Input, TextArea, FormBtn } from "../../components/Form";
 // import ProfileList from "../../components/ProfileList";
@@ -15,14 +17,14 @@ import "./style.css";
 
 function Profile() {
 
-    const [email, setEmail] = useState("dog@hotmmail.com");
-    const [password, setPassword] = useState("!PuppyLover1");
-    const [name, setName] = useState("Enter the name of your doggie");
-    const [age, setAge] = useState("How old is your dog");
-    const [breed, setBreed] = useState("Enter Dog Breed");
-    const [size, setSize] = useState("What's their size?");
-    const [gender, setGender] = useState("What's their gender?");
-    const [description, setDescription] = useState("Tell us something about your pawesome friend!");
+    // const [email, setEmail] = useState("dog@hotmmail.com");
+    // const [password, setPassword] = useState("!PuppyLover1");
+    const [name, setName] = useState("");
+    const [age, setAge] = useState("");
+    const [breed, setBreed] = useState("");
+    const [size, setSize] = useState("");
+    const [gender, setGender] = useState("");
+    const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [likes, setLikes] = useState("");
     const [location, setLocation] = useState("Which city are you located in?");
@@ -38,6 +40,29 @@ function Profile() {
 
     const [readOnlyState, setReadOnlyState] = useState(true);
 
+    const { id } = useParams()  // Get URL parameter with React Hooks (useParams)
+
+    // Load Profile and component render
+    useEffect(() => {
+        API.getDog(id)
+            .then(res => {
+                setName(res.data.name);
+                setAge(res.data.age);
+                setBreed(res.data.breed);
+                setSize(res.data.size);
+                setGender(res.data.gender);
+                setDescription(res.data.description);
+                setImage(res.data.image);
+                setLikes(res.data.likes);
+                setLocation(res.data.location);
+            })
+            .catch(err => console.log(err));
+
+            API.getNewDogs().then(res => {
+                console.log(res)
+            })
+    }, [])
+
 
     const handleImageChange = (ev) => {
         setStateAWS({ ...stateAWS, success: false, url: "../../../img/dog-icon.png" });
@@ -50,8 +75,7 @@ function Profile() {
         // Split the filename to get the name and type
         let fileParts = selectedFile.name.split('.');
 
-        let userId = "12934434"  // Pass the user id to save photos on unique folder on S3 bucket
-        let fileName = `${userId}/${fileParts[0]}`;
+        let fileName = `${id}/${fileParts[0]}`;  // Pass the user id to save photos on unique folder on S3 bucket
         let fileType = fileParts[1];
         console.log("Preparing the upload");
         axios.post("http://localhost:3001/sign_s3", {
@@ -72,6 +96,7 @@ function Profile() {
                     .then(result => {
                         console.log("Response from s3")
                         setStateAWS({ ...stateAWS, success: true, url: response.data.data.returnData.url });
+                        setImage(response.data.data.returnData.url)
 
                     })
                     .catch(error => {
@@ -109,32 +134,22 @@ function Profile() {
             gender &&
             size &&
             description &&
-            location &&
-            email
+            location
         ) {
-            // API.saveDogProfile({
-            //     name: dog.name,
-            //     breed: dog.breed,
-            //     age: dog.age,
-            //     gender: dog.gender,
-            //     size: dog.size,
-            //     description: dog.description,
-            //     location: dog.location,
-            //     email: dog.email
-            // }
-            // )
-            // .then(res => loadProfile())
-            // .catch(err => console.log(err));
-            console.log({
+            API.saveDogProfile(id, {
                 name: name,
                 breed: breed,
                 age: age,
                 gender: gender,
                 size: size,
                 description: description,
+                image: image,
                 location: location,
-                email: email
             })
+                .then(res => {console.log(res);             
+                console.log('Profile saved')
+            })
+                .catch(err => console.log(err));
         }
         else { console.log("form isn't complete") }
         // console.log("afterSubmit", dog);
@@ -167,17 +182,17 @@ function Profile() {
                     <Col size="6">
 
                         <div id="profile-img-div">
-                            <img src={stateAWS.url} alt="default dog" id="profile-img" />
+                            <img src={image} alt="default dog" id="profile-img" />
                         </div>
                         {stateAWS.success ? <SuccessMessage /> : null}
                         {stateAWS.error ? <ErrorMessage /> : null}
 
-                        <div className="input-field file-field">
+                        {/* <div className="input-field file-field">
                             <div className="waves-effect waves-light btn-large">
-                                <span>Select Photo</span>
-                                <input type="file" onChange={handleImageChange} />
-                            </div>
-                        </div>
+                                <span>Select Photo</span> */}
+                        <input type="file" onChange={handleImageChange} />
+                        {/* </div>
+                        </div> */}
 
                         <div className="input-field">
                             <button className="waves-effect waves-light btn-large" onClick={handleUploadToAWS}>UPLOAD</button>
@@ -292,7 +307,7 @@ function Profile() {
                                 </select>
                             </div>
                             <button className="btn" onClick={toggleEditMode}>Edit</button>
-                            <button className="btn submit" onClick={handleSubmit} disabled={readOnlyState}>Save</button>
+                            {readOnlyState ? null : (<button className="btn submit" onClick={handleSubmit} >Save</button>)}
 
                         </form>
                     </Col>

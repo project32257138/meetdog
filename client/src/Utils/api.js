@@ -1,44 +1,46 @@
 import axios from "axios"
 
-const API = {
-    
-    getNextDog: function(cb) {
+export default {
+
+    getNextDog: function (cb) {
         axios.get("https://dog.ceo/api/breeds/image/random/")
-        .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
-        })
-        .then(nextDog => {
-            return cb(nextDog)
-        })
+            .then(data => {
+                console.log(data)
+                // this would need to be changed to a call to out db
+                return data.data.message
+            })
+            .then(nextDog => {
+                return cb(nextDog)
+            })
     },
 
-    getNextDogsNoCheck: function(n,cb) {
+    getNextDogsNoCheck: function (n, cb) {
         axios.get("https://dog.ceo/api/breeds/image/random/" + n)
-        .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
-        })
-        .then(nextDogs => {
-            return cb(nextDogs)
-        })
+            .then(data => {
+                console.log(data)
+                // this would need to be changed to a call to out db
+                return data.data.message
+            })
+            .then(nextDogs => {
+                return cb(nextDogs)
+            })
     },
 
-    saveDogProfile: function(data) {
-        console.log(data);
-        return axios.post("/api/profile", data, {
-          headers: {
-            'content-type': 'application/json'
-          }
-        });
+
+    // Gets all new Dogs
+    getNewDogs: function () {
+        return axios.get("/api/dogs");
     },
-    
-    //get all profile
-    getDogProfile: function() {
-        return axios.get("/api/profile");
-    }    
+
+    // Get a dog profile
+    getDog: function (id) {
+        return axios.get("/api/dogs/" + id);
+    },
+
+    // Update dog profile
+    saveDogProfile: function (id, data) {
+        return axios.put("/api/dogs/" + id,  data);
+    }
+
 }
 
-export default API;

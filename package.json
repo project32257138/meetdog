@@ -13,6 +13,7 @@
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
+
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -29,5 +30,5 @@
     "mongoose": "^5.12.1",
     "react-materialize": "^3.9.7",
     "react-places-autocomplete": "^7.3.0"
-   }
+  }
 }
