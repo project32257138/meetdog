@@ -33,16 +33,15 @@ app.use(routes);
 
 
 // Connect to the Mongo DB
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dogsDB",
-//     {
-//         useNewUrlParser: true,
-//         useUnifiedTopology: true,
-//         useCreateIndex: true,
-//         useFindAndModify: false
-//     }
-//     );
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/dogsDB",
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true,
+        useFindAndModify: false
+    });
 
-mongoose.connect("mongodb://localhost/dogsDB");
+// mongoose.connect("mongodb://localhost/dogsDB");
 
 app.listen(PORT, () => {
     console.log(`🌎 ==> API server now on port ${PORT}!`);

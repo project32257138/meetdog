@@ -38,7 +38,7 @@ function Profile() {
 
     const [selectedFile, setSelectedFile] = useState();
 
-    const [readOnlyState, setReadOnlyState] = useState(true);
+    const [readOnlyState, setReadOnlyState] = useState(false);
 
     const { id } = useParams()  // Get URL parameter with React Hooks (useParams)
 
@@ -108,23 +108,6 @@ function Profile() {
             })
     }
 
-
-    // const [formObject, setFormObject] = useState([]);
-
-    // Load all profile and store them with savedDog
-    // useEffect(() => {
-    //     loadProfile()
-    // }, [])
-
-    // Loads all Profile and set to savedDog
-    // function loadProfile() {
-    //     API.getDogProfile()
-    //     .then(res => 
-    //         savedDog(res.data)
-    //     )
-    //     .catch(err => console.log(err));
-    // };
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (
@@ -152,17 +135,15 @@ function Profile() {
                 .catch(err => console.log(err));
         }
         else { console.log("form isn't complete") }
-        // console.log("afterSubmit", dog);
     };
 
-    const toggleEditMode = () => {
-        setReadOnlyState(prevState => (
-            !prevState
-        ))
-    }
+    // const toggleEditMode = () => {
+    //     setReadOnlyState(prevState => (
+    //         !prevState
+    //     ))
+    // }
 
     const SuccessMessage = () => (
-
         <div>
             <p style={{ color: 'green' }}>SUCCESSFUL UPLOAD</p>
         </div>
@@ -306,8 +287,8 @@ function Profile() {
                                     <option>Mississauga</option>
                                 </select>
                             </div>
-                            <button className="btn" onClick={toggleEditMode}>Edit</button>
-                            {readOnlyState ? null : (<button className="btn submit" onClick={handleSubmit} >Save</button>)}
+                            {/* <button className="btn" onClick={toggleEditMode}>Edit</button> */}
+                            <button className="btn submit" onClick={handleSubmit} >Save</button>)
 
                         </form>
                     </Col>
