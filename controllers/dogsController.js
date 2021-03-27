@@ -43,18 +43,20 @@ module.exports = {
     // Get a single new profile from DB
     getOneNewDog: function (req, res) {
         // Get the current logged profile
-        db.Dog.find({ _id: req.params.id }, {_id: 0, likes: 1})
+        db.Dog.findById(req.params.id)
             .then(loggedDog => {
+                res.json(loggedDog)
+
                 // Get the array with the key (others profile ids) from likes property
-                let filterArray = Object.getOwnPropertyNames(loggedDog.likes)
+
+                // let filterArray = Object.getOwnPropertyNames(loggedDog.likes)
 
                 // Push user id into filterArray 
-                const filterList = filterArray.push(req.params.id)
-
-                // Get one new profile
-                db.Dog.find({ _id: { $nin: filterList } }).limit(1).skip(0)
-                .then(dbModel => res.json(dbModel))
-                .catch(err => res.status(422).json(err))
+                // const filterList = filterArray.push(req.params.id)
+                // // Get one new profile
+                // db.Dog.find({ _id: { $nin: filterList } }).limit(1).skip(0)
+                // .then(dbModel => res.json(dbModel))
+                // .catch(err => res.status(422).json(err))
             })
             .catch(err => res.status(422).json(err))
     },
@@ -63,18 +65,24 @@ module.exports = {
     // Get an array of 10 new profile from DB
     getTenNewDog: function (req, res) {
         // Get the current logged profile
-        db.Dog.find({ _id: req.params.id }, {_id: 0, likes: 1})
+        db.Dog.find({_id: req.params.id})
             .then(loggedDog => {
+                res.json(loggedDog)
+
+                // res.json(loggedDog)
                 // Get the array with the key (others profile ids) from likes property
-                let filterArray = Object.getOwnPropertyNames(loggedDog.likes)
 
-                // Push user id into filterArray 
-                const filterList = filterArray.push(req.params.id)
+                // let filterArray = Object.getOwnPropertyNames(loggedDog.data.likes)
+                // console.log("okok")
 
-                // Get one new profile
-                db.Dog.find({ _id: { $nin: filterList } }).limit(10)
-                .then(dbModel => res.json(dbModel))
-                .catch(err => res.status(422).json(err))
+                // res.json({"arra" : "q3"})
+                // // Push user id into filterArray 
+                // const filterList = filterArray.push(req.params.id)
+
+                // // Get one new profile
+                // db.Dog.find({ _id: { $nin: filterList } }).limit(10)
+                // .then(dbModel => res.json(dbModel))
+                // .catch(err => res.status(422).json(err))
             })
             .catch(err => res.status(422).json(err))
     },
@@ -85,11 +93,11 @@ module.exports = {
         const profileObj = {
             [keyName]: req.body.value
         }
-        
+
         db.Dog
-        .findOneAndUpdate({ _id: req.params.id }, profileObj)
-        .then(dbModel => res.json(dbModel))
-        .catch(err => res.status(422).json(err));
+            .findOneAndUpdate({ _id: req.params.id }, profileObj)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
     },
 
 
@@ -108,9 +116,9 @@ module.exports = {
             .findOne({ _id: req.body.id })
             .then(dbModel => {
                 // Check if the the user swiped logged user
-                if (dbModel.likes.hasOwnProperty(req.params.id)){
+                if (dbModel.likes.hasOwnProperty(req.params.id)) {
                     // Check if logged user was liked as well 
-                    if(dbModel.likes[req.params.id] === true){
+                    if (dbModel.likes[req.params.id] === true) {
                         res.json(true);
                     }
                     else {
@@ -126,14 +134,22 @@ module.exports = {
 
     getMatches: function (req, res) {
         // Get the current logged profile
-        db.Dog.find({ _id: req.params.id }, {_id: 0, likes: 1})
+        db.Dog.find({ _id: req.params.id }, { _id: 0, likes: 1 })
             .then(loggedDog => {
                 let filterArray = ["ij"]
 
-               
+
                 db.Dog.find({ _id: { $in: filterArray } })
-                .then(dbModel => res.json(dbModel))
-                .catch(err => res.status(422).json(err))
+                    .then(dbModel => res.json(dbModel))
+                    .catch(err => res.status(422).json(err))
+            })
+            .catch(err => res.status(422).json(err))
+    },
+
+    findUserId: function (req, res) {
+        db.Dog.find({ email: req.params.email }, { _id: 1 })
+            .then(userID => {
+                res.json(userID)
             })
             .catch(err => res.status(422).json(err))
     },
