@@ -11,15 +11,21 @@
     "seed": "node scripts/seedDB.js",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "npm run build",
+    "test": "jest --watchAll"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.12.13",
+    "@babel/preset-react": "^7.13.13",
+    "babel-preset-env": "^1.7.0",
     "concurrently": "^4.1.0",
+    "jest": "^26.6.3",
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "@types/jest": "^26.0.22",
     "aws-sdk": "^2.871.0",
     "axios": "^0.21.1",
     "cors": "^2.8.5",
