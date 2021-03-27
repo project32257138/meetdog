@@ -27,6 +27,7 @@ function Profile() {
     const [description, setDescription] = useState("");
     const [image, setImage] = useState("");
     const [likes, setLikes] = useState("");
+    // const [park, setPark] = useState("");
     const [location, setLocation] = useState("Which city are you located in?");
 
     const [stateAWS, setStateAWS] = useState({
@@ -54,6 +55,7 @@ function Profile() {
                 setDescription(res.data.description);
                 setImage(res.data.image);
                 setLikes(res.data.likes);
+                // setPark(res.data.park);
                 setLocation(res.data.location);
             })
             .catch(err => console.log(err));
@@ -127,6 +129,7 @@ function Profile() {
                 size: size,
                 description: description,
                 image: image,
+                // park: park,
                 location: location,
             })
                 .then(res => {console.log(res);             
