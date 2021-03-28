@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { Col, Row, Container } from "../../components/Grid";
 import axios from 'axios';
-import { useParams } from "react-router-dom";
-
-// import { Input, TextArea, FormBtn } from "../../components/Form";
-// import ProfileList from "../../components/ProfileList";
-// import ProfileListDefault from "../../components/ProfileListDefault"
+import { useAuth0 } from "@auth0/auth0-react";
 
 //--------- LOCATION API:
 import AutoComplete from "../../components/AutoComplete";
@@ -41,35 +37,79 @@ function Profile() {
 
     const [readOnlyState, setReadOnlyState] = useState(false);
 
-    const { id } = useParams()  // Get URL parameter with React Hooks (useParams)
+    const { user } = useAuth0();
+
 
     // Load Profile and component render
     useEffect(() => {
 
+        API.getDog(user.email)
+            .then(res => {
+                setName(res.data[0].name);
+                setAge(res.data[0].age);
+                setBreed(res.data[0].breed);
+                setSize(res.data[0].size);
+                setGender(res.data[0].gender);
+                setDescription(res.data[0].description);
+                setImage(res.data[0].image);
+                setLikes(res.data[0].likes);
+                // setPark(res.data.park);
+                setLocation(res.data.location);
+            })
+            .catch(err => console.log(err));
 
-        // API.getDog(id)
+
+        console.log(user.email)
+
+        // ---------------------
+
+        // API.getNewDog({
+        //   email: user.email
+        // }).then(res => {
+        //     console.log(res)
+        // })
+        // .catch(err => console.log(err));
+
+        // ---------------------
+
+        // API.getNewDogs({
+        //   email: user.email
+        // }).then(res => {
+        //     console.log(res)
+        // })
+        // .catch(err => console.log(err));
+
+        // ------------------
+
+        // API.likeOrDislike(user.email,
+        //     {
+        //         id: "605e58f29f0ef52213ba4749", 
+        //         value: false
+        //     })
         //     .then(res => {
-
-        //         let filterArray = Object.getOwnPropertyNames(res.data.likes)
-
-        //         console.log(filterArray)
-        //         setName(res.data.name);
-        //         setAge(res.data.age);
-        //         setBreed(res.data.breed);
-        //         setSize(res.data.size);
-        //         setGender(res.data.gender);
-        //         setDescription(res.data.description);
-        //         setImage(res.data.image);
-        //         setLikes(res.data.likes);
-        //         // setPark(res.data.park);
-        //         setLocation(res.data.location);
+        //         console.log(res)
         //     })
         //     .catch(err => console.log(err));
 
-            API.getAllDogs().then(res => {
-                console.log(res)
-            })
-            .catch(err => console.log(err));
+        // ---------------------
+
+        // API.checkIfMatch(user.email, {
+        //       likedEmail: "test@hotmail.com"
+        //     })
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log(err));
+
+        // ----------------
+
+        // API.getAllMatches({
+        //       email: user.email
+        //     })
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log(err));
 
     }, [])
 
@@ -85,7 +125,7 @@ function Profile() {
         // Split the filename to get the name and type
         let fileParts = selectedFile.name.split('.');
 
-        let fileName = `${id}/${fileParts[0]}`;  // Pass the user id to save photos on unique folder on S3 bucket
+        let fileName = `${user.email}/${fileParts[0]}`;  // Pass the user id to save photos on unique folder on S3 bucket
         let fileType = fileParts[1];
         console.log("Preparing the upload");
         axios.post("http://localhost:3001/sign_s3", {
@@ -129,7 +169,7 @@ function Profile() {
             description &&
             location
         ) {
-            API.saveDogProfile(id, {
+            API.saveDogProfile(user.email, {
                 name: name,
                 breed: breed,
                 age: age,
@@ -140,19 +180,14 @@ function Profile() {
                 // park: park,
                 location: location,
             })
-                .then(res => {console.log(res);             
-                console.log('Profile saved')
-            })
+                .then(res => {
+                    console.log(res);
+                    console.log('Profile saved')
+                })
                 .catch(err => console.log(err));
         }
         else { console.log("form isn't complete") }
     };
-
-    // const toggleEditMode = () => {
-    //     setReadOnlyState(prevState => (
-    //         !prevState
-    //     ))
-    // }
 
     const SuccessMessage = () => (
         <div>
@@ -179,12 +214,7 @@ function Profile() {
                         {stateAWS.success ? <SuccessMessage /> : null}
                         {stateAWS.error ? <ErrorMessage /> : null}
 
-                        {/* <div className="input-field file-field">
-                            <div className="waves-effect waves-light btn-large">
-                                <span>Select Photo</span> */}
                         <input type="file" onChange={handleImageChange} />
-                        {/* </div>
-                        </div> */}
 
                         <div className="input-field">
                             <button className="waves-effect waves-light btn-large" onClick={handleUploadToAWS}>UPLOAD</button>
