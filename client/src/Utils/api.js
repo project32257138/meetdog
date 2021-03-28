@@ -2,7 +2,7 @@ import axios from "axios"
 
 let setId = 0;
 
-const swapIndexes = (arr,i,j) => {
+const swap = (arr,i,j) => {
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
@@ -11,74 +11,64 @@ const swapIndexes = (arr,i,j) => {
 
 const getRandomNonRepeating = (n) => {
     let arr = []
-    for (let i = 1; i <= n; i++) {
+    for (let i = 0; i < n; i++) {
         arr.push(i)
     }
     let rdm;
     for (let i = (n - 1); i >= 0; i--) {
         rdm = Math.floor(Math.random() * (i))
-        swapIndexes(arr,i,rdm)
+        swap(arr,i,rdm)
     }
     return arr
 }
 
+const randomizeArray = (arr) => {
+    let rdm
+    for (let i = (arr.length - 1); i >= 0; i--) {
+        rdm = Math.floor(Math.random() * (i))
+        swap(arr,i,rdm)
+    }
+    return arr
+}
+
+const assign = (likeID) => {
+    let likes = {}
+    likeID.map(like => {
+        likes[like] = !(Math.floor(Math.random() * 3))
+    })
+    return likes
+}
+
 const API = {
-    
-    getNextDog: function(cb) {
-        axios.get("https://dog.ceo/api/breeds/image/random/")
-        .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
-        })
-        .then(nextDog => cb(nextDog)
-        )
-    },
 
-    // got rid of this because the API call doesn't really work and its just for testing
-    // getNextDogsNoCheck: function(n,cb) {
-    //     axios.get("https://dog.ceo/api/breeds/image/random/" + n)
-    //     .then(data => {
-    //         console.log(data)
-    //         // this would need to be changed to a call to out db
-    //         return data.data.message
-    //     })
-    //     .then(nextDogs => {
-    //         return cb(nextDogs)
-    //     })
-    // },
-
-    getNextDogsNoCheck: function(n,cb) {
-        axios.get("https://dog.ceo/api/breeds/image/random/" + n)
+    getNextDogsNoCheck: function(id,cb) {
+        this.getAllDogs(id)
         .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
+            console.log(data.data)
+            return {list: data.data, random: randomizeArray(data.data.map(id=>id._id))}
         })
-        .then(nextDogImgs => {
-            let nextDogs = nextDogImgs.map((nextDogImg,i) => {
-                let likeID = getRandomNonRepeating(10)
+        .then(nextDogs => {
+            let nextDogsList = nextDogs.list.map((nextDog,i) => {
+                let likeID = nextDogs.random
                 return {
-                    id: ++setId,
-                    image: nextDogImg,
-                    email: "lucky" + setId + "@doggymail.com",
-                    name: "lucky" + setId,
-                    liked: {
-                        [likeID[0]] : !!Math.floor(Math.random() * 4),
-                        [likeID[1]] : !!Math.floor(Math.random() * 4),
-                        [likeID[2]] : !!Math.floor(Math.random() * 4),
-                        [likeID[3]] : !!Math.floor(Math.random() * 4),
-                        [likeID[4]] : !!Math.floor(Math.random() * 4)
-                    }
+                    id: nextDog._id,
+                    image: nextDog.image,
+                    email: nextDog.email,
+                    name: nextDog.name,
+                    liked: assign(likeID)
                 }
             })
-            return cb(nextDogs)
+            return cb(randomizeArray(nextDogsList))
         })
+    },
+
+    getDogIds: function() {
+        return axios.get("/api/dogs/ids")
     },
 
     // Get a dog profile
     getDog: function (id) {
-        return axios.get("/api/dogs/" + id);
+       return axios.get("/api/dogs/" + id)
     },
 
     // Get logged user ID by email  
