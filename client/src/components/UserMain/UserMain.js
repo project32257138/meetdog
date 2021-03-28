@@ -9,19 +9,19 @@ import API from "../../Utils/api"
 class UserMain extends React.Component {
 
     state = {
-        id: "605fc76b98cc70501f8771ee",
+        id: "",
         name: "Spot",
-        email: "spotty@gmail.com",
+        email: "test1@gmail.com",
         currentMatch: false,
         currentDog: {
             image: "../../../img/loading.svg",
             name: "Loading",
-            id: 0,
+            id: "",
             liked: {
             }
         },
         dogList: [],
-        dogIndex: 1,
+        dogIndex: 2,
         liked: {
             // object storing id and if that dog was liked by the user
             // id: true,  for liked --or--
@@ -54,23 +54,33 @@ class UserMain extends React.Component {
             } 
           });
 
-        API.getDog(this.state.id).then(
-            res => {
-                let thisDog = res.data
-                // console.log(thisDog)
-                this.setState({
-                    id: thisDog._id,
-                    name: thisDog.name,
-                    email: thisDog.email,
-                    image: thisDog.image
-                })
-            }
-        )        
+        // API.getDog(this.state.id).then(
+        //     res => {
+        //         let thisDog = res.data
+        //         // console.log(thisDog)
+        //         this.setState({
+        //             id: thisDog._id,
+        //             name: thisDog.name,
+        //             email: thisDog.email,
+        //             image: thisDog.image
+        //         })
+        //     }
+        // )        
 
-        API.getNextDogsNoCheck(this.state.id,(dogs) => {
-            this.setState({dogList : dogs})
-            this.setState({currentDog: dogs[0]})
+        API.getNextDogsNoCheck(this.state.email,(dogs) => {
+            if (dogs.length) {
+              this.setState({
+                id: dogs[0].email,
+                name: dogs[0].name,
+                email: dogs[0].email,
+                image: dogs[0].image,
+                dogList : dogs,
+                currentDog: dogs[1]
+              })
+            }
         })
+
+        console.log(this.state)
     }
 
     componentDidUpdate(prevProps, prevState) {
