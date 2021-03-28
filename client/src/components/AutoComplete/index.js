@@ -29,7 +29,8 @@ export class AutoCompleteComponent  extends React.Component {
       //#2A on suscessfulyl API call ------------------>
       .then(results =>  {
         const fullAddressObj = results[0];
-        console.log("fullAddresObj", fullAddressObj);
+        // Call parent callbac Function to pass address back to Profile page
+        this.props.parentCallBack(address)
 
         //#3 Update State with selected address ---->
         this.setState({

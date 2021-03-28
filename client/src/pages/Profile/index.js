@@ -20,7 +20,7 @@ function Profile() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [likes, setLikes] = useState("");
-  // const [park, setPark] = useState("");
+  const [park, setPark] = useState("");
   const [location, setLocation] = useState("");
 
   const [stateAWS, setStateAWS] = useState({
@@ -166,6 +166,7 @@ function Profile() {
             gender &&
             size &&
             description &&
+            park &&
             location
         ) {
             API.saveDogProfile(user.email, {
@@ -176,7 +177,7 @@ function Profile() {
                 size: size,
                 description: description,
                 image: image,
-                // park: park,
+                park: park,
                 location: location,
             })
                 .then(res => {
@@ -186,6 +187,11 @@ function Profile() {
         }
         else { console.log("form isn't complete") }
    
+  };
+
+  //--- function To Handle Select for Auto Complete Component --->
+  const autoCompleteCallback = (parkAddress) => {
+    setPark(parkAddress)
   };
 
   const SuccessMessage = () => (
@@ -316,9 +322,9 @@ function Profile() {
                 </div>
               </div>
 
-              <h5 className="fieldLabelTxt">Parks I Enjoy:</h5>
+              <h5 className="fieldLabelTxt">Park I Enjoy:</h5>
               <div className="input-field">
-                <AutoComplete></AutoComplete>
+                <AutoComplete parentCallBack = {autoCompleteCallback}></AutoComplete>
               </div>
 
               <div className="" style={{ paddingBottom: "20px" }}>
