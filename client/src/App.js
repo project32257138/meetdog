@@ -13,7 +13,7 @@ function App() {
       <Auth0ProviderWithHistory>
         <Switch>
           <Route exact path="/" component={Main} />
-          <PrivateRoute exact path="/dogs/:id" component={Profile} />
+          <PrivateRoute exact path="/profile/" component={Profile} />
 
         </Switch>
       </Auth0ProviderWithHistory>
