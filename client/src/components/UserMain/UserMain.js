@@ -74,7 +74,6 @@ class UserMain extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log("both liked",prevState.currentDog.liked[this.state.id],this.state.liked[prevState.currentDog.id] )
         if (prevState.currentDog?.liked[this.state.id] && this.state.liked[prevState.currentDog.id])
           this.setState({
             currentMatch: true,

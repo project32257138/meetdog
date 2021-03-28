@@ -50,7 +50,6 @@ const API = {
         .then(nextDogs => {
             let nextDogsList = nextDogs.list.map((nextDog,i) => {
                 let likeID = nextDogs.random
-                console.log(this)
                 return {
                     id: nextDog._id,
                     image: nextDog.image,
