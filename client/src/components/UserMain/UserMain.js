@@ -9,11 +9,10 @@ import API from "../../Utils/api"
 class UserMain extends React.Component {
 
     state = {
-        id: 0,
+        id: "605fc76b98cc70501f8771ee",
         name: "Spot",
         email: "spotty@gmail.com",
         currentMatch: false,
-        currentMatchName: "",
         currentDog: {
             image: "../../../img/loading.svg",
             name: "Loading",
@@ -32,7 +31,6 @@ class UserMain extends React.Component {
     }
 
     componentDidMount() {
-
         const OSID = process.env.REACT_APP_ONE_SIGNAL_ID;
         const OSKEY = "Basic " + process.env.REACT_APP_ONE_SIGNAL_KEY
         
@@ -59,33 +57,30 @@ class UserMain extends React.Component {
         API.getDog(this.state.id).then(
             res => {
                 let thisDog = res.data
+                // console.log(thisDog)
                 this.setState({
-                    id: 0,
+                    id: thisDog._id,
                     name: thisDog.name,
                     email: thisDog.email,
                     image: thisDog.image
                 })
-                console.log(this.state)
             }
         )        
 
         API.getNextDogsNoCheck(this.state.id,(dogs) => {
             this.setState({dogList : dogs})
             this.setState({currentDog: dogs[0]})
-
         })
     }
 
     componentDidUpdate(prevProps, prevState) {
         console.log("both liked",prevState.currentDog.liked[this.state.id],this.state.liked[prevState.currentDog.id] )
-        if (prevState.currentDog.liked[this.state.id] && this.state.liked[prevState.currentDog.id])
+        if (prevState.currentDog?.liked[this.state.id] && this.state.liked[prevState.currentDog.id])
           this.setState({
-          currentMatch: true,
-          matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
-          currentMatchName: this.state.matches[this.state.matches.length - 1]?.name,
+            currentMatch: true,
+            matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
         })
-        console.log(this.state.matches)
-        // }
+        console.log(this.state)
     }
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -98,7 +93,6 @@ class UserMain extends React.Component {
             dogIndex: this.state.dogIndex + 1,
             currentDog: this.state.dogList[this.state.dogIndex],
         })
-        console.log(this.state.currentMatch, this.state.currentDog.name, this.state.currentDog.liked)
     }
 
     likeDog = () => {
@@ -115,11 +109,6 @@ class UserMain extends React.Component {
         this.getNextDog()
     }
 
-    // showNextBtn = () => {
-    //     if (this.state.currentMatch) return (
-    //         <i className="material-icons forward"  onClick={this.getNextDog}>arrow_forward_ios</i>
-    //     )
-    // }
   render () {
     return (
       <>

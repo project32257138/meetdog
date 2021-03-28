@@ -14,8 +14,7 @@ function Push(props) {
 
     OneSignal.push(()=> {
       console.log(props)
-    // }
-    if (props.match) OneSignal.sendSelfNotification( "Puppy Love","You matched with "+ props.dog,"http://localhost:3000")
+      if (props.match) OneSignal.sendSelfNotification( "Puppy Love","You matched with "+ props.dog,"http://localhost:3000")
 
     });
     

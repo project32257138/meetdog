@@ -9,14 +9,7 @@ import mongoose from "mongoose"
 
 class ShowMatch extends Component {
 
-    
-    // componentDidUpdate(nextProps, nextState) {
-    //     console.log(this.props)
-    //     return nextProps.match
-    // }
-
     render() {
-        // console.log(this.props)
         if (this.props.match) {
             return (
                 <div>You matched with {this.props.thisDog}</div>
@@ -25,11 +18,10 @@ class ShowMatch extends Component {
     }
 }
 
-
-
 const Swipe = (props) => {
         return (
             <div className="row">
+             {console.log(props.details.matches)}
             <Push
                 match={props.details.currentMatch}
                 dog={props.details.matches[props.details.matches.length - 1]?.name}

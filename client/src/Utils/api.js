@@ -31,41 +31,45 @@ const randomizeArray = (arr) => {
     return arr
 }
 
+const assign = (likeID) => {
+    let likes = {}
+    likeID.map(like => {
+        likes[like] = !(Math.floor(Math.random() * 3))
+    })
+    return likes
+}
+
 const API = {
 
-    // gets dogs that haven't been checked for...
-    // if they are the current dog,
-    // if they have already been liked/disliked
     getNextDogsNoCheck: function(id,cb) {
-        this.getNewDogs(id)
+        this.getAllDogs(id)
         .then(data => {
             console.log(data.data)
-            return data.data
+            return {list: data.data, random: randomizeArray(data.data.map(id=>id._id))}
         })
         .then(nextDogs => {
-            let nextDogsList = nextDogs.map((nextDog,i) => {
-                let likeID = getRandomNonRepeating(10)
+            let nextDogsList = nextDogs.list.map((nextDog,i) => {
+                let likeID = nextDogs.random
+                console.log(this)
                 return {
-                    id: ++setId,
+                    id: nextDog._id,
                     image: nextDog.image,
                     email: nextDog.email,
                     name: nextDog.name,
-                    liked: {
-                        [likeID[0]] : !!Math.floor(Math.random() * 10),
-                        [likeID[1]] : !!Math.floor(Math.random() * 10),
-                        [likeID[2]] : !!Math.floor(Math.random() * 10),
-                        [likeID[3]] : !!Math.floor(Math.random() * 10),
-                        [likeID[4]] : !!Math.floor(Math.random() * 10)
-                    }
+                    liked: assign(likeID)
                 }
             })
             return cb(randomizeArray(nextDogsList))
         })
     },
 
+    getDogIds: function() {
+        return axios.get("/api/dogs/ids")
+    },
+
     // Get a dog profile
     getDog: function (id) {
-        return axios.get("/api/dogs/" + id);
+       return axios.get("/api/dogs/" + id)
     },
 
     // Get logged user ID by email  
