@@ -12,8 +12,6 @@ import API from "../../Utils/api";
 import "./style.css";
 
 function Profile() {
-  // const [email, setEmail] = useState("dog@hotmmail.com");
-  // const [password, setPassword] = useState("!PuppyLover1");
   const [name, setName] = useState("");
   const [age, setAge] = useState("");
   const [breed, setBreed] = useState("");
@@ -23,7 +21,7 @@ function Profile() {
   const [image, setImage] = useState("");
   const [likes, setLikes] = useState("");
   // const [park, setPark] = useState("");
-  const [location, setLocation] = useState("Which city are you located in?");
+  const [location, setLocation] = useState("");
 
   const [stateAWS, setStateAWS] = useState({
     success: false,
@@ -54,7 +52,7 @@ function Profile() {
                 setImage(res.data[0].image);
                 setLikes(res.data[0].likes);
                 // setPark(res.data.park);
-                setLocation(res.data.location);
+                setLocation(res.data[0].location);
             })
             .catch(err => console.log(err));
 
@@ -185,7 +183,6 @@ function Profile() {
                 location: location,
             })
                 .then(res => {
-                    console.log(res);
                     console.log('Profile saved')
                 })
                 .catch(err => console.log(err));
@@ -193,12 +190,6 @@ function Profile() {
         else { console.log("form isn't complete") }
    
   };
-
-  // const toggleEditMode = () => {
-  //     setReadOnlyState(prevState => (
-  //         !prevState
-  //     ))
-  // }
 
   const SuccessMessage = () => (
     <div>
@@ -220,7 +211,7 @@ function Profile() {
           <div className="col s12 center-align">
             <div id="profile-img-div">
               <img
-                src="../../../img/dog-01.jpg"
+                src={image}
                 className="section responsive-img"
                 alt="default dog"
                 id="profile-img"
@@ -229,12 +220,7 @@ function Profile() {
             {stateAWS.success ? <SuccessMessage /> : null}
             {stateAWS.error ? <ErrorMessage /> : null}
 
-            {/* <div className="input-field file-field">
-                            <div className="waves-effect waves-light btn-large">
-                                <span>Select Photo</span> */}
             <input type="file" onChange={handleImageChange} />
-            {/* </div>
-                        </div> */}
 
             <div className="input-field">
               <button
