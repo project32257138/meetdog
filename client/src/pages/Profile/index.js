@@ -56,9 +56,6 @@ function Profile() {
             })
             .catch(err => console.log(err));
 
-
-        console.log(user.email)
-
         // ---------------------
 
         // API.getNewDog({

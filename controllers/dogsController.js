@@ -33,7 +33,14 @@ module.exports = {
                 db.Dog
                     .find({ email: { $ne: req.query.email }, _id: { $nin: filterArray } }).limit(1)
                     .then(dbModel => {
-                        res.json(dbModel)
+                        // If there is data back from DB, return it
+                        if(dbModel.length > 0) {
+                            res.json(dbModel)
+                        }
+                        // Else return null
+                        else {
+                            res.json(null)
+                        }
                     })
                     .catch(err => res.status(422).json(err));
             })
@@ -48,7 +55,14 @@ module.exports = {
                 db.Dog
                     .find({ email: { $ne: req.query.email }, _id: { $nin: filterArray } }).limit(10)
                     .then(dbModel => {
-                        res.json(dbModel)
+                        // If there is data back from DB, return it
+                        if(dbModel.length > 0) {
+                            res.json(dbModel)
+                        }
+                        // Else return null
+                        else {
+                            res.json(null)
+                        }
                     })
                     .catch(err => res.status(422).json(err));
             })
@@ -91,26 +105,6 @@ module.exports = {
                     .catch(err => res.status(422).json(err));
             })
             .catch(err => res.status(422).json(err));
-
-
-        // db.Dog
-        //     .findOne({ email: req.query.likedEmail })
-        //     .then(dbModel => {
-        //         // Check if the the user swiped logged user
-        //         if (dbModel.likes.hasOwnProperty(req.query.id)) {
-        //             // Check if logged user was liked as well 
-        //             if (dbModel.likes[req.query.id] === true) {
-        //                 res.json(true);
-        //             }
-        //             else {
-        //                 res.json(false);
-        //             }
-        //         }
-        //         else {
-        //             res.json(false);
-        //         }
-        //     })
-        //     .catch(err => res.status(422).json(err));
     },
 
     // Get a list of all matches of the current user
@@ -120,7 +114,16 @@ module.exports = {
             .then(loggedDog => {
                 const filterArray = Object.getOwnPropertyNames(loggedDog.likes)
                 db.Dog.find({ _id: { $in: filterArray } })
-                    .then(dbModel => res.json(dbModel))
+                    .then(dbModel => {
+                        // If there is data back from DB, return it
+                        if(dbModel.length > 0) {
+                            res.json(dbModel)
+                        }
+                        // Else return null
+                        else {
+                            res.json(null)
+                        }
+                    })
                     .catch(err => res.status(422).json(err))
             })
             .catch(err => res.status(422).json(err))
@@ -143,20 +146,3 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     }
 };
-
-
-    // This method add user id into the likes array
-    // likeDog: function (req, res) {
-    //     db.Dog.findOneAndUpdate({ _id: req.params.id }, { $push: { likes: req.params.likedId } })
-    //         .then(dbModel => res.json(dbModel))
-    //         .catch(err => res.status(422).json(err));
-    // },
-
-
-
-    // This method takes an array of Matches ID and return a list of users. 
-    // findMatches: function (req, res) {
-    //     db.dogs.find({ _id: { $in: req.params.matches } })
-    //         .then(dbModel => res.json(dbModel))
-    //         .catch(err => res.status(422).json(err));
-    // },
