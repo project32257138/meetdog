@@ -7,7 +7,7 @@ function Notification(props) {
         {console.log(props.matches)}
         {props.matches.map(match => (
           <li className="collection-item avatar">
-            <img src="../../../img/dog-01.jpg" alt="" className="circle" />
+            <img src={match.image} alt="" className="circle" />
             <p>{match.date}</p>
             <span className="title">{match.name}</span> sent you a bark!
             <p>Respond with a bark if you are interested in meeting up</p>
