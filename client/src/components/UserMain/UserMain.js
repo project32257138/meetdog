@@ -11,12 +11,12 @@ class UserMain extends React.Component {
     state = {
         id: "",
         name: "Spot",
-        email: "spotty@gmail.com",
+        email: "test1@gmail.com",
         currentMatch: false,
         currentDog: {
             image: "../../../img/loading.svg",
             name: "Loading",
-            id: 0,
+            id: "",
             liked: {
             }
         },
@@ -67,10 +67,10 @@ class UserMain extends React.Component {
         //     }
         // )        
 
-        API.getNextDogsNoCheck(this.state.id,(dogs) => {
+        API.getNextDogsNoCheck(this.state.email,(dogs) => {
             if (dogs.length) {
               this.setState({
-                id: dogs[0].id,
+                id: dogs[0].email,
                 name: dogs[0].name,
                 email: dogs[0].email,
                 image: dogs[0].image,
@@ -79,6 +79,8 @@ class UserMain extends React.Component {
               })
             }
         })
+
+        console.log(this.state)
     }
 
     componentDidUpdate(prevProps, prevState) {

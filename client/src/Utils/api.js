@@ -55,16 +55,16 @@ const API = {
     },
 
     getNextDogsNoCheck: function(id,cb) {
-        this.getAllDogs(id)
+        this.getNewDogs({email: id})
         .then(data => {
             console.log(data.data)
-            return {list: data.data, random: randomizeArray(data.data.map(id=>id._id))}
+            return {list: data.data, random: randomizeArray(data.data.map(id=>id.email))}
         })
         .then(nextDogs => {
             let nextDogsList = nextDogs.list.map((nextDog,i) => {
                 let likeID = nextDogs.random
                 return {
-                    id: nextDog._id,
+                    id: nextDog.email,
                     image: nextDog.image,
                     email: nextDog.email,
                     name: nextDog.name,
