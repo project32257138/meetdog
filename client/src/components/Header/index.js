@@ -34,13 +34,9 @@ const Header = () => {
                                     <i className="material-icons">home</i>
                                 </a>
                             </li>
+                           
                             <li>
-                                <a href="/matches">
-                                    <i className="material-icons">pets</i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="/">
+                                <a href="/dogs/605e58f29f0ef52213ba4746">
                                     <i className="material-icons">person</i>
                                 </a>
                             </li>

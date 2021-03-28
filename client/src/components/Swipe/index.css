@@ -43,9 +43,14 @@ a {
 
 }
 
+.dog-image {
+    width: 100% !important;
+}
+
 .dog-image img{
     height: 425.5px;
-    width: 425.5px !important;
+    width: 100%;
+    /* max-width: 425.5px !important; */
     object-fit: cover;
 }
 

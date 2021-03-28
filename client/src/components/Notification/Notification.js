@@ -1,48 +1,33 @@
 import React from "react";
+import "./index.css"
 
-function Notification() {
+function Notification(props) {
   return (
-    <div>
+    <div style={{height: "100%"}}>
+      {props.matches.length?
       <ul className="collection">
-        <li className="collection-item avatar">
-          <img src="../../../img/dog-01.jpg" alt="" className="circle" />
-          <p>2021-03-17</p>
-          <span className="title">Cutedog123</span> sent you a bark!
-          <p>Respond with a bark if you are interested in meeting up</p>
-          <a href="#!" className="secondary-content">
-            <i className="material-icons">send</i>
-          </a>
-        </li>
-        <li className="collection-item avatar">
-          <img src="../../../img/dog-02.jpg" alt="" className="circle" />
-          <p>2021-03-16</p>
-          <span className="title">good_boy</span> sent you a bark!
-          <p>Respond with a bark if you are interested in meeting up</p>
-          <a href="#!" className="secondary-content">
-            <i className="material-icons">send</i>
-          </a>
-        </li>
-        <li className="collection-item avatar">
-          <img src="../../../img/dog-03.jpg" alt="" className="circle" />
-          <p>2021-03-13</p>
-          <span className="title">Puppylove_91</span> sent you a bark!
-          <p>Respond with a bark if you are interested in meeting up</p>
-          <a href="#!" className="secondary-content">
-            <i className="material-icons">send</i>
-          </a>
-        </li>
-        <li className="collection-item avatar">
-          <img src="../../../img/dog-04.jpg" alt="" className="circle" />
-          <p>2021-03-12</p>
-          <span className="title">woofy102</span> sent you a bark!
-          <p>Respond with a bark if you are interested in meeting up</p>
-          <a href="#!" className="secondary-content">
-            <i className="material-icons">send</i>
-          </a>
-        </li>
-      </ul>
+        {props.matches.map(match => (
+          <li key={match.id} className="collection-item avatar">
+            <img src={match.image} alt="" className="circle" />
+            <p>{match.date}</p>
+            <span className="title">{match.name}</span> sent you a bark!
+            <p>Respond with a bark if you are interested in meeting up</p>
+            <a href="#!" className="secondary-content">
+              <i className="material-icons">send</i>
+            </a>
+          </li>
+        ))}
+      </ul> : <NoBarks/>}
     </div>
   );
+}
+
+function NoBarks() {
+  return (
+    <div className="no-barks">
+      <p>No barks yet, keep trying.</p>
+    </div>
+  )
 }
 
 export default Notification;
