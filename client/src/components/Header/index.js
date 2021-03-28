@@ -36,7 +36,7 @@ const Header = () => {
                             </li>
                            
                             <li>
-                                <a href="/dogs/605e58f29f0ef52213ba4746">
+                                <a href={"/profile/"}>
                                     <i className="material-icons">person</i>
                                 </a>
                             </li>
