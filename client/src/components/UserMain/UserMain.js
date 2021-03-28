@@ -9,7 +9,7 @@ import API from "../../Utils/api"
 class UserMain extends React.Component {
 
     state = {
-        id: "605fc76b98cc70501f8771ee",
+        id: "",
         name: "Spot",
         email: "spotty@gmail.com",
         currentMatch: false,
@@ -21,7 +21,7 @@ class UserMain extends React.Component {
             }
         },
         dogList: [],
-        dogIndex: 1,
+        dogIndex: 2,
         liked: {
             // object storing id and if that dog was liked by the user
             // id: true,  for liked --or--
@@ -54,22 +54,30 @@ class UserMain extends React.Component {
             } 
           });
 
-        API.getDog(this.state.id).then(
-            res => {
-                let thisDog = res.data
-                // console.log(thisDog)
-                this.setState({
-                    id: thisDog._id,
-                    name: thisDog.name,
-                    email: thisDog.email,
-                    image: thisDog.image
-                })
-            }
-        )        
+        // API.getDog(this.state.id).then(
+        //     res => {
+        //         let thisDog = res.data
+        //         // console.log(thisDog)
+        //         this.setState({
+        //             id: thisDog._id,
+        //             name: thisDog.name,
+        //             email: thisDog.email,
+        //             image: thisDog.image
+        //         })
+        //     }
+        // )        
 
         API.getNextDogsNoCheck(this.state.id,(dogs) => {
-            this.setState({dogList : dogs})
-            this.setState({currentDog: dogs[0]})
+            if (dogs.length) {
+              this.setState({
+                id: dogs[0].id,
+                name: dogs[0].name,
+                email: dogs[0].email,
+                image: dogs[0].image,
+                dogList : dogs,
+                currentDog: dogs[1]
+              })
+            }
         })
     }
 
