@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Col, Row, Container } from "../../components/Grid";
+import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
-// import { Input, TextArea, FormBtn } from "../../components/Form";
-// import ProfileList from "../../components/ProfileList";
-// import ProfileListDefault from "../../components/ProfileListDefault"
 
 //--------- LOCATION API:
 import AutoComplete from "../../components/AutoComplete";
@@ -34,61 +32,105 @@ function Profile() {
     errorMessage: "",
   });
 
-  const [selectedFile, setSelectedFile] = useState();
+  
+    const [selectedFile, setSelectedFile] = useState();
 
-  const [readOnlyState, setReadOnlyState] = useState(false);
+    const [readOnlyState, setReadOnlyState] = useState(false);
 
-  const { id } = useParams(); // Get URL parameter with React Hooks (useParams)
+    const { user } = useAuth0();
 
-  // Load Profile and component render
-  useEffect(() => {
-    // API.getDog(id)
-    //     .then(res => {
 
-    //         let filterArray = Object.getOwnPropertyNames(res.data.likes)
+    // Load Profile and component render
+    useEffect(() => {
 
-    //         console.log(filterArray)
-    //         setName(res.data.name);
-    //         setAge(res.data.age);
-    //         setBreed(res.data.breed);
-    //         setSize(res.data.size);
-    //         setGender(res.data.gender);
-    //         setDescription(res.data.description);
-    //         setImage(res.data.image);
-    //         setLikes(res.data.likes);
-    //         // setPark(res.data.park);
-    //         setLocation(res.data.location);
-    //     })
-    //     .catch(err => console.log(err));
+        API.getDog(user.email)
+            .then(res => {
+                setName(res.data[0].name);
+                setAge(res.data[0].age);
+                setBreed(res.data[0].breed);
+                setSize(res.data[0].size);
+                setGender(res.data[0].gender);
+                setDescription(res.data[0].description);
+                setImage(res.data[0].image);
+                setLikes(res.data[0].likes);
+                // setPark(res.data.park);
+                setLocation(res.data.location);
+            })
+            .catch(err => console.log(err));
 
-    API.getAllDogs()
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
 
-  const handleImageChange = (ev) => {
-    setStateAWS({
-      ...stateAWS,
-      success: false,
-      url: "../../../img/dog-icon.png",
-    });
-    setSelectedFile(ev.target.files[0]);
-  };
+        console.log(user.email)
 
-  const handleUploadToAWS = (ev) => {
-    let file = selectedFile;
-    // Split the filename to get the name and type
-    let fileParts = selectedFile.name.split(".");
+        // ---------------------
 
-    let fileName = `${id}/${fileParts[0]}`; // Pass the user id to save photos on unique folder on S3 bucket
-    let fileType = fileParts[1];
-    console.log("Preparing the upload");
-    axios
-      .post("http://localhost:3001/sign_s3", {
-        fileName: fileName,
-        fileType: fileType,
+        // API.getNewDog({
+        //   email: user.email
+        // }).then(res => {
+        //     console.log(res)
+        // })
+        // .catch(err => console.log(err));
+
+        // ---------------------
+
+        // API.getNewDogs({
+        //   email: user.email
+        // }).then(res => {
+        //     console.log(res)
+        // })
+        // .catch(err => console.log(err));
+
+        // ------------------
+
+        // API.likeOrDislike(user.email,
+        //     {
+        //         id: "605e58f29f0ef52213ba4749", 
+        //         value: false
+        //     })
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log(err));
+
+        // ---------------------
+
+        // API.checkIfMatch(user.email, {
+        //       likedEmail: "test@hotmail.com"
+        //     })
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log(err));
+
+        // ----------------
+
+        // API.getAllMatches({
+        //       email: user.email
+        //     })
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+        //     .catch(err => console.log(err));
+
+    }, [])
+
+
+    const handleImageChange = (ev) => {
+        setStateAWS({ ...stateAWS, success: false, url: "../../../img/dog-icon.png" });
+        setSelectedFile(ev.target.files[0]);
+    }
+
+    const handleUploadToAWS = (ev) => {
+
+        let file = selectedFile;
+        // Split the filename to get the name and type
+        let fileParts = selectedFile.name.split('.');
+
+        let fileName = `${user.email}/${fileParts[0]}`;  // Pass the user id to save photos on unique folder on S3 bucket
+        let fileType = fileParts[1];
+        console.log("Preparing the upload");
+        axios.post("http://localhost:3001/sign_s3", {
+            fileName: fileName,
+            fileType: fileType,
       })
       .then((response) => {
         var returnData = response.data.data.returnData;
@@ -119,28 +161,37 @@ function Profile() {
       });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (name && breed && age && gender && size && description && location) {
-      API.saveDogProfile(id, {
-        name: name,
-        breed: breed,
-        age: age,
-        gender: gender,
-        size: size,
-        description: description,
-        image: image,
-        // park: park,
-        location: location,
-      })
-        .then((res) => {
-          console.log(res);
-          console.log("Profile saved");
-        })
-        .catch((err) => console.log(err));
-    } else {
-      console.log("form isn't complete");
-    }
+       
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (
+            name &&
+            breed &&
+            age &&
+            gender &&
+            size &&
+            description &&
+            location
+        ) {
+            API.saveDogProfile(user.email, {
+                name: name,
+                breed: breed,
+                age: age,
+                gender: gender,
+                size: size,
+                description: description,
+                image: image,
+                // park: park,
+                location: location,
+            })
+                .then(res => {
+                    console.log(res);
+                    console.log('Profile saved')
+                })
+                .catch(err => console.log(err));
+        }
+        else { console.log("form isn't complete") }
+   
   };
 
   // const toggleEditMode = () => {

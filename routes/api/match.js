@@ -1,13 +1,12 @@
 const router = require("express").Router();
 const dogsController = require("../../controllers/dogsController");
 
-// Matches with "/api/dogs"
+// Matches with "/api/match"
 router.route("/")
-  .get(dogsController.getTenNewDogs)
+  .get(dogsController.getMatches)
 
-// Matches with "/api/dogs/:email"
+// Matches with "/api/match/:email"
 router.route("/:email")
-  .put(dogsController.updateLikes)
-
+  .get(dogsController.checkMatch)
 
 module.exports = router;

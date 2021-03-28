@@ -1,6 +1,9 @@
 import axios from "axios"
+const qs = require('qs');
+
 
 let setId = 0;
+
 
 const swap = (arr,i,j) => {
     let temp = arr[i];
@@ -40,6 +43,16 @@ const assign = (likeID) => {
 }
 
 const API = {
+    getNextDog: function (cb) {
+        axios.get("https://dog.ceo/api/breeds/image/random/")
+            .then(data => {
+                console.log(data)
+                // this would need to be changed to a call to out db
+                return data.data.message
+            })
+            .then(nextDog => cb(nextDog)
+            )
+    },
 
     getNextDogsNoCheck: function(id,cb) {
         this.getAllDogs(id)
@@ -71,45 +84,80 @@ const API = {
        return axios.get("/api/dogs/" + id)
     },
 
-    // Get logged user ID by email  
-    getLoggedUserByEmail: function (email) {
-        return axios.get("/api/dogs/currentuser/" + email);
+    // # Get a dog profile by email
+    getDog: function (email) {
+        return axios.get("/api/dog/" + email);
     },
 
-    // Update dog profile
-    saveDogProfile: function (id, data) {
-        return axios.put("/api/dogs/" + id,  data);
+    // # Update dog profile
+    saveDogProfile: function (email, data) {
+        return axios.put("/api/dog/" + email, data);
     },
 
-     // Gets all  Dogs
-     getAllDogs: function () {
-         return axios.get("/api/dogs/");
-     },
-
-    // Get logged profile id and return a single 
-    getNewDog: function (id) {
-        return axios.get("/api/dogs/newdog/" + id);
+    // # Get a new dogs profiles
+    // Pass an object with [key] = email and value = current user email
+    // This returns max 10 new profiles
+    // Example: {
+            //   email: "test@hotmail.com"
+            // }
+    getNewDog: function (queryObj) {
+        return axios.get("/api/dog/", {
+            params: queryObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     },
 
-    // Get logged profile id and return 10 new profiles 
-    getNewDogs: function (id) {
-        return axios.get("/api/dogs/newdog" + id);
+    // # Get a list of 10 new dogs profiles
+    // Pass an object with [key] = email and value = current user email
+    // This returns max 10 new profiles
+    // Example: {
+            //   email: "test64@hotmail.com"
+            // }
+    getNewDogs: function (queryObj) {
+        return axios.get("/api/dogs/", {
+            params: queryObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     },
 
-    // Get logged profile id and and obj (for likes pass {id: "2323483", value: true} and for dislike pass {id: "2323483", value: false})
-    likeOrDislike: function (id, swipedProfile) {
-        return axios.get("/api/dogs/swipe/" + id, swipedProfile);
+    // # Add a likes to user profile
+    // Pass logged email and obj
+    // for likes pass: { id: "2323483", value: true } 
+    // and for dislike pass: { id: "2323483", value: false }
+    likeOrDislike: function (email, swipedProfile) {
+        return axios.put("/api/dogs/" + email, swipedProfile);
     },
 
-    // Get logged profile id and and id of the swiped profile {id: "19289234"} and return true / false
-    checkIfMatch: function (id, swipedProfileId) {
-        return axios.get("/api/dogs/check/" + id, swipedProfileId);
+    // # Return true / false if two users liked each other
+    // Pass current user email and object with email of liked user
+    // Example: {
+            //   likedEmail: "test12@hotmail.com"
+            // }
+    checkIfMatch: function (email, dataObj) {
+        return axios.get("/api/match/" + email , {
+            params: dataObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     },
 
-    // No Ready
-    // Get all the matches  
-    getAllMatches: function (id) {
-        return axios.get("/api/dogs/matches/" + id);
+    // # Get all the matches of a particular profile
+    // Pass an object with [key] = email and value = current user email
+    // Example: {
+            //   email: "test@hotmail.com"
+            // }
+    getAllMatches: function (emailObj) {
+        return axios.get("/api/match/", {
+            params: emailObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     }
 
 }
