@@ -16,15 +16,15 @@ This application will assist dog owners with finding the perfect dog playmate so
 
 Log into your secure profile to begin
 
-![Login](login.PNG)
+![Login](Screenshot/login.PNG)
 
 Once logged in, create a profile with a great picture for other dogs to see
 
-![Createprofile](Createprofile.PNG)
+![Createprofile](Screenshot/Createprofile.PNG)
 
 Begin scrolling through dogs for which ones you'd like to sent a woof to!
 
-![Profile](Profile.PNG)
+![Profile](Screenshot/Profile.PNG)
 
 ## Installing
 
