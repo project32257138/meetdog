@@ -6,11 +6,25 @@ Dog adoptions have been booming during COVID-19. As a result of social distancin
 This application will assist dog owners with finding the perfect dog playmate so that you can find your dog the perfect playmate and ensure they get the exercise they deserve!
 
 
+
 ## Getting Started
 
-* Check out our deployed application on Heroku : 
+* Check out our deployed application on Heroku : https://fathomless-temple-52886.herokuapp.com/
 * Here sits our Repository : https://github.com/project32257138/meetdog
 
+## 
+
+Log into your secure profile to begin
+
+![Login](Screenshot/login.PNG)
+
+Once logged in, create a profile with a great picture for other dogs to see
+
+![Createprofile](Screenshot/Createprofile.PNG)
+
+Begin scrolling through dogs for which ones you'd like to sent a woof to!
+
+![Profile](Screenshot/Profile.PNG)
 
 ## Installing
 

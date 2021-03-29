@@ -1,8 +1,11 @@
 import axios from "axios"
+const qs = require('qs');
+
 
 let setId = 0;
 
-const swapIndexes = (arr,i,j) => {
+
+const swap = (arr,i,j) => {
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
@@ -11,110 +14,150 @@ const swapIndexes = (arr,i,j) => {
 
 const getRandomNonRepeating = (n) => {
     let arr = []
-    for (let i = 1; i <= n; i++) {
+    for (let i = 0; i < n; i++) {
         arr.push(i)
     }
     let rdm;
     for (let i = (n - 1); i >= 0; i--) {
         rdm = Math.floor(Math.random() * (i))
-        swapIndexes(arr,i,rdm)
+        swap(arr,i,rdm)
     }
     return arr
 }
 
+const randomizeArray = (arr) => {
+    let rdm
+    for (let i = (arr.length - 1); i >= 0; i--) {
+        rdm = Math.floor(Math.random() * (i))
+        swap(arr,i,rdm)
+    }
+    return arr
+}
+
+const assign = (likeID) => {
+    let likes = {}
+    likeID.map(like => {
+        likes[like] = !(Math.floor(Math.random() * 3))
+    })
+    return likes
+}
+
 const API = {
-    
-    getNextDog: function(cb) {
+    getNextDog: function (cb) {
         axios.get("https://dog.ceo/api/breeds/image/random/")
-        .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
-        })
-        .then(nextDog => cb(nextDog)
-        )
+            .then(data => {
+                console.log(data)
+                // this would need to be changed to a call to out db
+                return data.data.message
+            })
+            .then(nextDog => cb(nextDog)
+            )
     },
 
-    // got rid of this because the API call doesn't really work and its just for testing
-    // getNextDogsNoCheck: function(n,cb) {
-    //     axios.get("https://dog.ceo/api/breeds/image/random/" + n)
-    //     .then(data => {
-    //         console.log(data)
-    //         // this would need to be changed to a call to out db
-    //         return data.data.message
-    //     })
-    //     .then(nextDogs => {
-    //         return cb(nextDogs)
-    //     })
-    // },
-
-    getNextDogsNoCheck: function(n,cb) {
-        axios.get("https://dog.ceo/api/breeds/image/random/" + n)
+    getNextDogsNoCheck: function(id,cb) {
+        this.getNewDogs({email: id})
         .then(data => {
-            console.log(data)
-            // this would need to be changed to a call to out db
-            return data.data.message
+            console.log(data.data)
+            return {list: data.data, random: randomizeArray(data.data.map(id=>id.email))}
         })
-        .then(nextDogImgs => {
-            let nextDogs = nextDogImgs.map((nextDogImg,i) => {
-                let likeID = getRandomNonRepeating(10)
+        .then(nextDogs => {
+            let nextDogsList = nextDogs.list.map((nextDog,i) => {
+                let likeID = nextDogs.random
                 return {
-                    id: ++setId,
-                    image: nextDogImg,
-                    email: "lucky" + setId + "@doggymail.com",
-                    name: "lucky" + setId,
-                    liked: {
-                        [likeID[0]] : !!Math.floor(Math.random() * 4),
-                        [likeID[1]] : !!Math.floor(Math.random() * 4),
-                        [likeID[2]] : !!Math.floor(Math.random() * 4),
-                        [likeID[3]] : !!Math.floor(Math.random() * 4),
-                        [likeID[4]] : !!Math.floor(Math.random() * 4)
-                    }
+                    id: nextDog.email,
+                    image: nextDog.image,
+                    email: nextDog.email,
+                    name: nextDog.name,
+                    liked: assign(likeID)
                 }
             })
-            return cb(nextDogs)
+            return cb(randomizeArray(nextDogsList))
         })
+    },
+
+    getDogIds: function() {
+        return axios.get("/api/dogs/ids")
     },
 
     // Get a dog profile
     getDog: function (id) {
-        return axios.get("/api/dogs/" + id);
+       return axios.get("/api/dogs/" + id)
     },
 
-    // Update dog profile
-    saveDogProfile: function (id, data) {
-        return axios.put("/api/dogs/" + id,  data);
+    // # Get a dog profile by email
+    getDog: function (email) {
+        return axios.get("/api/dog/" + email);
     },
 
-     // Gets all new Dogs
-    //  getNewDogs: function () {
-    //      return axios.get("/api/dogs");
-    //  },
-
-    // Get logged profile id and return a single 
-    getNewDog: function (id) {
-        return axios.get("/api/dogs/newdog/" + id);
+    // # Update dog profile
+    saveDogProfile: function (email, data) {
+        return axios.put("/api/dog/" + email, data);
     },
 
-    // Get logged profile id and return 10 new profiles 
-    getNewDogs: function (id) {
-        return axios.get("/api/dogs/newdogs/" + id);
+    // # Get a new dogs profiles
+    // Pass an object with [key] = email and value = current user email
+    // This returns max 10 new profiles
+    // Example: {
+            //   email: "test@hotmail.com"
+            // }
+    getNewDog: function (queryObj) {
+        return axios.get("/api/dog/", {
+            params: queryObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     },
 
-    // Get logged profile id and and obj (for likes pass {id: "2323483", value: true} and for dislike pass {id: "2323483", value: false})
-    likeOrDislike: function (id, swipedProfile) {
-        return axios.get("/api/dogs/swipe/" + id, swipedProfile);
+    // # Get a list of 10 new dogs profiles
+    // Pass an object with [key] = email and value = current user email
+    // This returns max 10 new profiles
+    // Example: {
+            //   email: "test64@hotmail.com"
+            // }
+    getNewDogs: function (queryObj) {
+        return axios.get("/api/dogs/", {
+            params: queryObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     },
 
-    // Get logged profile id and and id of the swiped profile {id: "19289234"} and return true / false
-    checkIfMatch: function (id, swipedProfileId) {
-        return axios.get("/api/dogs/check/" + id, swipedProfileId);
+    // # Add a likes to user profile
+    // Pass logged email and obj
+    // for likes pass: { id: "2323483", value: true } 
+    // and for dislike pass: { id: "2323483", value: false }
+    likeOrDislike: function (email, swipedProfile) {
+        return axios.put("/api/dogs/" + email, swipedProfile);
     },
 
-    // No Ready
-    // Get all the matches  
-    getAllMatches: function (id) {
-        return axios.get("/api/dogs/matches/" + id);
+    // # Return true / false if two users liked each other
+    // Pass current user email and object with email of liked user
+    // Example: {
+            //   likedEmail: "test12@hotmail.com"
+            // }
+    checkIfMatch: function (email, dataObj) {
+        return axios.get("/api/match/" + email , {
+            params: dataObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
+    },
+
+    // # Get all the matches of a particular profile
+    // Pass an object with [key] = email and value = current user email
+    // Example: {
+            //   email: "test@hotmail.com"
+            // }
+    getAllMatches: function (emailObj) {
+        return axios.get("/api/match/", {
+            params: emailObj, 
+            paramsSerializer: params => {
+                return qs.stringify(params)
+            }
+          });
     }
 
 }
