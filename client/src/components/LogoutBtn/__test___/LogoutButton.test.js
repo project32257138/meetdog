@@ -26,9 +26,9 @@ it("renders button correctly", () => {
 const oldWindowLocation = window.location
 
 beforeAll(() => {
-  delete window.location
+    delete window.location
 
-  window.location = Object.defineProperties(
+    window.location = Object.defineProperties(
     {},
     {
       ...Object.getOwnPropertyDescriptors(oldWindowLocation),
@@ -39,6 +39,7 @@ beforeAll(() => {
     },
   )
 });
+
 beforeEach(() => {
   window.location.assign.mockReset()
 })
