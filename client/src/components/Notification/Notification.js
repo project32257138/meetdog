@@ -6,7 +6,7 @@ function Notification(props) {
     <div style={{height: "100%"}}>
       {props.matches.length?
       <ul className="collection">
-        {props.matches.map(match => (
+        {props.matches.reverse().map(match => (
           <li key={match.id} className="collection-item avatar">
             <img src={match.image} alt="" className="circle" />
             <p>{match.date}</p>

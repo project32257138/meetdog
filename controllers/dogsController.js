@@ -61,7 +61,7 @@ module.exports = {
                         }
                         // Else return null
                         else {
-                            res.json(null)
+                            res.json([])
                         }
                     })
                     .catch(err => res.status(422).json(err));
@@ -70,10 +70,9 @@ module.exports = {
 
     // Add swiped profile id into logged user likes field on DB
     updateLikes: function (req, res) {
-        const keyName = `likes.${req.body.id}`;
-        const profileObj = {
-            [keyName]: req.body.value
-        }
+        const profileObj = {}
+        let keyName = `likes.${req.body.id}`;
+        profileObj[keyName] = req.body.value
 
         db.Dog
             .findOneAndUpdate({ email: req.params.email }, profileObj)
@@ -121,7 +120,7 @@ module.exports = {
                         }
                         // Else return null
                         else {
-                            res.json(null)
+                            res.json([])
                         }
                     })
                     .catch(err => res.status(422).json(err))
