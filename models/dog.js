@@ -40,6 +40,9 @@ const dogSchema = new Schema({
 
     // Store the dog's location
     location: { type: String, default: "" },
+
+    // Store the dog's favorite park
+    fav_park: { type: String, default: "" },
 });
 
 
