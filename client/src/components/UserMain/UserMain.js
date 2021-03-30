@@ -56,12 +56,13 @@ class UserMain extends React.Component {
               "title": "Puppy Love | Creating New Play Dates",
               "message": "Thanks for subscribing!",
             } 
-          });
+          })
+          OneSignal.showSlidedownPrompt()
         })
 
         API.getDog(this.email).then(
             res => {
-              if (!res.data.length) return
+              if (!res.data.length) return null
                 let thisDog = res.data[0]
                 this.setState({
                     id: thisDog._id,
@@ -69,8 +70,11 @@ class UserMain extends React.Component {
                     email: thisDog.email,
                     image: thisDog.image
                 })
-            }
-        )        
+              return thisDog.id
+        })
+      OneSignal.push(() => {
+        OneSignal.setExternalUserId(this.email);
+      });
 
       API.getAllMatches({
             email: this.email
@@ -80,7 +84,7 @@ class UserMain extends React.Component {
                 matches: res.data
               })
           })
-          .catch(err => console.log(err));
+          .catch(err => []);
       
       this.getDogList()
     }
@@ -91,6 +95,9 @@ class UserMain extends React.Component {
             currentMatch: true,
             matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
         })
+        
+
+  
     }
 
     shouldComponentUpdate(nextProps, nextState) {

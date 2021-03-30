@@ -22,8 +22,9 @@ const Swipe = (props) => {
         return (
             <div className="row">
             <Push
+                email={props.details.email}            
                 match={props.details.currentMatch}
-                dog={props.details.matches[props.details.matches.length - 1]?.name}
+                dog={props.details.matches[props.details.matches.length - 1]}
             />
             <div className="col s12 m12">
             <div className="card">
