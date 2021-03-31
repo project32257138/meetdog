@@ -1,29 +1,12 @@
 import axios from "axios"
 const qs = require('qs');
 
-
-let setId = 0;
-
-
 const swap = (arr,i,j) => {
     let temp = arr[i];
     arr[i] = arr[j];
     arr[j] = temp;
     return arr
 }
-
-// const getRandomNonRepeating = (n) => {
-//     let arr = []
-//     for (let i = 0; i < n; i++) {
-//         arr.push(i)
-//     }
-//     let rdm;
-//     for (let i = (n - 1); i >= 0; i--) {
-//         rdm = Math.floor(Math.random() * (i))
-//         swap(arr,i,rdm)
-//     }
-//     return arr
-// }
 
 const randomizeArray = (arr) => {
     let rdm
@@ -39,15 +22,18 @@ const API = {
     assign: function(likeID, email){
         let likes = {}
         likeID.map(like => {
-            let liked = !!(Math.floor(Math.random() * 3))
+            console.log(like)
+            let liked = !!(Math.floor(Math.random() * 2))
             this.likeOrDislike(email, {id: like, value: liked})
             likes[like] = liked
         })
+        console.log(likes)
         return likes
     },   
 
-    getNextDogs: function(id,cb) {
-        this.getNewDogs({email: id})
+    getNextDogs: function(email,cb) {
+        console.log(email)
+        this.getNewDogs({email: email})
         .then(data => {
             this.getAllDogs(res => {
                 return res.data
@@ -56,14 +42,18 @@ const API = {
                 return {list: data.data, random: allDogs.data.map(dog=>dog._id)}
             })
             .then(nextDogs => {
-                let nextDogsList = nextDogs.list.map((nextDog,i) => {
+                console.log(nextDogs.random)
+                let nextDogsList = nextDogs.list.map(nextDog => {
                     let likeID = nextDogs.random
                     return {
-                        id: nextDog._id,
+                        _id: nextDog._id,
                         image: nextDog.image,
                         email: nextDog.email,
                         name: nextDog.name,
-                        liked: this.assign(likeID,nextDog.email)
+                        likes: this.assign(likeID,nextDog.email),
+                        description: nextDog.description,
+                        age: nextDog.age,
+                        breed: nextDog.breed
                     }
                 })
                 return cb(randomizeArray(nextDogsList))
