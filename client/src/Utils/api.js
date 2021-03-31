@@ -35,29 +35,22 @@ const API = {
         console.log(email)
         this.getNewDogs({email: email})
         .then(data => {
-            this.getAllDogs(res => {
-                return res.data
-            })
-            .then(allDogs => {
-                return {list: data.data, random: allDogs.data.map(dog=>dog._id)}
-            })
-            .then(nextDogs => {
-                console.log(nextDogs.random)
-                let nextDogsList = nextDogs.list.map(nextDog => {
-                    let likeID = nextDogs.random
+            return data.data
+        })
+        .then(nextDogs => {
+                let nextDogsList = nextDogs.map(nextDog => {
                     return {
                         _id: nextDog._id,
                         image: nextDog.image,
                         email: nextDog.email,
                         name: nextDog.name,
-                        likes: this.assign(likeID,nextDog.email),
+                        likes: nextDog.likes || {},
                         description: nextDog.description,
                         age: nextDog.age,
                         breed: nextDog.breed
                     }
                 })
                 return cb(randomizeArray(nextDogsList))
-            })
         })
     },
 
