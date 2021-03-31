@@ -35,7 +35,6 @@ class UserMain extends React.Component {
     email = this.props.user.email
 
     componentDidMount() {
-        console.log(this.email)
 
         const OSID = process.env.REACT_APP_ONE_SIGNAL_ID;
         const OSKEY = "Basic " + process.env.REACT_APP_ONE_SIGNAL_KEY
@@ -108,7 +107,6 @@ class UserMain extends React.Component {
 
     getDogList = () => {
       API.getNextDogs(this.email,(dogs) => {
-        console.log(dogs)
           if (dogs) {
             this.setState({
               dogList : dogs,

@@ -5,7 +5,6 @@ import UserMain from "./UserMain"
 class Profile extends Component {
   render() {
     const { user } = this.props.auth0;
-    console.log(user)
     return (
         <UserMain
             user={user}

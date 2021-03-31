@@ -29,7 +29,6 @@ class DogSummary extends Component {
       }
 
     render() {
-        console.log(this.props)
         return (
             <>
         <a

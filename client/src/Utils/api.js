@@ -22,17 +22,14 @@ const API = {
     assign: function(likeID, email){
         let likes = {}
         likeID.map(like => {
-            console.log(like)
             let liked = !!(Math.floor(Math.random() * 2))
             this.likeOrDislike(email, {id: like, value: liked})
             likes[like] = liked
         })
-        console.log(likes)
         return likes
     },   
 
     getNextDogs: function(email,cb) {
-        console.log(email)
         this.getNewDogs({email: email})
         .then(data => {
             this.getAllDogs(res => {
@@ -42,7 +39,6 @@ const API = {
                 return {list: data.data, random: allDogs.data.map(dog=>dog._id)}
             })
             .then(nextDogs => {
-                console.log(nextDogs.random)
                 let nextDogsList = nextDogs.list.map(nextDog => {
                     let likeID = nextDogs.random
                     return {

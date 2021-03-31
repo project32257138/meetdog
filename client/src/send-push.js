@@ -12,9 +12,6 @@ function Push(props) {
 
   useEffect(() => {
 
-    console.log(props)
-
-    // trying to use this message, but it doesn't work
     let message = { 
       app_id: OSID,
       headings: {"en": "Puppy Love"},
