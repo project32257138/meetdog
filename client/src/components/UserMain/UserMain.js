@@ -1,17 +1,17 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Notification from "../Notification/Notification";
 import Swipe from "../Swipe/index";
 import Header from "../Header";
-import { withAuthenticationRequired } from "@auth0/auth0-react";
 import Loading from "../Loading/Loading";
 import API from "../../Utils/api"
+
 
 class UserMain extends React.Component {
 
     state = {
         id: "",
-        name: "Spot",
-        email: "test1@gmail.com",
+        name: "",
+        email: "",
         currentMatch: false,
         currentDog: {
             image: "../../../img/loading.svg",
@@ -21,7 +21,7 @@ class UserMain extends React.Component {
             }
         },
         dogList: [],
-        dogIndex: 2,
+        dogIndex: 1,
         liked: {
             // object storing id and if that dog was liked by the user
             // id: true,  for liked --or--
@@ -30,13 +30,17 @@ class UserMain extends React.Component {
         matches: []
     }
 
+    email = this.props.user.email
+
     componentDidMount() {
+        console.log(this.email)
+
         const OSID = process.env.REACT_APP_ONE_SIGNAL_ID;
         const OSKEY = "Basic " + process.env.REACT_APP_ONE_SIGNAL_KEY
         
         window.OneSignal = window.OneSignal || [];
         const OneSignal = window.OneSignal;
-
+        OneSignal.push(() => {
         OneSignal.init(
             {
               appId: OSID,
@@ -52,35 +56,37 @@ class UserMain extends React.Component {
               "title": "Puppy Love | Creating New Play Dates",
               "message": "Thanks for subscribing!",
             } 
-          });
-
-        // API.getDog(this.state.id).then(
-        //     res => {
-        //         let thisDog = res.data
-        //         // console.log(thisDog)
-        //         this.setState({
-        //             id: thisDog._id,
-        //             name: thisDog.name,
-        //             email: thisDog.email,
-        //             image: thisDog.image
-        //         })
-        //     }
-        // )        
-
-        API.getNextDogsNoCheck(this.state.email,(dogs) => {
-            if (dogs.length) {
-              this.setState({
-                id: dogs[0].email,
-                name: dogs[0].name,
-                email: dogs[0].email,
-                image: dogs[0].image,
-                dogList : dogs,
-                currentDog: dogs[1]
-              })
-            }
+          })
+          OneSignal.showSlidedownPrompt()
         })
 
-        console.log(this.state)
+        API.getDog(this.email).then(
+            res => {
+              if (!res.data.length) return null
+                let thisDog = res.data[0]
+                this.setState({
+                    id: thisDog._id,
+                    name: thisDog.name,
+                    email: thisDog.email,
+                    image: thisDog.image
+                })
+              return thisDog.id
+        })
+      OneSignal.push(() => {
+        OneSignal.setExternalUserId(this.email);
+      });
+
+      API.getAllMatches({
+            email: this.email
+          })
+          .then(res => {
+              this.setState({
+                matches: res.data
+              })
+          })
+          .catch(err => []);
+      
+      this.getDogList()
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -89,19 +95,40 @@ class UserMain extends React.Component {
             currentMatch: true,
             matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
         })
-        console.log(this.state)
+        
+
+  
     }
 
     shouldComponentUpdate(nextProps, nextState) {
         return this.state.currentDog !== nextState.currentDog
     }
 
+    getDogList = () => {
+      API.getNextDogs(this.email,(dogs) => {
+          if (dogs) {
+            this.setState({
+              dogList : dogs,
+              currentDog: dogs[0]
+            })
+          } 
+      })
+    }
+
 
     getNextDog = () => {
+        if (this.state.dogIndex >= this.state.dogList.length) {
+          this.getDogList()
+          this.setState({
+            dogIndex: 1,
+            // currentDog: this.state.dogList[0],
+          })
+        } else {
         this.setState({
-            dogIndex: this.state.dogIndex + 1,
-            currentDog: this.state.dogList[this.state.dogIndex],
+          dogIndex: this.state.dogIndex + 1,
+          currentDog: this.state.dogList[this.state.dogIndex],
         })
+      }
     }
 
     likeDog = () => {
@@ -110,18 +137,21 @@ class UserMain extends React.Component {
         this.setState({
             liked: {[this.state.currentDog.id]: true, ...this.state.liked},
         })
+        API.likeOrDislike(this.state.email,{id: this.state.currentDog.id, value: false}) //{ id: "2323483", value: false }
         this.getNextDog()
     }
 
     dislikeDog = () => {
         this.setState({liked: {[this.state.currentDog.id]: false, ...this.state.liked}})
+        API.likeOrDislike(this.state.email,{id: this.state.currentDog.id, value: false}) //{ id: "2323483", value: false }
         this.getNextDog()
     }
 
   render () {
+
     return (
       <>
-        <Header />
+        <Header/>
         <div className="container">
           <div className="row">
             <div className="section" style={{width: "100%"}}>
@@ -147,6 +177,4 @@ class UserMain extends React.Component {
   }
 }
 
-export default withAuthenticationRequired(UserMain, {
-  onredirecting: () => <Loading />,
-});
+export default UserMain

@@ -9,5 +9,8 @@ router.route("/")
 router.route("/:email")
   .put(dogsController.updateLikes)
 
+router.route("/all")
+  .get(dogsController.findAllNew)
+
 
 module.exports = router;

@@ -21,10 +21,10 @@ class ShowMatch extends Component {
 const Swipe = (props) => {
         return (
             <div className="row">
-             {console.log(props.details.matches[props.details.matches.length - 1])}
             <Push
+                email={props.details.email}            
                 match={props.details.currentMatch}
-                dog={props.details.matches[props.details.matches.length - 1]?.name}
+                dog={props.details.matches[props.details.matches.length - 1]}
             />
             <div className="col s12 m12">
             <div className="card">
@@ -34,12 +34,12 @@ const Swipe = (props) => {
                     <span className="card-title dog-name">{props.details.currentDog?.name || "Oops, looks like you've seen them all!"}</span>
                 </div>
                 <div className="card-action bark-back">
-                <a href="#"><span className="material-icons dislike" onClick={props.dislikeDog}>{props.details.currentDog? "thumb_down" : ""}</span></a>
+                <a href="#"><span className="material-icons dislike" onClick={props.dislikeDog}>{props.details.currentDog?.id? "thumb_down" : ""}</span></a>
                 <ShowMatch
                     match={props.details.currentMatch}
                     thisDog={props.details.matches[props.details.matches.length - 1]?.name}
                 />
-                <a href="#"><span className="material-icons like" onClick={props.likeDog}>{props.details.currentDog? "thumb_up" : ""}</span></a>
+                <a href="#"><span className="material-icons like" onClick={props.likeDog}>{props.details.currentDog?.id? "thumb_up" : ""}</span></a>
                 </div>
             </div>
             
