@@ -1,20 +1,25 @@
 import React from "react";
 import "./index.css"
+import DogSummary from "./DogSummary/DogSummary"
 
 function Notification(props) {
+
   return (
     <div style={{height: "100%"}}>
       {props.matches.length?
       <ul className="collection">
-        {props.matches.map(match => (
+        {props.matches.reverse().map((match,i) => (
           <li key={match.id} className="collection-item avatar">
             <img src={match.image} alt="" className="circle" />
             <p>{match.date}</p>
             <span className="title">{match.name}</span> sent you a bark!
             <p>Respond with a bark if you are interested in meeting up</p>
-            <a href="#!" className="secondary-content">
-              <i className="material-icons">send</i>
-            </a>
+            <DogSummary
+              key={match._id}
+              match={match}
+              index={i}
+              onClick={() => this.showDogSummary(i)}
+            />
           </li>
         ))}
       </ul> : <NoBarks/>}

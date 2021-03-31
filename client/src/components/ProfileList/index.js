@@ -7,14 +7,14 @@ class ProfileList extends React.Component {
         return (
             this.props.dogState.map((dog) => (
             <ProfileListItem 
-            key={dog._id}
-            id={dog._id}
-            name={dog.name}
-            breed={dog.breed}
-            age={dog.age}
-            gender={dog.gender}
-            bio={dog.bio}
-            email={dog.email}
+                key={dog._id}
+                id={dog._id}
+                name={dog.name}
+                breed={dog.breed}
+                age={dog.age}
+                gender={dog.gender}
+                bio={dog.bio}
+                email={dog.email}
             />
             ))
         )

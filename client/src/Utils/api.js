@@ -12,18 +12,18 @@ const swap = (arr,i,j) => {
     return arr
 }
 
-const getRandomNonRepeating = (n) => {
-    let arr = []
-    for (let i = 0; i < n; i++) {
-        arr.push(i)
-    }
-    let rdm;
-    for (let i = (n - 1); i >= 0; i--) {
-        rdm = Math.floor(Math.random() * (i))
-        swap(arr,i,rdm)
-    }
-    return arr
-}
+// const getRandomNonRepeating = (n) => {
+//     let arr = []
+//     for (let i = 0; i < n; i++) {
+//         arr.push(i)
+//     }
+//     let rdm;
+//     for (let i = (n - 1); i >= 0; i--) {
+//         rdm = Math.floor(Math.random() * (i))
+//         swap(arr,i,rdm)
+//     }
+//     return arr
+// }
 
 const randomizeArray = (arr) => {
     let rdm
@@ -34,45 +34,45 @@ const randomizeArray = (arr) => {
     return arr
 }
 
-const assign = (likeID) => {
-    let likes = {}
-    likeID.map(like => {
-        likes[like] = !(Math.floor(Math.random() * 3))
-    })
-    return likes
-}
-
 const API = {
-    getNextDog: function (cb) {
-        axios.get("https://dog.ceo/api/breeds/image/random/")
-            .then(data => {
-                console.log(data)
-                // this would need to be changed to a call to out db
-                return data.data.message
-            })
-            .then(nextDog => cb(nextDog)
-            )
-    },
 
-    getNextDogsNoCheck: function(id,cb) {
+    assign: function(likeID, email){
+        let likes = {}
+        likeID.map(like => {
+            let liked = !!(Math.floor(Math.random() * 3))
+            this.likeOrDislike(email, {id: like, value: liked})
+            likes[like] = liked
+        })
+        return likes
+    },   
+
+    getNextDogs: function(id,cb) {
         this.getNewDogs({email: id})
         .then(data => {
-            console.log(data.data)
-            return {list: data.data, random: randomizeArray(data.data.map(id=>id.email))}
-        })
-        .then(nextDogs => {
-            let nextDogsList = nextDogs.list.map((nextDog,i) => {
-                let likeID = nextDogs.random
-                return {
-                    id: nextDog.email,
-                    image: nextDog.image,
-                    email: nextDog.email,
-                    name: nextDog.name,
-                    liked: assign(likeID)
-                }
+            this.getAllDogs(res => {
+                return res.data
             })
-            return cb(randomizeArray(nextDogsList))
+            .then(allDogs => {
+                return {list: data.data, random: allDogs.data.map(dog=>dog._id)}
+            })
+            .then(nextDogs => {
+                let nextDogsList = nextDogs.list.map((nextDog,i) => {
+                    let likeID = nextDogs.random
+                    return {
+                        id: nextDog._id,
+                        image: nextDog.image,
+                        email: nextDog.email,
+                        name: nextDog.name,
+                        liked: this.assign(likeID,nextDog.email)
+                    }
+                })
+                return cb(randomizeArray(nextDogsList))
+            })
         })
+    },
+
+    getAllDogs: function() {
+        return axios.get("/api/dogs/all")
     },
 
     getDogIds: function() {
