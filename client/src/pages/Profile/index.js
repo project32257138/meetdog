@@ -154,7 +154,7 @@ function Profile() {
                         <div id="profile-img-div">
                             <img
                                 src={image}
-                                className="section responsive-img"
+                                className="section responsive-img z-depth-5"
                                 alt="default dog"
                                 id="profile-img"
                             />
@@ -177,7 +177,7 @@ function Profile() {
                 <div className="row">
                     {/* Profile Detail Column */}
 
-                    <div className="col s12">
+                    <div className="col s12 profileCol z-depth-5">
                         <form onSubmit={handleSubmit}>
                             <h4 className="fieldLabelTxt">Profile</h4>
                             <div className="divider"></div>

@@ -4,6 +4,11 @@
     url(../../font/MoreSugar-Thin.ttf) format("truetype");
 }
 
+body {
+  background-color: #e9ebe7;
+  
+}
+
 h4,
 h5 {
   font-family: moreSugarThin;
@@ -14,7 +19,21 @@ h5,
 p {
   color: white;
 }
+img {
+  border-radius: 10px
+}
 
 .fieldLabelTxt {
   color: cadetblue;
+}
+
+.profileCol {
+  background-color: white;
+  border-radius: 10px;
+}
+
+form {
+  padding-top: 15px;
+  padding-left: 25px;
+  padding-right: 25px;
 }
