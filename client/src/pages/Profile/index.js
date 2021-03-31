@@ -71,7 +71,7 @@ function Profile() {
         let fileName = `${user.email}/${fileParts[0]}`;  // Pass the user id to save photos on unique folder on S3 bucket
         let fileType = fileParts[1];
         // console.log("Preparing the upload");
-        axios.post("http://localhost:3001/sign_s3", {
+        axios.post("https://fathomless-temple-52886.herokuapp.com/sign_s3", {
             fileName: fileName,
             fileType: fileType,
         })
