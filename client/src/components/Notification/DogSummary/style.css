@@ -1,0 +1,82 @@
+@font-face {
+  font-family: moreSugarThin;
+  src: local("MoreSugar-Thin"),
+    url(../../../font/MoreSugar-Thin.ttf) format("truetype");
+}
+
+/* .modal-content {
+  padding-bottom: 0;
+} */
+
+.wrapper {
+  /* display: flex; */
+  /* justify-content: space-around; */
+  width: 100%;
+  flex: 1;
+}
+
+.modal-footer{
+  background-color: transparent !important;
+  padding-right: 24px;
+  width: auto;
+}
+
+/* #modal1 {
+  max-width: 100% !important;
+  max-height: 100% !important; 
+  overflow-y: auto;
+}  */
+
+.image {
+  width: 100%;
+  padding-bottom: 100%;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  background: transparent
+}
+
+.image > img {
+  position:absolute;
+  left: 0;
+  border-radius: 50%;
+  width:auto;
+   width:100%;
+   height:100%;
+  
+}
+
+.info {
+  margin: 0;
+  /* align-self: flex-end; */
+  /* min-height: 100%; */
+  /* width: 50%; */
+  /* float: right */
+}
+
+h4,
+h5
+{
+  font-family: moreSugarThin;
+}
+
+[id *= "modal"] h4 {
+  color: cadetblue;
+}
+
+.fieldLabelTxt {
+  color: cadetblue;
+}
+
+.small {
+  line-height: .5em;
+}
+
+.btn.call {
+  width: 11em;
+  height: auto !important;
+  line-height: 20px;
+  white-space: normal;
+  font-family: sans-serif;
+  padding: 5px 16px;
+}
