@@ -19,17 +19,18 @@ const randomizeArray = (arr) => {
 
 const API = {
 
-    assign: function(likeID, email){
-        let likes = {}
-        likeID.map(like => {
-            console.log(like)
-            let liked = !!(Math.floor(Math.random() * 2))
-            this.likeOrDislike(email, {id: like, value: liked})
-            likes[like] = liked
-        })
-        console.log(likes)
-        return likes
-    },   
+    // this function was only for testing
+    // assign: function(likeID, email){
+    //     let likes = {}
+    //     likeID.map(like => {
+    //         console.log(like)
+    //         let liked = !!(Math.floor(Math.random() * 2))
+    //         this.likeOrDislike(email, {id: like, value: liked})
+    //         likes[like] = liked
+    //     })
+    //     console.log(likes)
+    //     return likes
+    // },   
 
     getNextDogs: function(email,cb) {
         console.log(email)
@@ -54,9 +55,10 @@ const API = {
         })
     },
 
-    getAllDogs: function() {
-        return axios.get("/api/dogs/all")
-    },
+    // this function was only for testing
+    // getAllDogs: function() {
+    //     return axios.get("/api/dogs/all")
+    // },
 
     getDogIds: function() {
         return axios.get("/api/dogs/ids")
