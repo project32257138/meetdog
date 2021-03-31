@@ -7,7 +7,7 @@ const Splash = () => {
     <main id="main-splash">
       <section id="logo">
 
-        <img src="../../../img/puppy-love.png" alt="Logo"/>
+        <img src="../../../img/puppyLove.gif" alt="Logo"/>
 
       </section>
 
