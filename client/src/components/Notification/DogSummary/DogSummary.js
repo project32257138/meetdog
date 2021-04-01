@@ -53,11 +53,11 @@ class DogSummary extends Component {
                             <img alt={this.props.match.name} src={this.props.match.image}></img>
                         </div>
                     </div>
-                    <div className="info float-left s12 m6">
+                    <div className="info float-left s12 m6 center">
                         <h5><span className="fieldLabelTxt"> Age:</span>  {this.props.match.age}</h5>
                         <h5><span className="fieldLabelTxt"> Breed:</span>  {this.props.match.breed}</h5>
                         <h5><span className="fieldLabelTxt"> Description:</span>  {this.props.match.description}</h5>
-                        <h5><a className="call btn" href={"mailto:" + this.props.match.email}>Bark back!<br/><small>(send email)</small></a></h5>
+                        <h5><a className="call btn" rel="noopener noreferrer" target="_blank" href={"mailto:" + this.props.match.email}>Bark back!<br/><small>(send email)</small></a></h5>
                     </div>
             </div>
         </div>
