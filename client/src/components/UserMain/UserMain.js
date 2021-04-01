@@ -98,7 +98,7 @@ class UserMain extends React.Component {
         if (prevState.currentDog?.likes[this.state._id] && this.state.likes[prevState.currentDog?._id])
           this.setState({
             currentMatch: true,
-            matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
+            matches: [{...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}, ...this.state.matches],
         })
         
 
