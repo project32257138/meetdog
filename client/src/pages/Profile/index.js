@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../../components/Header";
-// import { Col, Row, Container } from "../../components/Grid";
+import Footer from"../../components/Footer";
 import axios from 'axios';
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -285,6 +285,7 @@ function Profile() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </>
     );
 }

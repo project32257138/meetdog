@@ -1,0 +1,26 @@
+footer {
+    margin-top: 20px;
+}
+
+#page-footer {
+    background-color: #537c58
+}
+
+#footer-copyright{
+    background-color: #426d49;
+}
+
+
+.github {
+    position: relative;
+    right: 8px;
+}
+
+#github {
+    padding-right: 10px;
+}
+
+#footer-copyright-text {
+    position: relative;
+    right: 8px;
+}

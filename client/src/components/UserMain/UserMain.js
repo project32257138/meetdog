@@ -2,8 +2,10 @@ import React, {useState, useEffect} from "react";
 import Notification from "../Notification/Notification";
 import Swipe from "../Swipe/index";
 import Header from "../Header";
+import Footer from"../../components/Footer";
 import Loading from "../Loading/Loading";
 import API from "../../Utils/api"
+import "./style.css"
 
 
 class UserMain extends React.Component {
@@ -152,26 +154,29 @@ class UserMain extends React.Component {
     return (
       <>
         <Header/>
-        <div className="container">
-          <div className="row">
-            <div className="section" style={{width: "100%"}}>
-              <div className="col s12 m6">
-                <Swipe 
-                  details={this.state}
-                  likeDog={this.likeDog}
-                  dislikeDog={this.dislikeDog}
-                  getNextDog={this.getNextDog}
-                />
-              </div>
-              <div className="col s12 m6">
-                <Notification 
-                  matches={this.state.matches}
-                  details={this.state}
-                />
+        <div className="wrapper">
+          <div className="container">
+            <div className="row">
+              <div className="section" style={{width: "100%"}}>
+                <div className="col s12 m6">
+                  <Swipe 
+                    details={this.state}
+                    likeDog={this.likeDog}
+                    dislikeDog={this.dislikeDog}
+                    getNextDog={this.getNextDog}
+                  />
+                </div>
+                <div className="col s12 m6 notificationCol">
+                  <Notification 
+                    matches={this.state.matches}
+                    details={this.state}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <Footer />
       </>
     );
   }
