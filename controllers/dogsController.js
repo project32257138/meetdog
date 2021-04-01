@@ -1,3 +1,4 @@
+const { json } = require("express");
 const db = require("../models");
 
 // Defining methods for the dogsController
@@ -34,7 +35,7 @@ module.exports = {
                     .find({ email: { $ne: req.query.email }, _id: { $nin: filterArray } }).limit(1)
                     .then(dbModel => {
                         // If there is data back from DB, return it
-                        if(dbModel.length > 0) {
+                        if (dbModel.length > 0) {
                             res.json(dbModel)
                         }
                         // Else return null
@@ -56,7 +57,7 @@ module.exports = {
                     .find({ email: { $ne: req.query.email }, _id: { $nin: filterArray } }).limit(10)
                     .then(dbModel => {
                         // If there is data back from DB, return it
-                        if(dbModel.length > 0) {
+                        if (dbModel.length > 0) {
                             res.json(dbModel)
                         }
                         // Else return null
@@ -107,15 +108,20 @@ module.exports = {
     },
 
     // Get a list of all matches of the current user
-    getMatches: function (req, res) {
+    getMatches: async function (req, res) {
         // Get the current logged profile
-        db.Dog.findOne({ email: req.query.email }, { _id: 0, likes: 1 })
+
+        db.Dog.findOne({ email: req.query.email }, { _id: 1, likes: 1 })
             .then(loggedDog => {
-                const filterArray = Object.getOwnPropertyNames(loggedDog.likes)
-                db.Dog.find({ _id: { $in: filterArray } })
+                let obj = loggedDog.likes;
+                Object.keys(obj).forEach(key => {
+                    if (!obj[key]) delete obj[key]
+                });
+
+                db.Dog.find({ _id: { $in: Object.getOwnPropertyNames(obj) }, [`likes.${loggedDog._id}`]: true })
                     .then(dbModel => {
                         // If there is data back from DB, return it
-                        if(dbModel.length > 0) {
+                        if (dbModel.length > 0) {
                             res.json(dbModel)
                         }
                         // Else return null
@@ -125,7 +131,7 @@ module.exports = {
                     })
                     .catch(err => res.status(422).json(err))
             })
-            .catch(err => res.status(422).json(err))
+            .catch(err => res.status(422).json(err));
     },
 
     // Return only the user id
