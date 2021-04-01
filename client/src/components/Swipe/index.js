@@ -27,7 +27,7 @@ const Swipe = (props) => {
                 dog={props.details.matches[props.details.matches.length - 1]}
             />
             <div className="col s12 m12">
-            <div className="card">
+            <div className="card z-depth-3">
                 <div className="card-image dog-image">
                     <img src={props.details.currentDog?.image || "./img/surprised.jpeg"}>
                     </img>

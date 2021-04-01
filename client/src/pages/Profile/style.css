@@ -9,6 +9,10 @@ body {
   
 }
 
+.container {
+  padding-bottom: 10px;
+}
+
 h4,
 h5 {
   font-family: moreSugarThin;

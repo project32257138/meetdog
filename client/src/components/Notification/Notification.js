@@ -30,7 +30,7 @@ function Notification(props) {
 function NoBarks() {
   return (
     <div className="no-barks">
-      <p>No barks yet, keep trying.</p>
+      <p>No barks yet, keep trying!</p>
     </div>
   )
 }
