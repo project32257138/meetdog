@@ -2,17 +2,13 @@ import React, { Component } from "react";
 import "./index.css"
 import DogSummary from "./DogSummary/DogSummary"
 
-class Notification extends Component{
+const Notification = (props) => {
 
-  // componentShouldUpdate = (nextProps, nextState)=> {
-  //   return this.props.matches[this.props.matches - 1] !== nextProps.matches[nextProps.matches - 1]}
-  render () {
-    let matches = this.props.matches.reverse()
     return (
     <div style={{height: "100%"}}>
-      {this.props.matches.length?
+      {props.matches.length?
       <ul className="collection">
-        {matches.map((match,i) => (
+        {props.matches.map((match,i) => (
           <li key={match._id} className="collection-item avatar">
             <img src={match.image} alt="" className="circle" />
             <p>{match.date}</p>
@@ -29,7 +25,6 @@ class Notification extends Component{
       </ul> : <NoBarks/>}
     </div>
   );
-}
 }
 function NoBarks() {
   return (
