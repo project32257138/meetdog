@@ -1,5 +1,5 @@
 @media only screen and (min-width: 768px) {
     .wrapper {
-        height: 75%;
+        min-height: 75%;
     }
 }
