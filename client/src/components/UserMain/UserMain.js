@@ -11,20 +11,22 @@ import "./style.css"
 class UserMain extends React.Component {
 
     state = {
-        id: "",
+        _id: "",
         name: "",
         email: "",
         currentMatch: false,
         currentDog: {
             image: "../../../img/loading.svg",
             name: "Loading",
-            id: "",
-            liked: {
-            }
+            _id: "",
+            likes: {
+            },
+            description: "",
+            breed: "",
         },
         dogList: [],
         dogIndex: 1,
-        liked: {
+        likes: {
             // object storing id and if that dog was liked by the user
             // id: true,  for liked --or--
             // id: false, for disliked
@@ -67,12 +69,12 @@ class UserMain extends React.Component {
               if (!res.data.length) return null
                 let thisDog = res.data[0]
                 this.setState({
-                    id: thisDog._id,
+                    _id: thisDog._id,
                     name: thisDog.name,
                     email: thisDog.email,
                     image: thisDog.image
                 })
-              return thisDog.id
+              return thisDog._id
         })
       OneSignal.push(() => {
         OneSignal.setExternalUserId(this.email);
@@ -92,7 +94,8 @@ class UserMain extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.currentDog?.liked[this.state.id] && this.state.liked[prevState.currentDog.id])
+      console.log("they like you",prevState.currentDog?.likes[this.state._id], "you like them",this.state.likes[prevState.currentDog?._id])
+        if (prevState.currentDog?.likes[this.state._id] && this.state.likes[prevState.currentDog?._id])
           this.setState({
             currentMatch: true,
             matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
@@ -108,6 +111,7 @@ class UserMain extends React.Component {
 
     getDogList = () => {
       API.getNextDogs(this.email,(dogs) => {
+        console.log(dogs)
           if (dogs) {
             this.setState({
               dogList : dogs,
@@ -134,18 +138,18 @@ class UserMain extends React.Component {
     }
 
     likeDog = () => {
-        this.setState({liked: {[this.state.currentDog.id]: true, ...this.state.liked}})
+        this.setState({likes: {[this.state.currentDog._id]: true, ...this.state.likes}})
 
         this.setState({
-            liked: {[this.state.currentDog.id]: true, ...this.state.liked},
+            likes: {[this.state.currentDog._id]: true, ...this.state.likes},
         })
-        API.likeOrDislike(this.state.email,{id: this.state.currentDog.id, value: false}) //{ id: "2323483", value: false }
+        API.likeOrDislike(this.state.email,{id: this.state.currentDog._id, value: true}) //{ id: "2323483", value: false }
         this.getNextDog()
     }
 
     dislikeDog = () => {
-        this.setState({liked: {[this.state.currentDog.id]: false, ...this.state.liked}})
-        API.likeOrDislike(this.state.email,{id: this.state.currentDog.id, value: false}) //{ id: "2323483", value: false }
+        this.setState({likes: {[this.state.currentDog._id]: false, ...this.state.likes}})
+        API.likeOrDislike(this.state.email,{id: this.state.currentDog._id, value: false}) //{ id: "2323483", value: false }
         this.getNextDog()
     }
 
