@@ -57,6 +57,7 @@ const API = {
         })
     },
 
+    // this function was only for testing
     getAllDogs: function() {
         return axios.get("/api/dogs/all")
     },

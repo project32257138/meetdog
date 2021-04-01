@@ -91,14 +91,14 @@ class UserMain extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.currentDog?.likes[this.state._id] && this.state.likes[prevState.currentDog._id])
+      console.log("they like you",prevState.currentDog?.likes[this.state._id], "you like them",this.state.likes[prevState.currentDog?._id])
+        if (prevState.currentDog?.likes[this.state._id] && this.state.likes[prevState.currentDog?._id]) {
           this.setState({
             currentMatch: true,
             matches: [...this.state.matches, {...prevState.currentDog, date: new Date(Date.now()).toLocaleString()}],
-        })
-        
-
-  
+          })
+          console.log(this.state.matches)
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState) {

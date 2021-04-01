@@ -1,11 +1,6 @@
 import React, { useState, useEffect, Component } from 'react';
 import "./index.css"
-// import API from "../../Utils/api"
 import Push from "./../../send-push.js"
-import { useHistory } from 'react-router';
-import mongoose from "mongoose"
-
-// import { TrustProductsEntityAssignmentsContext } from 'twilio/lib/rest/trusthub/v1/trustProducts/trustProductsEntityAssignments';
 
 class ShowMatch extends Component {
 
@@ -46,7 +41,6 @@ const Swipe = (props) => {
             </div>
         </div>
         )
-    // }
 } 
 
 export default Swipe
